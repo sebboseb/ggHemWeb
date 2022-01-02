@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 
 function index() {
     return (
@@ -8,4 +8,4 @@ function index() {
     )
 }
 
-export default index
+export default index;

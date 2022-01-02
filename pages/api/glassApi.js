@@ -17,3 +17,11 @@ export async function getApi(sort) {
 
 //     return searchResults;
 // }
+
+// export async function getWeather() {
+//     const weatherUrl = `https://api.openweathermap.org/data/2.5/weather?q=stockholm&appid=7f3629c9cb887cc63ceccf2f0eb4ed48`;
+//     const response = await fetch(weatherUrl);
+//     const responseJson = await response.json();
+
+//     return responseJson;
+// }

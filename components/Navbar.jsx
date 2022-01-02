@@ -47,10 +47,11 @@ function Navbar() {
     }
 
     return (
-        <div className=' w-screen h-20 bg-sky-700 flex items-center justify-between px-4 shadow'>
-            <div className='font-semibold text-white text-3xl mb-1.5 flex items-end w-64'><span className='text-xl text-sky-50'>GG</span><h1 className=''>Hem</h1></div>
-            <div>
-                <input id="inputDiv" className="rounded-full px-3 py-2 w-64" type="text" placeholder="Sök efter glass 🍦" value={query} onChange={onChange} autoComplete="off" />
+        <div className=' h-20 bg-sky-700 flex items-center justify-between px-8 sm:px-4 shadow'>
+            <div className='font-semibold text-white sm:text-3xl mb-1.5 sm:flex items-end sm:w-64 hidden sm:visible'><span className='sm:text-xl text-sky-50'>GG</span><h1 className=''>Hem</h1></div>
+            <img className="w-12 sm:hidden visible rounded-full" src="/ggHemIcon.png"/>
+            <div className="w-full flex justify-center">
+                <input id="inputDiv" className="rounded-full px-3 py-2 sm:h-12 h-12 w-3/4 sm:text-xl" type="text" placeholder="Sök efter glass 🍦" value={query} onChange={onChange} autoComplete="off" />
                 <div className="hover:block absolute" id="searchDiv">
                     {query.length !== 0 && <ul className="flex flex-col gap-y-1 p-1">
                         {glassar?.map((glass, index) => (
@@ -65,12 +66,12 @@ function Navbar() {
                     </ul>}
                 </div>
             </div>
-            <div className="rounded-full px-3 py-2 h-10 flex w-64 bg-white items-center justify-center">
+            <div className="rounded-full px-3 py-2 h-10 flex sm:w-64 bg-white items-center justify-center">
                 <HiOutlineShoppingCart size={20} color="black" />
-                <p className=" font-semibold">
+                <p className=" font-semibold hidden sm:block">
                     {cart.reduce((previousValue, currentValue) => previousValue + parseInt(currentValue.displayPris), 0) + ":-"}
                 </p>
-                <div className="bg-red-600 w-6 h-6 rounded-full absolute top-3 right-1 flex justify-center items-center">
+                <div className="bg-red-600 w-6 h-6 rounded-full absolute top-1 right-1 sm:top-3 sm:right-1 flex justify-center items-center">
                     <p className=" text-white font-semibold transition duration-1000 mb-0.5">{cart.length}</p>
                 </div>
                 <p>{price}</p>
