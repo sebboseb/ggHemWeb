@@ -1,12 +1,23 @@
 export async function getApi(sort) {
     if (sort) {
-        const searchUrl = `https://swedishicecream.herokuapp.com/${sort}`;
+        // const searchUrl = `https://swedishicecream.herokuapp.com/${sort}`;
+        const searchUrl = `https://swedishicecream.herokuapp.com/glass?sort=${sort}`;
         const response = await fetch(searchUrl);
         const responseJson = await response.json();
         const searchResults = responseJson;
 
         return searchResults;
     }
+}
+
+export async function getAllApi(page) {
+        // const searchUrl = `https://swedishicecream.herokuapp.com/${sort}`;
+        const searchUrl = `https://swedishicecream.herokuapp.com/glass?_page=${page}&_limit=20`;
+        const response = await fetch(searchUrl);
+        const responseJson = await response.json();
+        const searchResults = responseJson;
+
+        return searchResults;
 }
 
 // export async function getApiType(sort, namn) {
