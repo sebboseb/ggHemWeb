@@ -8,6 +8,7 @@ export default async (req, res) => {
             const {amount} = req.body;
 
             const paymentIntent = await stripe.paymentIntents.create({
+                payment_method_types: ['klarna'],
                 amount,
                 currency: "sek"
             });

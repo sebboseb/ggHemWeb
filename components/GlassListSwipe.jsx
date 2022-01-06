@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Link from 'next/link'
+import Link from 'next/link';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination } from "swiper";
 import 'swiper/css';
@@ -46,7 +46,7 @@ function GlassListSwipe(props) {
         <div className='flex flex-wrap overflow-hidden snap-x'>
             <div className='flex w-full justify-between mx-2.5 items-center'>
                 <h1 className='font-semibold text-3xl pb-3'>{props.text}</h1>
-                <div className='font-semibold'><u>Se alla</u></div>
+                <div className='font-semibold cursor-pointer'><Link href={`/produkter/${"Pinne"}`}><u>Se alla</u></Link></div>
             </div>
             {loading ? <GlassLoadingCard /> : <div className="w-screen pr-9 h-88 sm">
                 <Swiper breakpoints={{
@@ -62,7 +62,7 @@ function GlassListSwipe(props) {
                                 <div className="absolute w-full justify-end flex right-3 top-2">
                                     {!liked.some(name => name === glass.namn) ? <AiOutlineHeart onClick={() => likeGlass(glass, currentUser.uid)} size={25}></AiOutlineHeart> : <AiFillHeart onClick={() => removeLikeGlass(glass, currentUser.uid)} size={25} color="red"></AiFillHeart>}
                                 </div>
-                                <Link href={`produkter/${glass.namn.replace(/ /g, "%20")}`}>
+                                <Link href={`produkter/${glass.sort}/${glass.namn.replace(/ /g, "%20")}`}>
                                     <div className=" cursor-pointer h-64">
                                         <div className='w-full flex justify-center'>
                                             <img loading='lazy' className='w-auto min-w-min max-h-24 mt-3' src={`${glass.url}`} alt="" />
@@ -72,7 +72,7 @@ function GlassListSwipe(props) {
                                         <p className='text-xs'>{glass.vikt}/{glass.volym}</p>
                                         <div className='flex justify-between'>
                                             <h1>{glass.displayPris}:-</h1>
-                                            <h1>{glass.displayPrisSingel} st</h1>
+                                            <h1>{glass.antal} st</h1>
                                         </div>
                                     </div>
                                 </Link>

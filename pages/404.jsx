@@ -3,7 +3,7 @@ import React from 'react';
 function Custom404() {
     return (
         <div className='text-3xl'>
-            Sidan hittades inte
+            Glassen är smält! Sidan hittades inte
         </div>
     )
 }

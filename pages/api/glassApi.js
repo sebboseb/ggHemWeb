@@ -1,7 +1,7 @@
 export async function getApi(sort) {
     if (sort) {
         // const searchUrl = `https://swedishicecream.herokuapp.com/${sort}`;
-        const searchUrl = `https://swedishicecream.herokuapp.com/glass?sort=${sort}`;
+        const searchUrl = `https://swedishicecream.herokuapp.com/glass?nyhet=${sort}`;
         const response = await fetch(searchUrl);
         const responseJson = await response.json();
         const searchResults = responseJson;
@@ -11,13 +11,13 @@ export async function getApi(sort) {
 }
 
 export async function getAllApi(page) {
-        // const searchUrl = `https://swedishicecream.herokuapp.com/${sort}`;
-        const searchUrl = `https://swedishicecream.herokuapp.com/glass?_page=${page}&_limit=20`;
-        const response = await fetch(searchUrl);
-        const responseJson = await response.json();
-        const searchResults = responseJson;
+    // const searchUrl = `https://swedishicecream.herokuapp.com/${sort}`;
+    const searchUrl = `https://swedishicecream.herokuapp.com/glass?_start=0&_end=${page}&_limit=10`;
+    const response = await fetch(searchUrl);
+    const responseJson = await response.json();
+    const searchResults = responseJson;
 
-        return searchResults;
+    return searchResults;
 }
 
 // export async function getApiType(sort, namn) {
