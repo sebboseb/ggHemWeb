@@ -80,12 +80,12 @@ function DrawerContainer(props) {
                 <div className="w-full h-20  bg-sky-700 p-6 shadow flex items-center justify-center">
                     <h1 className=" font-semibold text-3xl text-center text-white">Varukorg</h1>
                     <label htmlFor='my-drawer-3' className='flex w-full justify-end absolute mr-8 sm:hidden'>
-                        <h1>close</h1>
+                        <h1 className=' font-semibold text-white text-3xl mb-1.5'>x</h1>
                     </label>
                 </div>
                 <ul className="gap-y-3 flex flex-col px-5 mt-4">
                     {filterCart(cart).map((glass) => (
-                        <li key={glass.url} className="font-semibold text-xl h-20 border-b">
+                        <li key={glass.url} className="font-semibold sm:text-xl text-sm h-20 border-b">
                             <div>
                                 <div className="flex gap-x-3 relative">
                                     <div className=' flex justify-center w-14'>
@@ -96,13 +96,13 @@ function DrawerContainer(props) {
                                         <p className=' text-lg text-slate-500'>{glass.antal}</p>
                                     </div>
                                     <div className=" flex flex-1 justify-end h-full mt-1">
-                                        <div className=' w-36 flex justify-between items-center rounded-full mb-3 p-1'>
-                                            <div onClick={() => deleteFromCart(glass, currentUser.uid, cart)} className='w-10 h-10 bg-slate-300 hover:bg-slate-400 transition duration-150 rounded-full cursor-pointer z-30'>
-                                                <h1 className='font font-semibold text-3xl text-slate-900 items-center justify-center flex text-center font-serif'>-</h1>
+                                        <div className=' sm:w-36 w-24 flex justify-between items-center rounded-full mb-3 p-1'>
+                                            <div onClick={() => deleteFromCart(glass, currentUser.uid, cart)} className='sm:w-10 w-6 sm:h-10 h-6 bg-slate-300 hover:bg-slate-400 transition duration-150 rounded-full cursor-pointer z-30'>
+                                                <h1 className='font font-semibold sm:text-3xl text-slate-900 items-center justify-center flex text-center font-serif'>-</h1>
                                             </div>
-                                            <p className=" font-semibold text-3xl mb-1.5">{cart.filter(x => x.namn === glass.namn).length}</p>
-                                            <div onClick={() => addToCart(glass, currentUser.uid, cart)} className='w-10 h-10 bg-sky-700 hover:bg-sky-600 transition duration-150 rounded-full cursor-pointer z-30'>
-                                                <h1 className='font font-semibold text-3xl text-white items-center justify-center flex text-center font-serif'>+</h1>
+                                            <p className=" font-semibold sm:text-3xl text-lg mb-1.5">{cart.filter(x => x.namn === glass.namn).length}</p>
+                                            <div onClick={() => addToCart(glass, currentUser.uid, cart)} className='sm:w-10 sm:h-10 h-6 w-6 bg-sky-700 hover:bg-sky-600 transition duration-150 rounded-full cursor-pointer z-30'>
+                                                <h1 className='font font-semibold sm:text-3xl text-white items-center justify-center flex text-center font-serif'>+</h1>
                                             </div>
                                         </div>
                                     </div>

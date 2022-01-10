@@ -63,7 +63,7 @@ export default function Car({ glass }) {
             <main className='h-screen flex justify-center'>
                 <div className='sm:px-16 px-4 max-w-7xl flex flex-col w-full'>
                     <div className='w-full flex justify-center'>
-                        <img src={glass.url} className='w-auto min-w-min sm:max-h-96 max-h-80 sm:mt-16 mt-8 select-none' alt={glass.namn}/>
+                        <img src={glass.url} className='w-auto min-w-min sm:max-h-96 max-h-80 sm:mt-16 mt-8 select-none object-scale-down' alt={glass.namn}/>
                     </div>
                     <div className='flex justify-between border-b border-black pb-4'>
                         <h1 className=' text-3xl font-semibold'>{glass.namn}</h1>

@@ -65,7 +65,7 @@ function GlassListSwipe(props) {
                                 <Link href={`produkter/${glass.sort}/${glass.namn.replace(/ /g, "%20")}`} passHref>
                                     <div className=" cursor-pointer h-64">
                                         <div className='w-full flex justify-center'>
-                                            <img loading='lazy' className='w-auto min-w-min max-h-24 mt-3' src={`${glass.url}`} alt="" />
+                                            <img loading='lazy' className='w-auto min-w-min max-h-24 mt-3 object-scale-down' src={`${glass.url}`} alt="" />
                                         </div>
                                         <p className='text-xs mt-3 font-semibold'>{glass.supplier}</p>
                                         <h1 className=' font-semibold'>{glass.namn}</h1>
