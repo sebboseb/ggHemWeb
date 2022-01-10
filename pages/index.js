@@ -92,7 +92,7 @@ export default function Home() {
           <div className=" w-[40rem] h-[40rem] rounded bg-sky-100 absolute bottom-[-10rem] left-[-32rem] -z-10 skew-x-[70deg]"></div>
           <div className="flex flex-col items-center">
             <h1 className="sm:text-7xl text-center text-3xl font-semibold">Välkommen till <span id="logoFont" className=" text-sky-700">ggHem</span></h1>
-            <p className="text-xl font-semibold text-center">Beställ en massa god glass med fri hemleverans!</p>
+            <p className="sm:text-xl font-semibold text-center">Beställ en massa god glass med fri hemleverans!</p>
           </div>
         </div>
         {!loading ? <GlassListSwipe glass={apilol} text={"Nyheter"}></GlassListSwipe> : <GlassLoadingCard></GlassLoadingCard>}

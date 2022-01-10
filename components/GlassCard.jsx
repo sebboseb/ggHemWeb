@@ -13,7 +13,7 @@ function GlassCard(props) {
                 <Link href={`/produkter/${props.glasslol.sort}/${props.glasslol.namn.replace(/ /g, "%20")}`} passHref>
                     <div className=" cursor-pointer h-64 py-3 sm:py-0">
                         <div className='w-full flex justify-center overflow-x-hidden'>
-                            <img loading='lazy' className='w-auto min-w-min max-h-24 mt-3' src={`${props.glasslol.url}`} alt="" />
+                            <img loading='lazy' className='w-auto min-w-min max-h-24 mt-3 object-scale-down' src={`${props.glasslol.url}`} alt="" />
                         </div>
                         <p className='text-xs mt-3 font-semibold'>{props.glasslol.supplier}</p>
                         <h1 className=' font-semibold'>{props.glasslol.namn}</h1>
