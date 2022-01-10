@@ -48,7 +48,7 @@ function GlassListSwipe(props) {
                 <h1 className='font-semibold text-3xl pb-3'>{props.text}</h1>
                 <div className='font-semibold cursor-pointer'><Link href={`/produkter/${"Pinne"}`}><u>Se alla</u></Link></div>
             </div>
-            {loading ? <GlassLoadingCard /> : <div className="w-screen pr-9 h-88 sm">
+            {loading ? <GlassLoadingCard /> : <div className=" w-[95vw] h-88">
                 <Swiper breakpoints={{
                     // when window width is >= 640px
                     640: {

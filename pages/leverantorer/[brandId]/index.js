@@ -46,26 +46,87 @@ export default function Leverantor({ glass }) {
         currentUser && getFunction();
     }, [currentUser, brandId]);
 
+    function filterCart(array) {
+        var flags = [], output = [], l = array?.length, i;
+        for (i = 0; i < l; i++) {
+            if (flags[array[i].sort]) continue;
+            flags[array[i].sort] = true;
+            output.push(array[i]);
+        }
+
+        console.log(output)
+        return output;
+    }
+
     return (
         <>
             <Head>
                 <title>Köp {brandId} Online | Fri Hemleverans</title>
             </Head>
-            <div className='h-44 relative overflow-hidden'>
-        <div className=" w-[40rem] h-[40rem] rounded bg-sky-100 absolute left-[-28rem] -top-44 -z-10 skew-x-[110deg]"></div>
-<div className='ml-5 pt-5'>
-<p className=' font-semibold'><Link href={"/leverantorer"}><span className='hover:underline cursor-pointer'> leverantörer</span></Link> / {brandId}</p>
-                <h1 className='sm:text-7xl font-semibold text-slate-700 mt-3'>
-                    {brandId}
-                </h1></div>
-            </div>
-            <div className="flex justify-center">
-                <ul className="grid sm:grid-cols-4 grid-cols-2 gap-y-3 gap-x-10 px-9">
-                    {glass.map((glasslol) => (
-                        <GlassCard glasslol={glasslol} liked={liked} cart={cart} uid={currentUser.uid}></GlassCard>
-
-                    ))}
-                </ul>
+            <div className='flex flex-col'>
+                <div className='h-44 relative overflow-hidden'>
+                    <div className=" w-[40rem] h-[40rem] rounded bg-sky-100 absolute left-[-28rem] -top-44 -z-10 skew-x-[110deg]"></div>
+                    <div className='ml-5 pt-5'>
+                        <p className=' font-semibold'><Link href={"/leverantorer"}><span className='hover:underline cursor-pointer'> leverantörer</span></Link> / {brandId}</p>
+                        <h1 className='sm:text-7xl font-semibold text-slate-700 mt-3'>
+                            {brandId}
+                        </h1>
+                    </div>
+                </div>
+                <div className='flex flex-1 w-full px-4 justify-center'>
+                    <ul className='flex flex-col gap-y-3 justify-start'>
+                        {filterCart(glass).map((sort) => (
+                            filterCart(glass).length > 1 &&
+                            <li className='w-44 border rounded shadow px-1 py-2 cursor-pointer hover:shadow-md transition duration-150'>
+                                <Link href={`/leverantorer/${brandId}/${sort.sort}`}>
+                                    <div className='flex justify-between'>
+                                        <h1 className='font-semibold pl-1 text-xl'>
+                                            {sort.sort}
+                                        </h1>
+                                        <span className='font-semibold'>&gt;</span>
+                                    </div>
+                                </Link>
+                            </li>
+                        ))}
+                        <ul className='mt-9 gap-y-3 flex flex-col'>
+                            <li className='w-44 border rounded shadow px-1 py-2 cursor-pointer hover:shadow-md transition duration-150'>
+                                <div className='flex justify-between'>
+                                    <h1 className='font-semibold pl-1 text-xl'>
+                                        Veganskt
+                                    </h1>
+                                    <input type="checkbox" className=" w-6 h-6 mt-0.5" />
+                                </div>
+                            </li>
+                            <li className='w-44 border rounded shadow px-1 py-2 cursor-pointer hover:shadow-md transition duration-150'>
+                                <div className='flex justify-between'>
+                                    <h1 className='font-semibold pl-1 text-xl'>
+                                        Sockerfritt
+                                    </h1>
+                                    <input type="checkbox" className=" w-6 h-6 mt-0.5" />
+                                </div>
+                            </li>
+                            <li className='w-44 border rounded shadow px-1 py-2 cursor-pointer hover:shadow-md transition duration-150'>
+                                <div className='flex justify-between'>
+                                    <h1 className='font-semibold pl-1 text-xl'>
+                                        Laktosfritt
+                                    </h1>
+                                    <input type="checkbox" className=" w-6 h-6 mt-0.5" />
+                                </div>
+                            </li>
+                        </ul>
+                    </ul>
+                    <div className="flex justify-center w-full">
+                        {filterCart(glass).length > 1 ? <ul className="grid sm:grid-cols-3 grid-cols-2 gap-y-3 gap-x-10 px-9">
+                            {glass.map((glasslol) => (
+                                <GlassCard glasslol={glasslol} liked={liked} cart={cart} uid={currentUser.uid}></GlassCard>
+                            ))}
+                        </ul> : <ul className="grid sm:grid-cols-3 grid-cols-2 gap-y-3 gap-x-10 px-9">
+                            {glass.map((glasslol) => (
+                                <GlassCard glasslol={glasslol} liked={liked} cart={cart} uid={currentUser.uid}></GlassCard>
+                            ))}
+                        </ul>}
+                    </div>
+                </div>
             </div>
         </>
     )

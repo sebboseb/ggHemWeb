@@ -5,14 +5,14 @@ import { deleteFromCart, addToCart, likeGlass, removeLikeGlass } from './functio
 
 function GlassCard(props) {
     return (
-        <li key={props.glasslol.url} className='flex flex-col sm:w-56 h-80 '>
+        <li key={props.glasslol.url} className='flex flex-col sm:w-56 h-80'>
             <div className="shadow relative shadow-slate-300 hover:shadow-slate-300 hover:shadow-md transition duration-150 rounded-sm mb-3 px-1.5 border border-slate-300 flex-col flex">
                 <div className="absolute w-full justify-end flex right-3 top-2">
                     {!props.liked.some(name => name === props.glasslol.namn) ? <AiOutlineHeart onClick={() => likeGlass(props.glasslol, props.uid)} size={25}></AiOutlineHeart> : <AiFillHeart onClick={() => removeLikeGlass(props.glasslol, props.uid)} size={25} color="red"></AiFillHeart>}
                 </div>
                 <Link href={`/produkter/${props.glasslol.sort}/${props.glasslol.namn.replace(/ /g, "%20")}`}>
-                    <div className=" cursor-pointer h-64">
-                        <div className='w-full flex justify-center'>
+                    <div className=" cursor-pointer h-64 py-3 sm:py-0">
+                        <div className='w-full flex justify-center overflow-x-hidden'>
                             <img loading='lazy' className='w-auto min-w-min max-h-24 mt-3' src={`${props.glasslol.url}`} alt="" />
                         </div>
                         <p className='text-xs mt-3 font-semibold'>{props.glasslol.supplier}</p>

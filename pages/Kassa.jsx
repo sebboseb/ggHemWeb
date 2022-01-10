@@ -1,148 +1,84 @@
-import React, { useState, useEffect } from "react";
-import { getApi, getAllApi } from "./api/glassApi";
-import Navbar from "../components/Navbar";
-import Signup from "../components/Signup";
-import { useAuth } from "../components/contexts/AuthContext";
+import React, { useState } from 'react';
+import { loadStripe } from '@stripe/stripe-js';
 import { db } from '../firebase';
-import { doc, onSnapshot, deleteDoc, deleteField, updateDoc, setDoc, query, collection } from "firebase/firestore";
-import 'swiper/css';
-import GlassListSwipe from "../components/GlassListSwipe";
-import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
-import axios from "axios";
-import Drawer from 'rc-drawer';
-import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
-import { likeGlass, removeLikeGlass, addToCart, deleteFromCart } from "../components/functions/Functions";
-import { HiOutlineShoppingCart } from 'react-icons/hi'
-import Link from 'next/link';
-import DrawerContainer from "../components/DrawerContainer";
-
-const CardElementOptions = {
-    hidePostalCode: true
-}
-
-function Kassa() {
-
-    const { currentUser } = useAuth();
-
-    const stripe = useStripe();
-    const elements = useElements();
-    const [apilol, setApilol] = useState([]);
-    const [cart, setCart] = useState([]);
-    const [strutar, setStrutar] = useState([]);
-    const [idLol, setIdLol] = useState(makeId(9));
-    const [allaglassar, setAllaglassar] = useState([]);
-    const [liked, setLiked] = useState([]);
-    const [loading, setLoading] = useState(false);
-    const price = [];
-    const [processing, setProcessing] = useState(false);
-
-    useEffect(() => {
-        async function getFunction() {
-    
-          const docRef = doc(db, "User", currentUser.uid, "Cart", "glassar");
-          onSnapshot(docRef, (snapshot) => {
-            if (snapshot.exists()) {
-              setCart([]);
-              let mapData = Object.values(snapshot.data());
-              setCart(mapData);
-              console.log(mapData);
-            }
-          });
-    
-          const q = query(collection(db, "User", (currentUser.uid), "Liked"));
-          const unsubscribe = onSnapshot(q, (querySnapshot) => {
-            setLiked([])
-            querySnapshot.forEach((doc) => {
-              setLiked(prevFollowed => prevFollowed.concat(doc.id));
-            });
-          });
-    
-          // const docRefPrice = doc(db, "User", currentUser.uid, "Cart", "glassar");
-          // onSnapshot(docRefPrice, (snapshotPrice) => {
-          //   if (snapshotPrice.exists()) {
-          //     let mapDataPrice = Object.values(snapshotPrice.data());
-          //     setCart(mapDataPrice);
-          //     price.push(mapDataPrice.displayPris)
-          //   }
-          // });
-    
-          // const weather = await getWeather();
-          // console.log(Math.ceil((weather.main.temp-273.15)));
-        }
-    
-        currentUser && getFunction();
-      }, [currentUser]);
-
-    const handleFormSubmit = async ev => {
-        ev.preventDefault();
-
-        const billingDetails = {
-            name: ev.target.name.value,
-            email: "lol@gmail.com",
-            address: {
-                city: ev.target.name.value,
-                line1: ev.target.address.value,
-                state: ev.target.name.valuee,
-                postal_code: ev.target.name.value
-            }
-        }
-
-        setProcessing(true);
-
-        const { data: clientSecret } = await axios.post('/api/payment_intents', {
-            amount: cart.reduce((previousValue, currentValue) => previousValue + parseInt(currentValue.displayPris), 0)
-                * 100
-        });
-
-        const cardElement = elements.getElement(CardElement);
-        const paymentMethodReq = await stripe.createPaymentMethod({
-            type: 'card',
-            card: cardElement,
-            billing_details: billingDetails
-        });
-
-        const confirmCardPayment = await stripe.confirmCardPayment(clientSecret, {
-            payment_method: paymentMethodReq.paymentMethod.id
-        });
-
-        console.log(confirmCardPayment);
-        createOrder(billingDetails, cart, cart.reduce((previousValue, currentValue) => previousValue + parseInt(currentValue.displayPris), 0));
+import { doc, onSnapshot, query, collection } from "firebase/firestore";
+import { useAuth } from '../components/contexts/AuthContext';
+import axios from 'axios';
+// Make sure to call `loadStripe` outside of a component’s render to avoid
+// recreating the `Stripe` object on every render.
+const stripePromise = loadStripe(
+  process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY
+);
+export default function PreviewPage() {
+  React.useEffect(() => {
+    // Check to see if this is a redirect back from Checkout
+    const query = new URLSearchParams(window.location.search);
+    if (query.get('success')) {
+      console.log('Order placed! You will receive an email confirmation.');
     }
 
-    async function createOrder(details, cart, price) {
-        setIdLol(makeId(9));
-        const orderRef = doc(db, "Order", (currentUser.uid), "orders", idLol);
-        await setDoc(orderRef, {
-            name: details.name,
-            email: details.email,
-            address: details.address.line1,
-            city: details.address.city,
-            postal_code: details.address.postal_code,
-            cart: cart,
-            price: price
-        })
+    if (query.get('canceled')) {
+      console.log('Order canceled -- continue to shop around and checkout when you’re ready.');
     }
 
-    function makeId(length) {
-        var result = '';
-        var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-        var charactersLength = characters.length;
-        for (var i = 0; i < length; i++) {
-          result += characters.charAt(Math.floor(Math.random() *
-            charactersLength));
+    async function getFunction() {
+
+
+      const docRef = doc(db, "User", currentUser.uid, "Cart", "glassar");
+      onSnapshot(docRef, (snapshot) => {
+        if (snapshot.exists()) {
+          setCart([]);
+          let mapData = Object.values(snapshot.data());
+          setCart(mapData);
+          console.log(mapData);
         }
-        return result;
-      }
+      });
+    }
 
-    return (
-        <div>
-            <form className="w-80" onSubmit={handleFormSubmit}>
-                <input type="text" name="name" value="lol"></input>
-                <input type="text" name="address" value="lolgatan"></input>
-                <CardElement options={CardElementOptions} /><button type="submit">awd</button>
-            </form>
-        </div>
-    )
+    getFunction();
+  }, []);
+
+  const { currentUser } = useAuth();
+  const [cart, setCart] = useState([]);
+
+  
+
+
+  return (
+    <><button type="submit" role="link" onClick={handleClick}>awdawd</button>
+      <form action="/api/checkout_sessions" method="POST">
+        <section>
+          <button type="submit" role="link">
+            Betala
+          </button>
+        </section>
+        <style jsx>
+          {`
+          section {
+            background: #ffffff;
+            display: flex;
+            flex-direction: column;
+            width: 400px;
+            height: 112px;
+            border-radius: 6px;
+            justify-content: space-between;
+          }
+          button {
+            height: 36px;
+            background: #556cd6;
+            border-radius: 4px;
+            color: white;
+            border: 0;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0px 4px 5.5px 0px rgba(0, 0, 0, 0.07);
+          }
+          button:hover {
+            opacity: 0.8;
+          }
+        `}
+        </style>
+      </form></>
+  );
 }
-
-export default Kassa

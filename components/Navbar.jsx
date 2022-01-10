@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { db } from '../firebase';
 import { doc, onSnapshot, query, collection } from "firebase/firestore";
@@ -6,14 +6,16 @@ import { useAuth } from './contexts/AuthContext';
 import { HiOutlineShoppingCart } from "react-icons/hi";
 import Head from 'next/head';
 import { AiOutlineDown } from 'react-icons/ai';
+import { handleLogin } from './Login';
 
 function Navbar(props) {
 
-    const { currentUser, logout } = useAuth();
+    const { currentUser, logout, login } = useAuth();
 
     const [glassar, setGlassar] = useState([]);
     const [query, setQuery] = useState("");
     const [cart, setCart] = useState([]);
+    const [error, setError] = useState("");
     const price = [];
 
     useEffect(() => {
@@ -55,6 +57,23 @@ function Navbar(props) {
         } catch (err) {
             setError(err.message);
         }
+    }
+
+    const emailRef = useRef();
+    const passwordRef = useRef();
+    // const passwordConfirmRef = useRef();
+  
+    async function handleSubmit(e) {
+      e.preventDefault();
+  
+      try {
+      setError("");
+      // setLoading(true);
+      await login(emailRef.current.value, passwordRef.current.value);
+      // history.push("/");
+      } catch {
+      setError("Failed to log in");
+      }
     }
 
     return (
@@ -105,15 +124,15 @@ function Navbar(props) {
                             <h1>Hem</h1>
                         </li>
                         <li className=''>
-                            <div class="dropdown dropdown-hover">
-                                <div tabindex="0" class="flex items-center gap-x-1">Kategorier <AiOutlineDown size={15} className='mt-1.5' /></div>
-                                <ul tabindex="0" class="p-2 shadow menu dropdown-content bg-base-100 rounded-box w-max">
-                                    <div className=' grid grid-cols-2'>
-                                        <DropdownCategory link={"Pinnar"} title={"Pinnar"}></DropdownCategory>
-                                        <DropdownCategory link={"Strutar"} title={"Strutar"}></DropdownCategory>
-                                        <DropdownCategory link={"Bägare"} title={"Bägare"}></DropdownCategory>
+                            <div className="dropdown dropdown-hover">
+                                <div tabIndex="0" className="flex items-center gap-x-1">Kategorier <AiOutlineDown size={15} className='mt-1.5' /></div>
+                                <ul tabIndex="0" className="p-2 shadow menu dropdown-content bg-base-100 rounded-box w-max">
+                                    <div className=' grid sm:grid-cols-2 grid-cols-1'>
+                                        <DropdownCategory link={"Pinne"} title={"Pinnar"}></DropdownCategory>
+                                        <DropdownCategory link={"Strut"} title={"Strutar"}></DropdownCategory>
+                                        <DropdownCategory link={"Pint"} title={"Bägare"}></DropdownCategory>
                                         <DropdownCategory link={"Kulglass"} title={"Kulglass"}></DropdownCategory>
-                                        <DropdownCategory link={"halvliter"} title={"0.5 Liter"}></DropdownCategory>
+                                        <DropdownCategory link={"halvliter"} title={"Halvliter"}></DropdownCategory>
                                         <DropdownCategory link={"Dryck"} title={"Dryck"}></DropdownCategory>
                                         <DropdownCategory link={"Mat"} title={"Mat"}></DropdownCategory>
                                         <DropdownCategory link={"Bars"} title={"Bars"}></DropdownCategory>
@@ -122,10 +141,10 @@ function Navbar(props) {
                             </div>
                         </li>
                         <li className=''>
-                            <div class="dropdown dropdown-hover">
-                                <div tabindex="0" class="flex items-center gap-x-1">Leverantörer <AiOutlineDown size={15} className='mt-1.5' /></div>
-                                <ul tabindex="0" class="p-2 shadow menu dropdown-content bg-base-100 rounded-box w-max">
-                                    <div className=' grid grid-cols-2'>
+                            <div className="dropdown dropdown-hover">
+                                <div tabIndex="0" className="flex items-center gap-x-1">Leverantörer <AiOutlineDown size={15} className='mt-1.5' /></div>
+                                <ul tabIndex="0" className="p-2 shadow menu dropdown-content bg-base-100 rounded-box w-max">
+                                    <div className=' grid sm:grid-cols-2 grid-cols-1'>
                                         <DropdownSupplier link={"Add Ice Cream"} title={"Add Ice Cream"}></DropdownSupplier>
                                         <DropdownSupplier link={"Cravingz"} title={"Cravingz"}></DropdownSupplier>
                                         <DropdownSupplier link={"Frill Frozen Smoothie"} title={"Frill Frozen Smoothie"}></DropdownSupplier>
@@ -154,9 +173,20 @@ function Navbar(props) {
                     </ul>
                     {!currentUser ? <ul className="text-slate-600 font-semibold sm:text-xl flex items-center sm:gap-x-16 px-4">
                         <li className=''>
-                            <h1>
-                                Logga In
-                            </h1>
+                            <div className="dropdown dropdown-left">
+                                <div tabIndex="0" className="flex items-center gap-x-1">Logga In</div>
+                                <ul tabIndex="0" className="p-2 shadow menu dropdown-content bg-base-100 rounded-box w-max border-2 border-sky-600">
+                                    <form className='flex flex-col gap-y-3' onSubmit={handleSubmit}>
+                                        <div className='flex flex-col gap-y-3'>
+                                            <input id="email" type="text" placeholder="Email" ref={emailRef} className='border border-sky-600 rounded p-1' />
+                                            <input id="password" type="password" placeholder="********" ref={passwordRef} className='border border-sky-600 rounded p-1' />
+                                        </div>
+                                        <div className=' h-full w-full flex flex-col items-end justify-end'>
+                                            <button type='submit' className=' bg-sky-600 rounded-lg px-4 py-2 text-white font-semibold shadow-sky-100 shadow'>Fortsätt</button>
+                                        </div>
+                                    </form>
+                                </ul>
+                            </div>
                         </li>
                         <li className=''>
                             <h1>
