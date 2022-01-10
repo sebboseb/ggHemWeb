@@ -97,12 +97,12 @@ function DrawerContainer(props) {
                                     </div>
                                     <div className=" flex flex-1 justify-end h-full mt-1">
                                         <div className=' sm:w-36 w-24 flex justify-between items-center rounded-full mb-3 p-1'>
-                                            <div onClick={() => deleteFromCart(glass, currentUser.uid, cart)} className='sm:w-10 w-6 sm:h-10 h-6 bg-slate-300 hover:bg-slate-400 transition duration-150 rounded-full cursor-pointer z-30'>
-                                                <h1 className='font font-semibold sm:text-3xl text-slate-900 items-center justify-center flex text-center font-serif'>-</h1>
+                                            <div onClick={() => deleteFromCart(glass, currentUser.uid, cart)} className='sm:w-10 w-7 sm:h-10 h-7 bg-slate-300 hover:bg-slate-400 transition duration-150 rounded-full cursor-pointer z-30'>
+                                                <h1 className='font font-semibold sm:text-3xl text-slate-900 items-center justify-center flex text-lg text-center font-serif -mt-0'>-</h1>
                                             </div>
                                             <p className=" font-semibold sm:text-3xl text-lg mb-1.5">{cart.filter(x => x.namn === glass.namn).length}</p>
-                                            <div onClick={() => addToCart(glass, currentUser.uid, cart)} className='sm:w-10 sm:h-10 h-6 w-6 bg-sky-700 hover:bg-sky-600 transition duration-150 rounded-full cursor-pointer z-30'>
-                                                <h1 className='font font-semibold sm:text-3xl text-white items-center justify-center flex text-center font-serif'>+</h1>
+                                            <div onClick={() => addToCart(glass, currentUser.uid, cart)} className='sm:w-10 sm:h-10 h-7 w-7 bg-sky-700 hover:bg-sky-600 transition duration-150 rounded-full cursor-pointer z-30'>
+                                                <h1 className='font font-semibold sm:text-3xl text-white items-center justify-center flex text-center font-serif text-lg'>+</h1>
                                             </div>
                                         </div>
                                     </div>

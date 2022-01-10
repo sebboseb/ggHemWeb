@@ -119,13 +119,13 @@ function Navbar(props) {
                     </label>
                 </div>
                 <div className="h-12 w-full shadow-slate-100 shadow-md flex justify-between text-sm">
-                    <ul className="text-slate-600 font-semibold sm:text-xl flex items-center sm:gap-x-16 px-4">
+                    <ul className="text-slate-600 font-semibold sm:text-xl text-xs gap-x-5 flex items-center sm:gap-x-16 px-4">
                         <li className=''>
                             <h1>Hem</h1>
                         </li>
                         <li className=''>
                             <div className="dropdown dropdown-hover">
-                                <div tabIndex="0" className="flex items-center gap-x-1">Kategorier <AiOutlineDown size={15} className='mt-1.5' /></div>
+                                <div tabIndex="0" className="flex items-center gap-x-1">Kategorier <AiOutlineDown className='sm:mt-1.5 w-2 sm:w-5 h-2 sm:h-5' /></div>
                                 <ul tabIndex="0" className="p-2 shadow menu dropdown-content bg-base-100 rounded-box w-max">
                                     <div className=' grid sm:grid-cols-2 grid-cols-1'>
                                         <DropdownCategory link={"Pinne"} title={"Pinnar"}></DropdownCategory>
@@ -142,7 +142,7 @@ function Navbar(props) {
                         </li>
                         <li className=''>
                             <div className="dropdown dropdown-hover">
-                                <div tabIndex="0" className="flex items-center gap-x-1">Leverantörer <AiOutlineDown size={15} className='mt-1.5' /></div>
+                                <div tabIndex="0" className="flex items-center gap-x-1">Leverantörer <AiOutlineDown className='sm:mt-1.5 w-2 sm:w-5 h-2 sm:h-5' /></div>
                                 <ul tabIndex="0" className="p-2 shadow menu dropdown-content bg-base-100 rounded-box w-max">
                                     <div className=' grid sm:grid-cols-2 grid-cols-1'>
                                         <DropdownSupplier link={"Add Ice Cream"} title={"Add Ice Cream"}></DropdownSupplier>
@@ -193,7 +193,7 @@ function Navbar(props) {
                                 Skapa Konto
                             </h1>
                         </li>
-                    </ul> : <ul className="text-slate-600 font-semibold sm:text-xl flex items-center sm:gap-x-16 px-4">
+                    </ul> : <ul className="text-slate-600 font-semibold sm:text-xl flex items-center text-xs sm:gap-x-16 px-4">
                         <li className=''>
                             <h1 onClick={() => handleLogout()}>
                                 Mitt Konto
