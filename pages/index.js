@@ -38,8 +38,7 @@ export default function Home() {
       setStrutar(lolstrut);
       // setApilol([...lol.strutar, ...lol.pinnar]);
 
-      const alla = await getAllApi(load).then(setLoading(false));
-      setAllaglassar(alla);
+      
       
 
       const docRef = doc(db, "User", currentUser.uid, "Cart", "glassar");
@@ -48,7 +47,6 @@ export default function Home() {
           setCart([]);
           let mapData = Object.values(snapshot.data());
           setCart(mapData);
-          console.log(mapData);
         }
       });
 
@@ -73,7 +71,13 @@ export default function Home() {
       // console.log(Math.ceil((weather.main.temp-273.15)));
     }
 
+    async function getApiFunctions() {
+      const alla = await getAllApi(load).then(setLoading(false));
+      setAllaglassar(alla);
+    }
+
     currentUser && getFunction();
+    getApiFunctions();
   }, [currentUser, load]);
 
   return (
@@ -95,13 +99,13 @@ export default function Home() {
             <p className="sm:text-xl font-semibold text-center">Beställ en massa god glass med fri hemleverans!</p>
           </div>
         </div>
-        {!loading ? <GlassListSwipe glass={apilol} text={"Nyheter"}></GlassListSwipe> : <GlassLoadingCard></GlassLoadingCard>}
+        {!loading ? <GlassListSwipe glass={apilol} liked={currentUser && liked} text={"Nyheter"}></GlassListSwipe> : <GlassLoadingCard></GlassLoadingCard>}
         {/* <GlassListSwipe glass={strutar} text={"Strutar"}></GlassListSwipe> */}
         <div>
           <h1 className="text-slate-900 text-3xl font-semibold mt-9 mx-2.5">All Glass</h1>
           {!loading ? <ul className="grid sm:grid-cols-4 grid-cols-2 gap-y-3 gap-x-9 p-9">
-            {currentUser && allaglassar?.map((glass) => (
-              <GlassCard key={glass.url} glasslol={glass} liked={liked} cart={cart} uid={currentUser.uid}></GlassCard>
+            {allaglassar?.map((glass) => (
+              <GlassCard key={glass.url} glasslol={glass} liked={currentUser && liked} cart={cart} uid={currentUser?.uid}></GlassCard>
             ))}
           </ul> : <GlassLoadingCard></GlassLoadingCard>}
         </div>

@@ -31,7 +31,6 @@ export default function LeverantorExtra({ glass }) {
                     setCart([]);
                     let mapData = Object.values(snapshot.data());
                     setCart(mapData);
-                    console.log(mapData);
                 }
             });
 
@@ -62,7 +61,7 @@ export default function LeverantorExtra({ glass }) {
                 <ul className="grid sm:grid-cols-4 grid-cols-2 gap-y-3 gap-x-10 mt-9 p-9">
                     {glass.map((glasslol) => (
                         // glasslol.contains(sortArray //[veganskja, sockerfrija, laktosfrinej])
-                        <GlassCard key={glass.url} glasslol={glasslol} liked={liked} cart={cart} uid={currentUser.uid}></GlassCard>
+                        <GlassCard key={glass.url} glasslol={glasslol} liked={currentUser && liked} cart={cart} uid={currentUser?.uid}></GlassCard>
                     ))}
                 </ul>
             </div>

@@ -28,16 +28,12 @@ export default function Car({ glass }) {
 
     useEffect(() => {
         async function getFunction() {
-            const alla = await getApi(glass.sort);
-            setAllaglassar(alla);
-
             const docRef = doc(db, "User", currentUser.uid, "Cart", "glassar");
             onSnapshot(docRef, (snapshot) => {
                 if (snapshot.exists()) {
                     setCart([]);
                     let mapData = Object.values(snapshot.data());
                     setCart(mapData);
-                    console.log(mapData);
                 }
             });
 
@@ -48,12 +44,13 @@ export default function Car({ glass }) {
                     setLiked(prevFollowed => prevFollowed.concat(doc.id));
                 });
             });
+            
+            const alla = await getApi(glass.sort);
+            setAllaglassar(alla);
         }
-
+            
         currentUser && getFunction();
     }, [currentUser, id, glass.sort]);
-
-    console.log(glass);
 
     return (
         <>
@@ -63,11 +60,11 @@ export default function Car({ glass }) {
             <main className='h-screen flex justify-center'>
                 <div className='sm:px-16 px-4 max-w-7xl flex flex-col w-full'>
                     <div className='w-full flex justify-center'>
-                        <img src={glass.url} className='w-auto min-w-min sm:max-h-96 max-h-80 sm:mt-16 mt-8 select-none object-scale-down' alt={glass.namn}/>
+                        <img src={glass.url} className='w-auto min-w-min sm:max-h-96 max-h-80 sm:mt-16 mt-8 select-none object-scale-down' alt={glass.namn} />
                     </div>
                     <div className='flex justify-between border-b border-black pb-4'>
                         <h1 className=' text-3xl font-semibold'>{glass.namn}</h1>
-                        {!liked.some(name => name === glass.namn) ? <AiOutlineHeart onClick={() => likeGlass(glass, currentUser.uid)} size={35}></AiOutlineHeart> : <AiFillHeart onClick={() => removeLikeGlass(glass, currentUser.uid)} size={35} color="red"></AiFillHeart>}
+                        {!liked.some(name => name === glass.namn) ? <AiOutlineHeart onClick={() => likeGlass(glass, currentUser.uid)} size={35}></AiOutlineHeart> : currentUser && <AiFillHeart onClick={() => removeLikeGlass(glass, currentUser.uid)} size={35} color="red"></AiFillHeart>}
                     </div>
                     <div className='flex justify-between text-xl pt-2 font-semibold text-slate-500'>
                         <p>{glass.antal} st</p>
@@ -75,7 +72,7 @@ export default function Car({ glass }) {
                     </div>
                     <div className='bg-sky-50 p-1 mt-8 w-full flex items-center justify-between rounded-full py-1 px-8 h-16'>
                         <h1 className='sm:text-3xl text-xl font-semibold mb-1'>{glass.displayPris}:-</h1>
-                        {cart.filter(x => x.namn === glass.namn).length ?
+                        {currentUser && cart.filter(x => x.namn === glass.namn).length ?
                             <div className=" flex flex-1 justify-end h-full mt-1">
                                 <div className=' sm:w-64 w-44 flex justify-between items-center rounded-full px-1 h-12 bg-slate-200'>
                                     <div onClick={() => deleteFromCart(glass, currentUser.uid, cart)} className='w-10 h-10 bg-slate-300 hover:bg-slate-400 transition duration-150 rounded-full cursor-pointer z-30'>
@@ -118,7 +115,7 @@ export default function Car({ glass }) {
                             <div className='w-full max-w-full mt-4 gap-y-3 sm:flex sm:flex-col grid grid-cols-2 gap-3'>
                                 {allaglassar?.map((glasslol, i) => (
                                     i <= 3 && glasslol.namn !== glass.namn &&
-                                    <GlassCard glasslol={glasslol} liked={liked} cart={cart} uid={currentUser.uid}></GlassCard>
+                                    <GlassCard key={glass.url} glasslol={glasslol} liked={currentUser && liked} cart={cart} uid={currentUser?.uid}></GlassCard>
                                 ))}
                             </div>
                         </div>

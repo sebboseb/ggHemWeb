@@ -30,7 +30,6 @@ export default function Leverantor({ glass }) {
                     setCart([]);
                     let mapData = Object.values(snapshot.data());
                     setCart(mapData);
-                    console.log(mapData);
                 }
             });
 
@@ -54,7 +53,6 @@ export default function Leverantor({ glass }) {
             output.push(array[i]);
         }
 
-        console.log(output)
         return output;
     }
 
@@ -118,11 +116,11 @@ export default function Leverantor({ glass }) {
                     <div className="flex justify-center w-full">
                         {filterCart(glass).length > 1 ? <ul className="grid sm:grid-cols-3 grid-cols-2 gap-y-3 gap-x-10 px-9">
                             {glass.map((glasslol) => (
-                                <GlassCard key={glass.url} glasslol={glasslol} liked={liked} cart={cart} uid={currentUser.uid}></GlassCard>
+                                <GlassCard key={glass.url} glasslol={glasslol} liked={currentUser && liked} cart={cart} uid={currentUser?.uid}></GlassCard>
                             ))}
                         </ul> : <ul className="grid sm:grid-cols-3 grid-cols-2 gap-y-3 gap-x-10 px-9">
                             {glass.map((glasslol) => (
-                                <GlassCard key={glass.url} glasslol={glasslol} liked={liked} cart={cart} uid={currentUser.uid}></GlassCard>
+                                <GlassCard key={glass.url} glasslol={glasslol} liked={currentUser && liked} cart={cart} uid={currentUser?.uid}></GlassCard>
                             ))}
                         </ul>}
                     </div>

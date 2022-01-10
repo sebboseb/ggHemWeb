@@ -5,6 +5,7 @@ import { loadStripe } from '@stripe/stripe-js';
 import Navbar from "../components/Navbar";
 import 'swiper/css';
 import DrawerContainer from "../components/DrawerContainer";
+import Head from 'next/head';
 
 
 
@@ -13,19 +14,24 @@ const stripePromise = loadStripe("pk_test_51FphUvF84nza37ikyfwSvhsQsIIMr7l0Gx9ou
 function MyApp({ Component, pageProps }) {
 
   return (
-    <Elements stripe={stripePromise}>
-      <AuthProvider>
-        <div className="drawer drawer-end">
-          <input id="my-drawer-3" type="checkbox" className="drawer-toggle" />
-          <div className="drawer-content min-h-screen">
-            <Navbar />
-            <Component {...pageProps} />
+    <>
+      <Head>
+        <link rel="shortcut icon" href="/ggHemIcon.png" />
+      </Head>
+      <Elements stripe={stripePromise}>
+        <AuthProvider>
+          <div className="drawer drawer-end">
+            <input id="my-drawer-3" type="checkbox" className="drawer-toggle" />
+            <div className="drawer-content min-h-screen">
+              <Navbar />
+              <Component {...pageProps} />
+            </div>
+            <DrawerContainer />
           </div>
-          <DrawerContainer />
-        </div>
-        {/* <Footer></Footer> */}
-      </AuthProvider>
-    </Elements>
+          {/* <Footer></Footer> */}
+        </AuthProvider>
+      </Elements>
+    </>
   )
 }
 

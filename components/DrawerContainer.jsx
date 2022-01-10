@@ -12,17 +12,15 @@ function DrawerContainer(props) {
     const { currentUser } = useAuth();
     const [cart, setCart] = useState([]);
     const [stripeCart, setStripeCart] = useState([]);
+
     useEffect(() => {
         async function getFunction() {
-
-
             const docRef = doc(db, "User", currentUser.uid, "Cart", "glassar");
             onSnapshot(docRef, (snapshot) => {
                 if (snapshot.exists()) {
                     setCart([]);
                     let mapData = Object.values(snapshot.data());
                     setCart(mapData);
-                    console.log(mapData);
                 }
             });
 
@@ -32,7 +30,6 @@ function DrawerContainer(props) {
                     setStripeCart([]);
                     let mapDataStripe = Object.values(snapshot.data());
                     setStripeCart(mapDataStripe);
-                    console.log(mapDataStripe);
                 }
             });
         }
@@ -48,13 +45,11 @@ function DrawerContainer(props) {
             output.push(array[i]);
         }
 
-        console.log(output)
         return output;
     }
 
     const handleClick = async (e) => {
         e.preventDefault();
-        console.log("in handleSubmit");
 
         try {
             const res = await axios.post(
@@ -68,7 +63,6 @@ function DrawerContainer(props) {
                     },
                 },
             );
-            console.log(res); //check now
             window.location.href = res.data.url
         } catch (e) { }
     };
@@ -84,7 +78,7 @@ function DrawerContainer(props) {
                     </label>
                 </div>
                 <ul className="gap-y-3 flex flex-col px-5 mt-4">
-                    {filterCart(cart).map((glass) => (
+                    {currentUser && filterCart(cart).map((glass) => (
                         <li key={glass.url} className="font-semibold sm:text-xl text-sm h-20 border-b">
                             <div>
                                 <div className="flex gap-x-3 relative">
@@ -110,12 +104,11 @@ function DrawerContainer(props) {
                             </div>
                         </li>
                     ))}
-                    {cart.length !== 0 && <div onClick={() => deleteCart(currentUser.uid)} className='w-full flex justify-end items-center pt-4'><div className='cursor-pointer hover:bg-gray-100 duration-150 transition flex gap-x-3 p-2 rounded-full active:bg-gray-300'><h1 className='font-semibold'> Töm Kundvagn </h1> <RiDeleteBin5Line size={25} color='red'></RiDeleteBin5Line></div></div>}                </ul>
-
+                    {currentUser && cart.length !== 0 && <div onClick={() => {{setCart([]);}{deleteCart(currentUser.uid)}}} className='w-full flex justify-end items-center pt-4'><div className='cursor-pointer hover:bg-gray-100 duration-150 transition flex gap-x-3 p-2 rounded-full active:bg-gray-300'><h1 className='font-semibold'> Töm Kundvagn </h1> <RiDeleteBin5Line size={25} color='red'></RiDeleteBin5Line></div></div>}                </ul>
                 <div className=" w-full h-full px-5 bg-sky-600 flex flex-col justify-end items-center mt-16">
                     <div className="h-full pt-4 w-full flex justify-between px-4 text-3xl font-semibold text-white">
                         <h1>Totalt</h1>
-                        <h1>{cart.reduce((previousValue, currentValue) => previousValue + parseInt(currentValue.displayPris), 0) + " kr"}</h1>
+                        <h1>{currentUser && cart.reduce((previousValue, currentValue) => previousValue + parseInt(currentValue.displayPris), 0) + " kr"}</h1>
                     </div>
                     <button onClick={handleClick} className="text-center w-3/4 h-12 bg-white rounded-full flex justify-center items-center shadow-lg hover:shadow-white hover:shadow-md duration-150 transform shadow-white mb-8 cursor-pointer">
                         <h1 className=" text-slate-900 font-semibold text-xl capitalize">Gå till kassan</h1>

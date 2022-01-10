@@ -1,14 +1,37 @@
 import Link from 'next/link';
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import { deleteFromCart, addToCart, likeGlass, removeLikeGlass } from './functions/Functions';
+import { useAuth } from './contexts/AuthContext';
+import { db } from '../firebase';
+import { doc, onSnapshot, query, collection } from "firebase/firestore";
 
 function GlassCard(props) {
+
+    const { currentUser } = useAuth();
+    const [cart, setCart] = useState([]);
+
+    useEffect(() => {
+        setCart([]);
+        async function getFunction() {
+            const docRef = doc(db, "User", currentUser.uid, "Cart", "glassar");
+            onSnapshot(docRef, (snapshot) => {
+                if (snapshot.exists()) {
+                    let mapData = Object.values(snapshot.data());
+                    setCart(mapData);
+                }
+            });
+        }
+
+        currentUser && getFunction();
+    }, [currentUser]);
+
+
     return (
         <li key={props.glasslol.url} className='flex flex-col sm:w-56 h-80'>
             <div className="shadow relative shadow-slate-300 hover:shadow-slate-300 hover:shadow-md transition duration-150 rounded-sm mb-3 px-1.5 border border-slate-300 flex-col flex">
                 <div className="absolute w-full justify-end flex right-3 top-2">
-                    {!props.liked.some(name => name === props.glasslol.namn) ? <AiOutlineHeart onClick={() => likeGlass(props.glasslol, props.uid)} size={25}></AiOutlineHeart> : <AiFillHeart onClick={() => removeLikeGlass(props.glasslol, props.uid)} size={25} color="red"></AiFillHeart>}
+                    {!props.liked?.some(name => name === props.glasslol.namn) ? <AiOutlineHeart onClick={() => likeGlass(props.glasslol, props.uid)} size={25}></AiOutlineHeart> : <AiFillHeart onClick={() => removeLikeGlass(props.glasslol, props.uid)} size={25} color="red"></AiFillHeart>}
                 </div>
                 <Link href={`/produkter/${props.glasslol.sort}/${props.glasslol.namn.replace(/ /g, "%20")}`} passHref>
                     <div className=" cursor-pointer h-64 py-3 sm:py-0">
@@ -24,7 +47,7 @@ function GlassCard(props) {
                         </div>
                     </div>
                 </Link>
-                {props.cart?.filter(x => x.namn === props.glasslol.namn).length ?
+                {currentUser && props.cart?.filter(x => x.namn === props.glasslol.namn).length ?
                     <div className=' w-full flex justify-between items-end bg-slate-100 rounded-full mb-3 p-1'>
                         <div onClick={() => deleteFromCart(props.glasslol, props.uid, props.cart)} className='w-10 h-10 bg-slate-300 hover:bg-slate-400 transition duration-150 rounded-full cursor-pointer z-30'>
                             <h1 className='font font-semibold text-3xl text-slate-900 items-center justify-center flex text-center font-serif select-none'>-</h1>
