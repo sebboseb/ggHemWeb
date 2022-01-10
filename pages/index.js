@@ -80,7 +80,7 @@ export default function Home() {
     <>
       <Head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin />
         <link href="https://fonts.googleapis.com/css2?family=Montserrat+Subrayada:wght@400;700&display=swap" rel="stylesheet" />
         <title>ggHem | Beställ glass online</title>
       </Head>
@@ -101,7 +101,7 @@ export default function Home() {
           <h1 className="text-slate-900 text-3xl font-semibold mt-9 mx-2.5">All Glass</h1>
           {!loading ? <ul className="grid sm:grid-cols-4 grid-cols-2 gap-y-3 gap-x-9 p-9">
             {currentUser && allaglassar?.map((glass) => (
-              <GlassCard glasslol={glass} liked={liked} cart={cart} uid={currentUser.uid}></GlassCard>
+              <GlassCard key={glass.url} glasslol={glass} liked={liked} cart={cart} uid={currentUser.uid}></GlassCard>
             ))}
           </ul> : <GlassLoadingCard></GlassLoadingCard>}
         </div>

@@ -10,7 +10,7 @@ function GlassCard(props) {
                 <div className="absolute w-full justify-end flex right-3 top-2">
                     {!props.liked.some(name => name === props.glasslol.namn) ? <AiOutlineHeart onClick={() => likeGlass(props.glasslol, props.uid)} size={25}></AiOutlineHeart> : <AiFillHeart onClick={() => removeLikeGlass(props.glasslol, props.uid)} size={25} color="red"></AiFillHeart>}
                 </div>
-                <Link href={`/produkter/${props.glasslol.sort}/${props.glasslol.namn.replace(/ /g, "%20")}`}>
+                <Link href={`/produkter/${props.glasslol.sort}/${props.glasslol.namn.replace(/ /g, "%20")}`} passHref>
                     <div className=" cursor-pointer h-64 py-3 sm:py-0">
                         <div className='w-full flex justify-center overflow-x-hidden'>
                             <img loading='lazy' className='w-auto min-w-min max-h-24 mt-3' src={`${props.glasslol.url}`} alt="" />

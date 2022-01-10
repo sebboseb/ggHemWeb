@@ -57,7 +57,7 @@ export default function Car({ glass }) {
                 <div className='h-44 relative overflow-hidden'>
                     <div className=" w-[40rem] h-[40rem] rounded bg-sky-100 absolute left-[-28rem] -top-44 -z-10 skew-x-[110deg]"></div>
                     <div className='ml-5 pt-5'>
-                        <p className=' font-semibold'><Link href={"/kategorier"}><span className='hover:underline cursor-pointer'> Kategorier</span></Link> / {sortId}</p>
+                        <p className=' font-semibold'><Link href={"/kategorier"} passHref><span className='hover:underline cursor-pointer'> Kategorier</span></Link> / {sortId}</p>
                         <h1 className='sm:text-7xl font-semibold text-slate-700 mt-3'>
                             {sortId}
                         </h1>

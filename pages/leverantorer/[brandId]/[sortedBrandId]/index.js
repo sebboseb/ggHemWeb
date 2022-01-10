@@ -45,14 +45,14 @@ export default function LeverantorExtra({ glass }) {
         }
 
         currentUser && getFunction();
-    }, [currentUser, brandId]);
+    }, [currentUser, brandId, glass.sort]);
 
     return (
         <>
             <div className='h-44 relative overflow-hidden'>
                 <div className=" w-[40rem] h-[40rem] rounded bg-sky-100 absolute left-[-28rem] -top-44 -z-10 skew-x-[110deg]"></div>
                 <div className='ml-5 pt-5'>
-                    <p className=' font-semibold'><Link href={"/leverantorer"}><span className='hover:underline cursor-pointer'> leverantörer</span></Link> / <Link href={`/leverantorer/${brandId}`}><span className='hover:underline cursor-pointer'> {brandId}</span></Link> / {sortedBrandId}</p>
+                    <p className=' font-semibold'><Link href={"/leverantorer"} passHref><span className='hover:underline cursor-pointer'> leverantörer</span></Link> / <Link href={`/leverantorer/${brandId}`} passHref><span className='hover:underline cursor-pointer'> {brandId}</span></Link> / {sortedBrandId}</p>
                     <h1 className='sm:text-7xl font-semibold text-slate-700 mt-3'>
                         {brandId}
                     </h1>
@@ -62,11 +62,10 @@ export default function LeverantorExtra({ glass }) {
                 <ul className="grid sm:grid-cols-4 grid-cols-2 gap-y-3 gap-x-10 mt-9 p-9">
                     {glass.map((glasslol) => (
                         // glasslol.contains(sortArray //[veganskja, sockerfrija, laktosfrinej])
-                        <GlassCard glasslol={glasslol} liked={liked} cart={cart} uid={currentUser.uid}></GlassCard>
+                        <GlassCard key={glass.url} glasslol={glasslol} liked={liked} cart={cart} uid={currentUser.uid}></GlassCard>
                     ))}
                 </ul>
             </div>
-            {param1}
         </>
     )
 }

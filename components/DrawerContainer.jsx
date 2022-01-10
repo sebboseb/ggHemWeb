@@ -38,7 +38,7 @@ function DrawerContainer(props) {
         }
 
         currentUser && getFunction();
-    }, []);
+    }, [currentUser]);
 
     function filterCart(array) {
         var flags = [], output = [], l = array?.length, i;

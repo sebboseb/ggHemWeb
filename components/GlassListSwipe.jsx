@@ -46,7 +46,7 @@ function GlassListSwipe(props) {
         <div className='flex flex-wrap overflow-hidden snap-x'>
             <div className='flex w-full justify-between mx-2.5 items-center'>
                 <h1 className='font-semibold text-3xl pb-3'>{props.text}</h1>
-                <div className='font-semibold cursor-pointer'><Link href={`/produkter/${"Pinne"}`}><u>Se alla</u></Link></div>
+                <div className='font-semibold cursor-pointer'><Link href={`/produkter/${"Pinne"}`} passHref><u>Se alla</u></Link></div>
             </div>
             {loading ? <GlassLoadingCard /> : <div className=" w-[95vw] h-88">
                 <Swiper breakpoints={{
@@ -62,7 +62,7 @@ function GlassListSwipe(props) {
                                 <div className="absolute w-full justify-end flex right-3 top-2">
                                     {!liked.some(name => name === glass.namn) ? <AiOutlineHeart onClick={() => likeGlass(glass, currentUser.uid)} size={25}></AiOutlineHeart> : <AiFillHeart onClick={() => removeLikeGlass(glass, currentUser.uid)} size={25} color="red"></AiFillHeart>}
                                 </div>
-                                <Link href={`produkter/${glass.sort}/${glass.namn.replace(/ /g, "%20")}`}>
+                                <Link href={`produkter/${glass.sort}/${glass.namn.replace(/ /g, "%20")}`} passHref>
                                     <div className=" cursor-pointer h-64">
                                         <div className='w-full flex justify-center'>
                                             <img loading='lazy' className='w-auto min-w-min max-h-24 mt-3' src={`${glass.url}`} alt="" />

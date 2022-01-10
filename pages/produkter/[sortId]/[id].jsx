@@ -12,6 +12,7 @@ import Navbar from '../../../components/Navbar';
 import DrawerContainer from '../../../components/DrawerContainer';
 import GlassCard from '../../../components/GlassCard';
 import Link from 'next/link';
+import Image from 'next/image';
 
 export default function Car({ glass }) {
 
@@ -50,7 +51,7 @@ export default function Car({ glass }) {
         }
 
         currentUser && getFunction();
-    }, [currentUser, id]);
+    }, [currentUser, id, glass.sort]);
 
     console.log(glass);
 
@@ -62,7 +63,7 @@ export default function Car({ glass }) {
             <main className='h-screen flex justify-center'>
                 <div className='sm:px-16 px-4 max-w-7xl flex flex-col w-full'>
                     <div className='w-full flex justify-center'>
-                        <img src={glass.url} className='w-auto min-w-min sm:max-h-96 max-h-80 sm:mt-16 mt-8 select-none' />
+                        <img src={glass.url} className='w-auto min-w-min sm:max-h-96 max-h-80 sm:mt-16 mt-8 select-none' alt={glass.namn}/>
                     </div>
                     <div className='flex justify-between border-b border-black pb-4'>
                         <h1 className=' text-3xl font-semibold'>{glass.namn}</h1>
@@ -97,12 +98,12 @@ export default function Car({ glass }) {
                             <div className='flex flex-col items-center sm:items-start mt-16'>
                                 <h1 className='mb-4 text-slate-600 font-semibold text-xl'>Relaterat</h1>
                                 <div className='flex gap-x-5'>
-                                    <Link href={`/produkter/${glass.sort}`}>
+                                    <Link href={`/produkter/${glass.sort}`} passHref>
                                         <div className=' w-32 h-10 bg-red-600 cursor-pointer rounded-full text-white font-semibold flex justify-center items-center'>
                                             <h1>{sortId}</h1>
                                         </div>
                                     </Link>
-                                    <Link href={`/leverantorer/${glass.supplier}`}>
+                                    <Link href={`/leverantorer/${glass.supplier}`} passHref>
                                         <div className=' w-32 h-10 bg-red-600 cursor-pointer rounded-full text-white font-semibold flex justify-center items-center'>
                                             <h1>{glass.supplier}</h1>
                                         </div>

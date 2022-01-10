@@ -44,7 +44,7 @@ export default function Leverantor({ glass }) {
         }
 
         currentUser && getFunction();
-    }, [currentUser, brandId]);
+    }, [currentUser, brandId, glass.sort]);
 
     function filterCart(array) {
         var flags = [], output = [], l = array?.length, i;
@@ -67,7 +67,7 @@ export default function Leverantor({ glass }) {
                 <div className='h-44 relative overflow-hidden'>
                     <div className=" w-[40rem] h-[40rem] rounded bg-sky-100 absolute left-[-28rem] -top-44 -z-10 skew-x-[110deg]"></div>
                     <div className='ml-5 pt-5'>
-                        <p className=' font-semibold'><Link href={"/leverantorer"}><span className='hover:underline cursor-pointer'> leverantörer</span></Link> / {brandId}</p>
+                        <p className=' font-semibold'><Link href={"/leverantorer"} passHref><span className='hover:underline cursor-pointer'> leverantörer</span></Link> / {brandId}</p>
                         <h1 className='sm:text-7xl font-semibold text-slate-700 mt-3'>
                             {brandId}
                         </h1>
@@ -78,7 +78,7 @@ export default function Leverantor({ glass }) {
                         {filterCart(glass).map((sort) => (
                             filterCart(glass).length > 1 &&
                             <li className='w-44 border rounded shadow px-1 py-2 cursor-pointer hover:shadow-md transition duration-150'>
-                                <Link href={`/leverantorer/${brandId}/${sort.sort}`}>
+                                <Link href={`/leverantorer/${brandId}/${sort.sort}`} passHref>
                                     <div className='flex justify-between'>
                                         <h1 className='font-semibold pl-1 text-xl'>
                                             {sort.sort}
@@ -118,11 +118,11 @@ export default function Leverantor({ glass }) {
                     <div className="flex justify-center w-full">
                         {filterCart(glass).length > 1 ? <ul className="grid sm:grid-cols-3 grid-cols-2 gap-y-3 gap-x-10 px-9">
                             {glass.map((glasslol) => (
-                                <GlassCard glasslol={glasslol} liked={liked} cart={cart} uid={currentUser.uid}></GlassCard>
+                                <GlassCard key={glass.url} glasslol={glasslol} liked={liked} cart={cart} uid={currentUser.uid}></GlassCard>
                             ))}
                         </ul> : <ul className="grid sm:grid-cols-3 grid-cols-2 gap-y-3 gap-x-10 px-9">
                             {glass.map((glasslol) => (
-                                <GlassCard glasslol={glasslol} liked={liked} cart={cart} uid={currentUser.uid}></GlassCard>
+                                <GlassCard key={glass.url} glasslol={glasslol} liked={liked} cart={cart} uid={currentUser.uid}></GlassCard>
                             ))}
                         </ul>}
                     </div>

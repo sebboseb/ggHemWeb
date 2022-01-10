@@ -1,7 +1,7 @@
 import React from 'react'
 import Confetti from 'react-confetti'
 
-export default () => {
+export default function Succe() {
   return (
       <>
     <Confetti
