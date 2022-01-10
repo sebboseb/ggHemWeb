@@ -193,7 +193,7 @@ function Navbar(props) {
                             </h1>
                         </li>
                     </ul> : <ul className="text-slate-600 font-semibold sm:text-xl flex items-center text-xs sm:gap-x-16 px-4">
-                        <li className=''>
+                        <li className='text-center'>
                             <h1 onClick={() => handleLogout()}>
                                 Mitt Konto
                             </h1>
