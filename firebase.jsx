@@ -4,12 +4,12 @@ import 'firebase/compat/firestore';
 
 const app = firebase.initializeApp({
   apiKey: "AIzaSyCkuRf78xMBV_5kP_ayOMEhVQUBx0rPPuI",
-  authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
-  projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
-  storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
-  messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
-  appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
-  measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID
+  authDomain: "glassweb-65054.firebaseapp.com",
+  projectId: "glassweb-65054",
+  storageBucket: "glassweb-65054.appspot.com",
+  messagingSenderId: "811514008449",
+  appId: "1:811514008449:web:0fed535cf85d92dad58e80",
+  measurementId: "G-K0GLWCFVZ1"
 });
 
 export const auth = app.auth();
