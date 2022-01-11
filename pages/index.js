@@ -29,10 +29,6 @@ export default function Home() {
 
   useEffect(() => {
     async function getFunction() {
-      setLoading(true);
-
-      const lol = await getApi("nyhetja");
-      setApilol(lol);
 
       const lolstrut = await getApi("Strut");
       setStrutar(lolstrut);
@@ -72,6 +68,10 @@ export default function Home() {
     }
 
     async function getApiFunctions() {
+      setLoading(true);
+      const lol = await getApi("nyhetja");
+      setApilol(lol);
+
       const alla = await getAllApi(load).then(setLoading(false));
       setAllaglassar(alla);
     }

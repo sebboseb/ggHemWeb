@@ -7,10 +7,11 @@ import { HiOutlineShoppingCart } from "react-icons/hi";
 import Head from 'next/head';
 import { AiOutlineDown } from 'react-icons/ai';
 import { handleLogin } from './Login';
+import Signup from './Signup';
 
 function Navbar(props) {
 
-    const { currentUser, logout, login } = useAuth();
+    const { currentUser, logout, login, signup } = useAuth();
 
     const [glassar, setGlassar] = useState([]);
     const [query, setQuery] = useState("");
@@ -61,18 +62,25 @@ function Navbar(props) {
     const emailRef = useRef();
     const passwordRef = useRef();
     // const passwordConfirmRef = useRef();
-  
+
     async function handleSubmit(e) {
-      e.preventDefault();
-  
-      try {
-      setError("");
-      // setLoading(true);
-      await login(emailRef.current.value, passwordRef.current.value);
-      // history.push("/");
-      } catch {
-      setError("Failed to log in");
-      }
+        e.preventDefault();
+
+        try {
+            setError("");
+            // setLoading(true);
+            await login(emailRef.current.value, passwordRef.current.value);
+            // history.push("/");
+        } catch {
+            setError("Failed to log in");
+        }
+    }
+
+    async function handleSubmitSignup(e) {
+        e.preventDefault();
+
+        await signup(emailRef.current.value, passwordRef.current.value);
+        // history.push("/");
     }
 
     return (
@@ -85,7 +93,7 @@ function Navbar(props) {
             <nav className="flex flex-col">
                 <div className=' h-20 bg-sky-700 flex items-center justify-between px-5 sm:px-4 shadow'>
                     <div className='font-semibold text-white sm:text-3xl mb-1.5 sm:flex sm:items-end sm:w-64 hidden'><Link href={"/"} passHref><h1 id='logoFont' className=' mt-1.5 cursor-pointer'>ggHem</h1></Link></div>
-                    <Link href={"/"} passHref><img className="w-12 sm:hidden visible rounded-full" src="/ggHemIcon.png" alt='logga'/></Link>
+                    <Link href={"/"} passHref><img className="w-12 sm:hidden visible rounded-full" src="/ggHemIcon.png" alt='logga' /></Link>
                     <div className="w-full flex justify-center">
                         <input id="inputDiv" className="rounded-full px-3 py-2 sm:h-12 h-12 w-3/4 sm:text-xl" type="text" placeholder="Sök efter glass..." value={query} onChange={onChange} autoComplete="off" />
                         <div className="hover:block absolute" id="searchDiv">
@@ -102,7 +110,7 @@ function Navbar(props) {
                             </ul>}
                         </div>
                     </div>
-                    <label htmlFor="my-drawer-3" className="rounded-full px-3 py-2 h-10 flex sm:w-64 bg-white items-center justify-center cursor-pointer">
+                    <label htmlFor="my-drawer-3" className="rounded-full px-3 py-2 h-10 w-10 flex sm:w-64 bg-white items-center justify-center cursor-pointer">
                         <div className="flex w-full items-center justify-center">
                             <HiOutlineShoppingCart size={20} color="black" />
                             <p className=" font-semibold hidden sm:block">
@@ -119,9 +127,9 @@ function Navbar(props) {
                 </div>
                 <div className="h-12 w-full shadow-slate-100 shadow-md flex justify-between text-sm">
                     <ul className="text-slate-600 font-semibold sm:text-xl text-xs gap-x-5 flex items-center sm:gap-x-16 px-4">
-                        <li className=''>
+                        {/* <li className=''>
                             <h1>Hem</h1>
-                        </li>
+                        </li> */}
                         <li className=''>
                             <div className="dropdown dropdown-hover">
                                 <div tabIndex="0" className="flex items-center gap-x-1">Kategorier <AiOutlineDown className='sm:mt-1.5 w-2 sm:w-5 h-2 sm:h-5' /></div>
@@ -166,33 +174,62 @@ function Navbar(props) {
                         {/* <li className=''>
                             <h1>Erbjudanden</h1>
                         </li> */}
-                        <li className=''>
+                        {/* <li className=''>
                             <h1>Mer</h1>
-                        </li>
+                        </li> */}
                     </ul>
-                    {!currentUser ? <ul className="text-slate-600 font-semibold sm:text-xl flex items-center sm:gap-x-16 px-4">
+                    {!currentUser ? <ul className="text-slate-600 font-semibold sm:text-xl text-2xs flex items-center sm:gap-x-16 gap-x-4 px-4">
                         <li className=''>
-                            <div className="dropdown dropdown-left">
+                            <label htmlFor="my-modal-3" className=" modal-button">Logga In</label>
+                            <input type="checkbox" id="my-modal-3" className="modal-toggle" />
+                            <div className="modal">
+                                <div className="modal-box flex flex-col">
+                                    <ul tabIndex="0" className="p-2 menu dropdown-content bg-base-100 rounded-box w-full border-sky-600">
+                                        <form className='flex flex-col gap-y-3' onSubmit={handleSubmit}>
+                                            <div className='flex flex-col gap-y-3'>
+                                                <label htmlFor="email">Email</label>
+                                                <input id="email" type="text" placeholder="Email" ref={emailRef} className='border border-sky-600 rounded p-3' />
+                                                <label htmlFor="password">Lösenord</label>
+                                                <input id="password" type="password" placeholder="********" ref={passwordRef} className='border border-sky-600 rounded p-3' />
+                                            </div>
+
+                                        </form>
+                                    </ul>
+                                    <div className="modal-action">
+                                        <label onClick={handleSubmit} className="btn btn-primary bg-sky-600 border-0">Logga In</label>
+                                        <label htmlFor="my-modal-3" className="btn">Avbryt</label>
+                                    </div>
+                                </div>
+                            </div>
+                            {/* <div className="dropdown dropdown-left">
                                 <div tabIndex="0" className="flex items-center gap-x-1">Logga In</div>
-                                <ul tabIndex="0" className="p-2 shadow menu dropdown-content bg-base-100 rounded-box w-max border-2 border-sky-600">
-                                    <form className='flex flex-col gap-y-3' onSubmit={handleSubmit}>
-                                        <div className='flex flex-col gap-y-3'>
-                                            <input id="email" type="text" placeholder="Email" ref={emailRef} className='border border-sky-600 rounded p-1' />
-                                            <input id="password" type="password" placeholder="********" ref={passwordRef} className='border border-sky-600 rounded p-1' />
-                                        </div>
-                                        <div className=' h-full w-full flex flex-col items-end justify-end'>
-                                            <button type='submit' className=' bg-sky-600 rounded-lg px-4 py-2 text-white font-semibold shadow-sky-100 shadow'>Fortsätt</button>
-                                        </div>
-                                    </form>
-                                </ul>
+                                
+                            </div> */}
+                        </li>
+                        <li className=''>
+                            <label htmlFor="my-modal-2" className=" modal-button">Skapa Konto</label>
+                            <input type="checkbox" id="my-modal-2" className="modal-toggle" />
+                            <div className="modal">
+                                <div className="modal-box flex flex-col">
+                                    <ul tabIndex="0" className="p-2 menu dropdown-content bg-base-100 rounded-box w-full border-sky-600">
+                                        <form className='flex flex-col gap-y-3' onSubmit={handleSubmitSignup}>
+                                            <div className='flex flex-col gap-y-3'>
+                                                <label htmlFor="email">Email</label>
+                                                <input id="email" type="text" placeholder="Email" ref={emailRef} className='border border-sky-600 rounded p-3' />
+                                                <label htmlFor="password">Lösenord</label>
+                                                <input id="password" type="password" placeholder="********" ref={passwordRef} className='border border-sky-600 rounded p-3' />
+                                            </div>
+
+                                        </form>
+                                    </ul>
+                                    <div className="modal-action">
+                                        <label onClick={handleSubmitSignup} className="btn btn-primary bg-sky-600 border-0">Skapa Konto</label>
+                                        <label htmlFor="my-modal-2" className="btn">Avbryt</label>
+                                    </div>
+                                </div>
                             </div>
                         </li>
-                        <li className=''>
-                            <h1>
-                                Skapa Konto
-                            </h1>
-                        </li>
-                    </ul> : <ul className="text-slate-600 font-semibold sm:text-xl flex items-center text-xs sm:gap-x-16 px-4">
+                    </ul> : <ul className="text-slate-600 font-semibold sm:text-xl flex items-center text-xs sm:gap-x-16 gap-x-4 px-4">
                         <li className='text-center'>
                             <h1 onClick={() => handleLogout()}>
                                 Mitt Konto

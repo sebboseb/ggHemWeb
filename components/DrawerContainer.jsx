@@ -70,7 +70,7 @@ function DrawerContainer(props) {
     return (
         <div className="drawer-side h-full">
             <label htmlFor="my-drawer-3" className="drawer-overlay"></label>
-            <ul className="overflow-y-auto menu sm:w-1/2 w-full bg-base-100">
+            <ul className="overflow-y-auto menu sm:w-1/2 w-full xl:w-1/3 bg-base-100">
                 <div className="w-full h-20  bg-sky-700 p-6 shadow flex items-center justify-center">
                     <h1 className=" font-semibold text-3xl text-center text-white">Varukorg</h1>
                     <label htmlFor='my-drawer-3' className='flex w-full justify-end absolute mr-8 sm:hidden'>

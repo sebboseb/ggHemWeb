@@ -94,7 +94,7 @@ export default function Car({ glass }) {
                             <p className='text-lg pr-1'>{glass.beskrivning}</p>
                             <div className='flex flex-col items-center sm:items-start mt-16'>
                                 <h1 className='mb-4 text-slate-600 font-semibold text-xl'>Relaterat</h1>
-                                <div className='flex gap-x-5'>
+                                <div className='flex gap-x-5 pb-8'>
                                     <Link href={`/produkter/${glass.sort}`} passHref>
                                         <div className=' w-32 h-10 bg-red-600 cursor-pointer rounded-full text-white font-semibold flex justify-center items-center'>
                                             <h1>{sortId}</h1>

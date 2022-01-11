@@ -99,7 +99,7 @@ export default function Car({ glass }) {
                     </div>
                     <div className='h-screen w-full'>
                         <div className="flex justify-center">
-                            <ul className="grid sm:grid-cols-3 grid-cols-2 sm:mx-0 mx-4 gap-y-3 gap-x-10">
+                            <ul className="grid sm:grid-cols-3 grid-cols-2 sm:mx-0 mx-4 gap-y-3 gap-x-10 xl:grid-cols-5">
                                 {glass.map((glasslol) => (
                                     (!veganCheck || !sugarCheck || !laktosCheck) ?
                                         (glasslol.vegansk === veganCheck) &&

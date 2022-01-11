@@ -35,12 +35,12 @@ function GlassListSwipe(props) {
     const { currentUser } = useAuth();
 
     return (
-        <div className='flex flex-wrap overflow-hidden snap-x'>
+        <div className='flex flex-wrap overflow-hidden snap-x max-w-7xl'>
             <div className='flex w-full justify-between mx-2.5 items-center'>
                 <h1 className='font-semibold text-3xl pb-3'>{props.text}</h1>
                 <div className='font-semibold cursor-pointer'><Link href={`/produkter/${"Pinne"}`} passHref><u>Se alla</u></Link></div>
             </div>
-            {loading ? <GlassLoadingCard /> : <div className=" w-[95vw] h-88">
+            {loading ? <GlassLoadingCard /> : <div className=" w-[95vw] xl:w-[65vw] h-88">
                 <Swiper breakpoints={{
                     // when window width is >= 640px
                     640: {
@@ -52,7 +52,7 @@ function GlassListSwipe(props) {
                         <SwiperSlide key={glass.url} className='flex flex-col w-52 h-80 pl-3'>
                             <div className="shadow shadow-slate-300 hover:shadow-slate-300 hover:shadow-md transition duration-150 rounded-sm mb-3 px-1.5 border border-slate-300">
                                 <div className="absolute w-full justify-end flex right-3 top-2">
-                                    {!props.liked?.some(name => name === glass.namn) ? <AiOutlineHeart onClick={() => likeGlass(glass, currentUser.uid)} size={25}></AiOutlineHeart> : <AiFillHeart onClick={() => removeLikeGlass(glass, currentUser.uid)} size={25} color="red"></AiFillHeart>}
+                                    {!props.liked?.some(name => name === glass.namn) ? <AiOutlineHeart onClick={() => {currentUser ? likeGlass(glass, currentUser.uid) : alert("Logga in")}} size={25}></AiOutlineHeart> : <AiFillHeart onClick={() => removeLikeGlass(glass, currentUser.uid)} size={25} color="red"></AiFillHeart>}
                                 </div>
                                 <Link href={`produkter/${glass.sort}/${glass.namn.replace(/ /g, "%20")}`} passHref>
                                     <div className=" cursor-pointer h-64">
@@ -78,7 +78,7 @@ function GlassListSwipe(props) {
                                             <h1 className='font font-semibold text-3xl text-white items-center justify-center flex text-center font-serif'>+</h1>
                                         </div>
                                     </div> : <div className=' h-full w-full flex justify-end items-end rounded-full mb-3 p-1'>
-                                        <div onClick={() => addToCart(glass, currentUser.uid, cart)} className='w-10 h-10 bg-sky-700 hover:bg-sky-600 transition duration-150 rounded-full cursor-pointer z-30'>
+                                        <div onClick={() => {currentUser ? addToCart(glass, currentUser.uid, cart) : alert("Logga in")}} className='w-10 h-10 bg-sky-700 hover:bg-sky-600 transition duration-150 rounded-full cursor-pointer z-30'>
                                             <h1 className='font font-semibold text-3xl text-white items-center justify-center flex text-center font-serif'>+</h1>
                                         </div>
                                     </div>}
