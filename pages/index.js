@@ -104,7 +104,7 @@ export default function Home() {
         {/* <GlassListSwipe glass={strutar} text={"Strutar"}></GlassListSwipe> */}
         <div>
           <h1 className="text-slate-900 text-3xl font-semibold mt-9 mb-3 sm:px-0 px-4">All Glass</h1>
-          {!loading ? <ul className="grid sm:grid-cols-4 xl:grid-cols-5 grid-cols-2 sm:gap-y-3 gap-y-2 gap-x-3 sm:gap-x-9 px-4 sm:px-0">
+          {!loading ? <ul className="grid sm:grid-cols-4 xl:grid-cols-5 grid-cols-2 sm:gap-y-3 gap-y-1.5 gap-x-3 sm:gap-x-9 px-4 sm:px-0">
             {allaglassar?.map((glass) => (
               <GlassCard key={glass.url} glasslol={glass} liked={currentUser && liked} cart={cart} uid={currentUser?.uid}></GlassCard>
             ))}
