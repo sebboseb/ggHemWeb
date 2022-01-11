@@ -180,26 +180,19 @@ function Navbar(props) {
                     </ul>
                     {!currentUser ? <ul className="text-slate-600 font-semibold sm:text-xl text-2xs flex items-center sm:gap-x-16 gap-x-4 px-4">
                         <li className=''>
-                            <label htmlFor="my-modal-3" className=" modal-button">Logga In</label>
-                            <input type="checkbox" id="my-modal-3" className="modal-toggle" />
-                            <div className="modal">
-                                <div className="modal-box flex flex-col">
-                                    <ul tabIndex="0" className="p-2 menu dropdown-content bg-base-100 rounded-box w-full border-sky-600">
-                                        <form className='flex flex-col gap-y-3' onSubmit={handleSubmit}>
-                                            <div className='flex flex-col gap-y-3'>
-                                                <label htmlFor="email">Email</label>
-                                                <input id="email" type="text" placeholder="Email" ref={emailRef} className='border border-sky-600 rounded p-3' />
-                                                <label htmlFor="password">Lösenord</label>
-                                                <input id="password" type="password" placeholder="********" ref={passwordRef} className='border border-sky-600 rounded p-3' />
-                                            </div>
-
-                                        </form>
-                                    </ul>
-                                    <div className="modal-action">
-                                        <label onClick={handleSubmit} className="btn btn-primary bg-sky-600 border-0">Logga In</label>
-                                        <label htmlFor="my-modal-3" className="btn">Avbryt</label>
-                                    </div>
-                                </div>
+                        <div className="dropdown dropdown-left">
+                                <div tabIndex="0" className="flex items-center gap-x-1">Logga In</div>
+                                <ul tabIndex="0" className="p-2 shadow menu dropdown-content bg-base-100 rounded-box w-max border-2 border-sky-600">
+                                    <form className='flex flex-col gap-y-3' onSubmit={handleSubmit}>
+                                        <div className='flex flex-col gap-y-3'>
+                                            <input id="email" type="text" placeholder="Email" ref={emailRef} className='border border-sky-600 rounded p-1' />
+                                            <input id="password" type="password" placeholder="********" ref={passwordRef} className='border border-sky-600 rounded p-1' />
+                                        </div>
+                                        <div className=' h-full w-full flex flex-col items-end justify-end'>
+                                            <button type='submit' className=' bg-sky-600 rounded-lg px-4 py-2 text-white font-semibold shadow-sky-100 shadow'>Fortsätt</button>
+                                        </div>
+                                    </form>
+                                </ul>
                             </div>
                             {/* <div className="dropdown dropdown-left">
                                 <div tabIndex="0" className="flex items-center gap-x-1">Logga In</div>
