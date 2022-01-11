@@ -102,7 +102,7 @@ function Navbar(props) {
                             {query.length !== 0 && <ul className="flex flex-col gap-y-1 p-1">
                                 {glassar?.map((glass, index) => (
                                     index <= 3 &&
-                                    <Link href={`/produkter/${glass.sort}/${glass.namn}`} passHref>
+                                    <Link href={`/kategorier/${glass.sort}/${glass.namn}`} passHref>
                                         <div key={glass.url} className="flex hover:bg-sky-100 transition duration-150 p-1 border-b border-black bg-transparent">
                                             <img className="w-auto min-w-min max-h-24 rounded" src={`${glass.url}`} alt={glass.namn} />
                                             <li className="text-black">{glass.namn}</li>
@@ -242,7 +242,7 @@ function Navbar(props) {
 export function DropdownCategory(props) {
     return (
         <li>
-            <Link href={`/produkter/${props.link}`} passHref>{props.title}</Link>
+            <Link href={`/kategorier/${props.link}`} passHref>{props.title}</Link>
         </li>
     )
 }

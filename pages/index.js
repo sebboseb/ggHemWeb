@@ -34,8 +34,8 @@ export default function Home() {
       setStrutar(lolstrut);
       // setApilol([...lol.strutar, ...lol.pinnar]);
 
-      
-      
+
+
 
       const docRef = doc(db, "User", currentUser.uid, "Cart", "glassar");
       onSnapshot(docRef, (snapshot) => {
@@ -72,7 +72,8 @@ export default function Home() {
       const lol = await getApi("nyhetja");
       setApilol(lol);
 
-      const alla = await getAllApi(load).then(setLoading(false));
+      const alla = await getAllApi(load)
+      .then(setLoading(false));
       setAllaglassar(alla);
     }
 
@@ -99,22 +100,20 @@ export default function Home() {
             <p className="sm:text-xl font-semibold text-center">Beställ en massa god glass med fri hemleverans!</p>
           </div>
         </div>
-        {!loading ? <GlassListSwipe glass={apilol} liked={currentUser && liked} text={"Nyheter"}></GlassListSwipe> : <GlassLoadingCard></GlassLoadingCard>}
+        {/* {!loading ? <GlassListSwipe glass={apilol} liked={currentUser && liked} text={"Nyheter"}></GlassListSwipe> : <GlassLoadingCard></GlassLoadingCard>} */}
         {/* <GlassListSwipe glass={strutar} text={"Strutar"}></GlassListSwipe> */}
         <div>
-          <h1 className="text-slate-900 text-3xl font-semibold mt-9 mx-2.5">All Glass</h1>
-          {!loading ? <ul className="grid sm:grid-cols-4 grid-cols-2 gap-y-3 gap-x-9 p-9">
+          <h1 className="text-slate-900 text-3xl font-semibold mt-9 mb-3 sm:px-0 px-4">All Glass</h1>
+          {!loading ? <ul className="grid sm:grid-cols-4 xl:grid-cols-5 grid-cols-2 sm:gap-y-3 gap-y-2 gap-x-3 sm:gap-x-9 px-4 sm:px-0">
             {allaglassar?.map((glass) => (
               <GlassCard key={glass.url} glasslol={glass} liked={currentUser && liked} cart={cart} uid={currentUser?.uid}></GlassCard>
             ))}
           </ul> : <GlassLoadingCard></GlassLoadingCard>}
         </div>
-        <div className="w-full pb-16 flex justify-center">
+        <div className="w-full py-16 flex justify-center">
           {!loading && <h1 className="w-32 h-12 bg-red-600 rounded-full text-xl text-white font-semibold flex justify-center items-center cursor-pointer" onClick={() => { { setLoading(true); } { (load <= 170 && setLoad(load + 20)) } }}>Ladda fler</h1>}
         </div>
-        {!currentUser && <Signup></Signup>}
-        {/* {load} */}
-        </div>
+      </div>
     </>
   )
 }

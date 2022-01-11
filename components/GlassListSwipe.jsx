@@ -35,58 +35,64 @@ function GlassListSwipe(props) {
     const { currentUser } = useAuth();
 
     return (
-        <div className='flex flex-wrap overflow-hidden snap-x max-w-7xl'>
-            <div className='flex w-full justify-between mx-2.5 items-center'>
-                <h1 className='font-semibold text-3xl pb-3'>{props.text}</h1>
-                <div className='font-semibold cursor-pointer'><Link href={`/produkter/${"Pinne"}`} passHref><u>Se alla</u></Link></div>
+        <div className='flex flex-wrap overflow-hidden snap-x w-full max-w-7xl'>
+            <div className='flex w-full justify-between items-center'>
+                <h1 className='font-semibold text-3xl pb-3 px-4 mt-4'>{props.text}</h1>
+                {/* <div className='font-semibold cursor-pointer'>
+                    <Link href={`/produkter/${"Pinne"}`} passHref>
+                        <u>Se alla</u>
+                    </Link>
+                </div> */}
             </div>
-            {loading ? <GlassLoadingCard /> : <div className=" w-[95vw] xl:w-[65vw] h-88">
-                <Swiper breakpoints={{
-                    // when window width is >= 640px
-                    640: {
-                        slidesPerView: 4,
-                    },
-                }} modules={[Navigation]} spaceBetween={10} slidesPerView={2}>
-                    {props.glass.map((glass, i) => (
-                        // i <= 10 &&
-                        <SwiperSlide key={glass.url} className='flex flex-col w-52 h-80 pl-3'>
-                            <div className="shadow shadow-slate-300 hover:shadow-slate-300 hover:shadow-md transition duration-150 rounded-sm mb-3 px-1.5 border border-slate-300">
-                                <div className="absolute w-full justify-end flex right-3 top-2">
-                                    {!props.liked?.some(name => name === glass.namn) ? <AiOutlineHeart onClick={() => {currentUser ? likeGlass(glass, currentUser.uid) : alert("Logga in")}} size={25}></AiOutlineHeart> : <AiFillHeart onClick={() => removeLikeGlass(glass, currentUser.uid)} size={25} color="red"></AiFillHeart>}
-                                </div>
-                                <Link href={`produkter/${glass.sort}/${glass.namn.replace(/ /g, "%20")}`} passHref>
-                                    <div className=" cursor-pointer h-64">
-                                        <div className='w-full flex justify-center'>
-                                            <img loading='lazy' className='w-auto min-w-min max-h-24 mt-3 object-scale-down' src={`${glass.url}`} alt="" />
+            {loading ? <GlassLoadingCard /> :
+                <div className="flex w-full justify-center">
+                    <div className=" w-[95vw] px-4 sm:px-0 xl:w-[65vw] h-88">
+                        <Swiper breakpoints={{
+                            // when window width is >= 640px
+                            640: {
+                                slidesPerView: 4,
+                            },
+                        }} modules={[Navigation]} spaceBetween={36} slidesPerView={2}>
+                            {props.glass.map((glass, i) => (
+                                // i <= 10 &&
+                                <SwiperSlide key={glass.url} className='flex flex-col w-52 h-80'>
+                                    <div className="shadow shadow-slate-300 hover:shadow-slate-300 hover:shadow-md transition duration-150 rounded-sm mb-3 px-1.5 border border-slate-300">
+                                        <div className="absolute w-full justify-end flex right-3 top-2">
+                                            {!props.liked?.some(name => name === glass.namn) ? <AiOutlineHeart onClick={() => { currentUser ? likeGlass(glass, currentUser.uid) : alert("Logga in") }} size={25}></AiOutlineHeart> : <AiFillHeart onClick={() => removeLikeGlass(glass, currentUser.uid)} size={25} color="red"></AiFillHeart>}
                                         </div>
-                                        <p className='text-xs mt-3 font-semibold'>{glass.supplier}</p>
-                                        <h1 className=' font-semibold'>{glass.namn}</h1>
-                                        <p className='text-xs'>{glass.vikt}/{glass.volym}</p>
-                                        <div className='flex justify-between'>
-                                            <h1>{glass.displayPris}:-</h1>
-                                            <h1>{glass.antal} st</h1>
-                                        </div>
+                                        <Link href={`kategorier/${glass.sort}/${glass.namn.replace(/ /g, "%20")}`} passHref>
+                                            <div className=" cursor-pointer h-64">
+                                                <div className='w-full flex justify-center'>
+                                                    <img loading='lazy' className='w-auto min-w-min max-h-24 mt-3 object-scale-down' src={`${glass.url}`} alt="" />
+                                                </div>
+                                                <p className='text-xs mt-3 font-semibold'>{glass.supplier}</p>
+                                                <h1 className=' font-semibold'>{glass.namn}</h1>
+                                                <p className='text-xs'>{glass.vikt}/{glass.volym}</p>
+                                                <div className='flex justify-between'>
+                                                    <h1>{glass.displayPris}:-</h1>
+                                                    <h1>{glass.antal} st</h1>
+                                                </div>
+                                            </div>
+                                        </Link>
+                                        {currentUser && cart.filter(x => x.namn === glass.namn).length ?
+                                            <div className=' h-full w-full flex justify-between items-end bg-slate-100 rounded-full mb-3 p-1'>
+                                                <div onClick={() => deleteFromCart(glass, currentUser.uid, cart)} className='w-10 h-10 bg-slate-300 hover:bg-slate-400 transition duration-150 rounded-full cursor-pointer z-30'>
+                                                    <h1 className='font font-semibold text-3xl text-slate-900 items-center justify-center flex text-center font-serif'>-</h1>
+                                                </div>
+                                                <p className=" font-semibold text-xl mb-1.5">{cart.filter(x => x.namn === glass.namn).length}</p>
+                                                <div onClick={() => addToCart(glass, currentUser.uid, cart)} className='w-10 h-10 bg-sky-700 hover:bg-sky-600 transition duration-150 rounded-full cursor-pointer z-30'>
+                                                    <h1 className='font font-semibold text-3xl text-white items-center justify-center flex text-center font-serif'>+</h1>
+                                                </div>
+                                            </div> : <div className=' h-full w-full flex justify-end items-end rounded-full mb-3 p-1'>
+                                                <div onClick={() => { currentUser ? addToCart(glass, currentUser.uid, cart) : alert("Logga in") }} className='w-10 h-10 bg-sky-700 hover:bg-sky-600 transition duration-150 rounded-full cursor-pointer z-30'>
+                                                    <h1 className='font font-semibold text-3xl text-white items-center justify-center flex text-center font-serif'>+</h1>
+                                                </div>
+                                            </div>}
                                     </div>
-                                </Link>
-                                {currentUser && cart.filter(x => x.namn === glass.namn).length ?
-                                    <div className=' h-full w-full flex justify-between items-end bg-slate-100 rounded-full mb-3 p-1'>
-                                        <div onClick={() => deleteFromCart(glass, currentUser.uid, cart)} className='w-10 h-10 bg-slate-300 hover:bg-slate-400 transition duration-150 rounded-full cursor-pointer z-30'>
-                                            <h1 className='font font-semibold text-3xl text-slate-900 items-center justify-center flex text-center font-serif'>-</h1>
-                                        </div>
-                                        <p className=" font-semibold text-xl mb-1.5">{cart.filter(x => x.namn === glass.namn).length}</p>
-                                        <div onClick={() => addToCart(glass, currentUser.uid, cart)} className='w-10 h-10 bg-sky-700 hover:bg-sky-600 transition duration-150 rounded-full cursor-pointer z-30'>
-                                            <h1 className='font font-semibold text-3xl text-white items-center justify-center flex text-center font-serif'>+</h1>
-                                        </div>
-                                    </div> : <div className=' h-full w-full flex justify-end items-end rounded-full mb-3 p-1'>
-                                        <div onClick={() => {currentUser ? addToCart(glass, currentUser.uid, cart) : alert("Logga in")}} className='w-10 h-10 bg-sky-700 hover:bg-sky-600 transition duration-150 rounded-full cursor-pointer z-30'>
-                                            <h1 className='font font-semibold text-3xl text-white items-center justify-center flex text-center font-serif'>+</h1>
-                                        </div>
-                                    </div>}
-                            </div>
-                        </SwiperSlide>
-                    ))}
-                </Swiper>
-            </div>}
+                                </SwiperSlide>
+                            ))}
+                        </Swiper>
+                    </div></div>}
         </div>
     )
 }
