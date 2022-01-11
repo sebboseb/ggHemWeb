@@ -66,14 +66,14 @@ function Navbar(props) {
     async function handleSubmit(e) {
         e.preventDefault();
 
-        try {
-            setError("");
+        // try {
+        //     setError("");
             // setLoading(true);
             await login(emailRef.current.value, passwordRef.current.value);
             // history.push("/");
-        } catch {
-            setError("Failed to log in");
-        }
+        // } catch {
+        //     setError("Failed to log in");
+        // }
     }
 
     async function handleSubmitSignup(e) {
