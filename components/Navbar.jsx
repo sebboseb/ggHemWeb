@@ -185,8 +185,8 @@ function Navbar(props) {
                                 <ul tabIndex="0" className="p-2 shadow menu dropdown-content bg-base-100 rounded-box w-max border-2 border-sky-600">
                                     <form className='flex flex-col gap-y-3' onSubmit={handleSubmit}>
                                         <div className='flex flex-col gap-y-3'>
-                                            <input id="email" type="text" placeholder="Email" ref={emailRef} className='border border-sky-600 rounded p-1' />
-                                            <input id="password" type="password" placeholder="********" ref={passwordRef} className='border border-sky-600 rounded p-1' />
+                                            <input id="emaillogin" type="text" placeholder="Email" ref={emailRef} className='border border-sky-600 rounded p-1' />
+                                            <input id="passwordlogin" type="password" placeholder="********" ref={passwordRef} className='border border-sky-600 rounded p-1' />
                                         </div>
                                         <div className=' h-full w-full flex flex-col items-end justify-end'>
                                             <button type='submit' className=' bg-sky-600 rounded-lg px-4 py-2 text-white font-semibold shadow-sky-100 shadow'>Fortsätt</button>
@@ -207,10 +207,10 @@ function Navbar(props) {
                                     <ul tabIndex="0" className="p-2 menu dropdown-content bg-base-100 rounded-box w-full border-sky-600">
                                         <form className='flex flex-col gap-y-3' onSubmit={handleSubmitSignup}>
                                             <div className='flex flex-col gap-y-3'>
-                                                <label htmlFor="email">Email</label>
-                                                <input id="email" type="text" placeholder="Email" ref={emailRef} className='border border-sky-600 rounded p-3' />
-                                                <label htmlFor="password">Lösenord</label>
-                                                <input id="password" type="password" placeholder="********" ref={passwordRef} className='border border-sky-600 rounded p-3' />
+                                                <label htmlFor="emailawd">Email</label>
+                                                <input id="emailawd" type="text" placeholder="Email" ref={emailRef} className='border border-sky-600 rounded p-3' />
+                                                <label htmlFor="passwordawd">Lösenord</label>
+                                                <input id="passwordawd" type="password" placeholder="********" ref={passwordRef} className='border border-sky-600 rounded p-3' />
                                             </div>
 
                                         </form>
