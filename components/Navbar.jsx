@@ -61,6 +61,8 @@ function Navbar(props) {
 
     const emailRef = useRef();
     const passwordRef = useRef();
+    const emailRefawd = useRef();
+    const passwordRefawd = useRef();
     // const passwordConfirmRef = useRef();
 
     async function handleSubmit(e) {
@@ -208,9 +210,9 @@ function Navbar(props) {
                                         <form className='flex flex-col gap-y-3' onSubmit={handleSubmitSignup}>
                                             <div className='flex flex-col gap-y-3'>
                                                 <label htmlFor="emailawd">Email</label>
-                                                <input id="emailawd" type="text" placeholder="Email" ref={emailRef} className='border border-sky-600 rounded p-3' />
+                                                <input id="emailawd" type="text" placeholder="Email" ref={emailRefawd} className='border border-sky-600 rounded p-3' />
                                                 <label htmlFor="passwordawd">Lösenord</label>
-                                                <input id="passwordawd" type="password" placeholder="********" ref={passwordRef} className='border border-sky-600 rounded p-3' />
+                                                <input id="passwordawd" type="password" placeholder="********" ref={passwordRefawd} className='border border-sky-600 rounded p-3' />
                                             </div>
 
                                         </form>
