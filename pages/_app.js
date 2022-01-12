@@ -18,8 +18,8 @@ function MyApp({ Component, pageProps, metaTags }) {
       <Head>
         <link rel="shortcut icon" href="/ggHemIcon.png" />
         {metaTags &&
-          Object.entries(metaTags).map((entry) => (
-            <meta property={entry[0]} content={entry[1]} />
+          Object.entries(metaTags).map((entry, i) => (
+            <meta key={i} property={entry[0]} content={entry[1]} />
           ))}
       </Head>
       <Elements stripe={stripePromise}>
