@@ -147,7 +147,7 @@ export async function getStaticProps({ params }) {
     const metaTags = {
         "og:title": `Köp ${params.id}`,
         "og:description": `Köp ${params.id} online med snabb och fri hemleverans`,
-        "og:url": `https://gghem.se/kategorier/${params.id}`,
+        "og:url": `https://gghem.se/kategorier/${params.sortId}/${params.id}`,
     };
 
     return {
