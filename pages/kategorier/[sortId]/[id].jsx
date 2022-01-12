@@ -61,15 +61,14 @@ export default function Glass({ glass }) {
                 <meta property="og:type" content="website" />
                 <meta
                     property="og:title"
-                    content="Köp Sitting Bull"
+                    content={`Köp ${glass.namn}`}
                 />
                 <meta name="twitter:card" content="summary" />
                 <meta
                     property="og:description"
                     content="Köp Sitting Bull online med fri hemleverans"
                 />
-                <meta property="og:image" content={`${glass.url}`} />
-
+                <meta property="og:image" content={glass.url} />
             </Head>
             <main className='h-screen flex justify-center'>
                 <div className='sm:px-16 px-4 max-w-7xl flex flex-col w-full'>
