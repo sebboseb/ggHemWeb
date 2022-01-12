@@ -17,18 +17,6 @@ function MyApp({ Component, pageProps }) {
     <>
       <Head>
         <link rel="shortcut icon" href="/ggHemIcon.png" />
-        <meta property="og:url" content="https://gghem.se/" />
-        <meta property="og:type" content="website" />
-        <meta
-          property="og:title"
-          content="ggHem | Handla glass med fri hemleverans"
-        />
-        <meta name="twitter:card" content="summary" />
-        <meta
-          property="og:description"
-          content="Välj bland massa goda glassar med snabb och fri hemleverans!"
-        />
-        <meta property="og:image" content={"/ggHemIcon.png"} />
       </Head>
       <Elements stripe={stripePromise}>
         <AuthProvider>
