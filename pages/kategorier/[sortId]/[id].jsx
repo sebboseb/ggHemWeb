@@ -144,6 +144,13 @@ export async function getStaticProps({ params }) {
     const req = await fetch(`https://swedishicecream.herokuapp.com/glass?namn=${params.id}`);
     const data = await req.json();
 
+    const metaTags = {
+        "og:title": `Köp ${params.id}`,
+        "og:description": `Köp ${params.id} online med snabb och fri hemleverans`,
+        "og:image": params.test1,
+        "og:url": `https://gghem.se/kategorier/${params.id}`,
+    };
+
     return {
         props: { glass: data[0] },
     }
@@ -155,7 +162,7 @@ export async function getStaticPaths() {
     const data = await req.json();
 
     const paths = data.map(glass => {
-        return { params: { id: glass.namn, sortId: glass.sort } }
+        return { params: { id: glass.namn, sortId: glass.sort, test1: glass.url } }
     })
 
     return {
