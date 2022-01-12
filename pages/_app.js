@@ -6,6 +6,7 @@ import Navbar from "../components/Navbar";
 import 'swiper/css';
 import DrawerContainer from "../components/DrawerContainer";
 import Head from 'next/head';
+import Footer from '../components/Footer';
 
 
 
@@ -17,6 +18,18 @@ function MyApp({ Component, pageProps }) {
     <>
       <Head>
         <link rel="shortcut icon" href="/ggHemIcon.png" />
+        <meta name="og:url" content="https://gghem.se/" />
+        <meta name="og:type" content="website" />
+        <meta
+          name="og:title"
+          content="ggHem | Handla glass med fri hemleverans"
+        />
+        <meta name="twitter:card" content="summary" />
+        <meta
+          name="og:description"
+          content="Välj bland massa goda glassar med snabb och fri hemleverans!"
+        />
+        <meta name="og:image" content={"/ggHemIcon.png"} />
       </Head>
       <Elements stripe={stripePromise}>
         <AuthProvider>
@@ -25,10 +38,10 @@ function MyApp({ Component, pageProps }) {
             <div className="drawer-content min-h-screen">
               <Navbar />
               <Component {...pageProps} />
+              <Footer />
             </div>
             <DrawerContainer />
           </div>
-          {/* <Footer></Footer> */}
         </AuthProvider>
       </Elements>
     </>
