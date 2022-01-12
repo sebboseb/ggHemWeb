@@ -152,7 +152,7 @@ export async function getStaticProps({ params }) {
     };
 
     return {
-        props: { glass: data[0] },
+        props: { glass: data[0], metaTags },
     }
 }
 
