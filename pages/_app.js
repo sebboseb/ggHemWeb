@@ -11,12 +11,16 @@ import Head from 'next/head';
 
 const stripePromise = loadStripe("pk_test_51FphUvF84nza37ikyfwSvhsQsIIMr7l0Gx9ou225c6TRs191y9IlLmcEvuLolsuNGmofgEj5n0kRXl6JGktkaTYA00hoj2pJBo");
 
-function MyApp({ Component, pageProps }) {
+function MyApp({ Component, pageProps, metaTags }) {
 
   return (
     <>
       <Head>
         <link rel="shortcut icon" href="/ggHemIcon.png" />
+        {metaTags &&
+          Object.entries(metaTags).map((entry) => (
+            <meta property={entry[0]} content={entry[1]} />
+          ))}
       </Head>
       <Elements stripe={stripePromise}>
         <AuthProvider>
