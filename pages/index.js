@@ -88,18 +88,18 @@ export default function Home() {
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin />
         <link href="https://fonts.googleapis.com/css2?family=Montserrat+Subrayada:wght@400;700&display=swap" rel="stylesheet" />
         <title>ggHem | Beställ glass online</title>
-        <meta property="og:url" content="https://gghem.se/" />
-        <meta property="og:type" content="website" />
+        <meta name="og:url" content="https://gghem.se/" />
+        <meta name="og:type" content="website" />
         <meta
-          property="og:title"
+          name="og:title"
           content="ggHem | Handla glass med fri hemleverans"
         />
-        <meta property="twitter:card" content="summary" />
+        <meta name="twitter:card" content="summary" />
         <meta
-          property="og:description"
+          name="og:description"
           content="Välj bland massa goda glassar med snabb och fri hemleverans!"
         />
-        <meta property="og:image" content={"/ggHemIcon.png"} />
+        <meta name="og:image" content={"/ggHemIcon.png"} />
       </Head>
       {/* {loading && <div className="w-screen h-screen bg-red-600"></div>} */}
       <div className=" w-full flex flex-col items-center">

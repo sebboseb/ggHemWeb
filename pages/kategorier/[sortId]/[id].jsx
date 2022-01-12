@@ -57,18 +57,18 @@ export default function Glass({ glass }) {
             <Head>
                 <title>Köp {glass.namn} {glass.id}</title>
                 <link rel="shortcut icon" href="/ggHemIcon.png" />
-                <meta property="og:url" content={`https://gghem.se/kategorier/${sortId}/${glass.namn}`} />
-                <meta property="og:type" content="website" />
+                <meta name="og:url" content={`https://gghem.se/kategorier/${sortId}/${glass.namn}`} />
+                <meta name="og:type" content="website" />
                 <meta
-                    property="og:title"
+                    name="og:title"
                     content={`Köp ${glass.namn}`}
                 />
-                <meta property="twitter:card" content="summary" />
+                <meta name="twitter:card" content="summary" />
                 <meta
-                    property="og:description"
+                    name="og:description"
                     content="Köp Sitting Bull online med fri hemleverans"
                 />
-                <meta property="og:image" content={glass.url} />
+                <meta name="og:image" content={glass.url} />
             </Head>
             <main className='h-screen flex justify-center'>
                 <div className='sm:px-16 px-4 max-w-7xl flex flex-col w-full'>
@@ -144,14 +144,8 @@ export async function getStaticProps({ params }) {
     const req = await fetch(`https://swedishicecream.herokuapp.com/glass?namn=${params.id}`);
     const data = await req.json();
 
-    const metaTags = {
-        "og:title": `Köp ${params.id}`,
-        "og:description": `Köp ${params.id} online med snabb och fri hemleverans`,
-        "og:url": `https://gghem.se/kategorier/${params.sortId}/${params.id}`,
-    };
-
     return {
-        props: { glass: data[0], metaTags },
+        props: { glass: data[0] },
     }
 }
 
@@ -161,7 +155,7 @@ export async function getStaticPaths() {
     const data = await req.json();
 
     const paths = data.map(glass => {
-        return { params: { id: glass.namn, sortId: glass.sort, test: glass.url } }
+        return { params: { id: glass.namn, sortId: glass.sort } }
     })
 
     return {
