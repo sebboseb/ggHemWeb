@@ -14,7 +14,7 @@ import GlassCard from '../../../components/GlassCard';
 import Link from 'next/link';
 import Image from 'next/image';
 
-export default function Car({ glass }) {
+export default function Glass({ glass }) {
 
     const router = useRouter()
     let { id, sortId } = router.query;
@@ -44,11 +44,11 @@ export default function Car({ glass }) {
                     setLiked(prevFollowed => prevFollowed.concat(doc.id));
                 });
             });
-            
+
             const alla = await getApi(glass.sort);
             setAllaglassar(alla);
         }
-            
+
         currentUser && getFunction();
     }, [currentUser, id, glass.sort]);
 

@@ -70,9 +70,9 @@ function Navbar(props) {
 
         // try {
         //     setError("");
-            // setLoading(true);
-            await login(emailRef.current.value, passwordRef.current.value);
-            // history.push("/");
+        // setLoading(true);
+        await login(emailRef.current.value, passwordRef.current.value);
+        // history.push("/");
         // } catch {
         //     setError("Failed to log in");
         // }
@@ -137,8 +137,8 @@ function Navbar(props) {
                                 <div tabIndex="0" className="flex items-center gap-x-1">Kategorier <AiOutlineDown className='sm:mt-1.5 w-2 sm:w-5 h-2 sm:h-5' /></div>
                                 <ul tabIndex="0" className="p-2 shadow menu dropdown-content bg-base-100 rounded-box w-max">
                                     <div className=' grid sm:grid-cols-2 grid-cols-1'>
-                                        <DropdownCategory link={"Pinne"} title={"Pinnar"}></DropdownCategory>
-                                        <DropdownCategory link={"Strut"} title={"Strutar"}></DropdownCategory>
+                                        <DropdownCategory link={"Pinnglass"} title={"Pinnglass"}></DropdownCategory>
+                                        <DropdownCategory link={"Strutar"} title={"Strutar"}></DropdownCategory>
                                         <DropdownCategory link={"Pint"} title={"Bägare"}></DropdownCategory>
                                         <DropdownCategory link={"Kulglass"} title={"Kulglass"}></DropdownCategory>
                                         <DropdownCategory link={"halvliter"} title={"Halvliter"}></DropdownCategory>
@@ -182,7 +182,7 @@ function Navbar(props) {
                     </ul>
                     {!currentUser ? <ul className="text-slate-600 font-semibold sm:text-xl text-2xs flex items-center sm:gap-x-16 gap-x-4 px-4">
                         <li className=''>
-                        <label htmlFor="my-modal-3" className=" modal-button">Logga In</label>
+                            <label htmlFor="my-modal-3" className=" modal-button">Logga In</label>
                             <input type="checkbox" id="my-modal-3" className="modal-toggle" />
                             <div className="modal">
                                 <div className="modal-box flex flex-col">
@@ -196,9 +196,17 @@ function Navbar(props) {
                                             </div>
                                         </form>
                                     </ul>
-                                    <div className="modal-action">
-                                        <label onClick={handleSubmit} className="btn btn-primary bg-sky-600 border-0">Logga In</label>
-                                        <label htmlFor="my-modal-3" className="btn">Avbryt</label>
+                                    <div >
+                                        <div className='flex mt-4 justify-between w-full h-full items-end'>
+                                            <div className='flex items-center font-semibold gap-x-1'>
+                                                <h1 className='text-2xs text-center mt-0.5'>Har du inget konto?</h1>
+                                                <div className=' text-sky-600 cursor-pointer'>Skapa konto</div>
+                                            </div>
+                                            <div className="modal-action">
+                                                <label onClick={handleSubmit} className="btn btn-primary bg-sky-600 border-0">Logga In</label>
+                                                <label htmlFor="my-modal-3" className="btn">Avbryt</label>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
