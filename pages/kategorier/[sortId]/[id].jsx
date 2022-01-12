@@ -57,18 +57,18 @@ export default function Glass({ glass }) {
             <Head>
                 <title>Köp {glass.namn} {glass.id}</title>
                 <link rel="shortcut icon" href="/ggHemIcon.png" />
-                <meta name="og:url" content={`https://gghem.se/kategorier/${sortId}/${glass.namn}`} />
-                <meta name="og:type" content="website" />
+                <meta property="og:url" content={`https://gghem.se/kategorier/${sortId}/${glass.namn}`} />
+                <meta property="og:type" content="website" />
                 <meta
-                    name="og:title"
+                    property="og:title"
                     content={`Köp ${glass.namn}`}
                 />
-                <meta name="twitter:card" content="summary" />
+                <meta property="twitter:card" content="summary" />
                 <meta
-                    name="og:description"
+                    property="og:description"
                     content="Köp Sitting Bull online med fri hemleverans"
                 />
-                <meta name="og:image" content={glass.url} />
+                <meta property="og:image" content={glass.url} />
             </Head>
             <main className='h-screen flex justify-center'>
                 <div className='sm:px-16 px-4 max-w-7xl flex flex-col w-full'>
