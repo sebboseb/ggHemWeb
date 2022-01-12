@@ -147,7 +147,6 @@ export async function getStaticProps({ params }) {
     const metaTags = {
         "og:title": `Köp ${params.id}`,
         "og:description": `Köp ${params.id} online med snabb och fri hemleverans`,
-        "og:image": params.test1,
         "og:url": `https://gghem.se/kategorier/${params.id}`,
     };
 
@@ -162,7 +161,7 @@ export async function getStaticPaths() {
     const data = await req.json();
 
     const paths = data.map(glass => {
-        return { params: { id: glass.namn, sortId: glass.sort, test1: glass.url } }
+        return { params: { id: glass.namn, sortId: glass.sort, test: glass.url } }
     })
 
     return {
