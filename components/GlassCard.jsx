@@ -31,7 +31,15 @@ function GlassCard(props) {
             <li key={props.glasslol.url} className='flex flex-col sm:w-56 h-80'>
                 <div className="shadow relative shadow-slate-300 hover:shadow-slate-300 hover:shadow-md transition duration-150 rounded-sm mb-3 px-1.5 border border-slate-300 flex-col flex">
                     <div className="absolute w-full justify-end flex right-3 top-2">
-                        {!props.liked?.some(name => name === props.glasslol.namn) ? <AiOutlineHeart onClick={() => { currentUser ? likeGlass(props.glasslol, props.uid) : alert("Logga in") }} size={25}></AiOutlineHeart> : <AiFillHeart onClick={() => removeLikeGlass(props.glasslol, props.uid)} size={25} color="red"></AiFillHeart>}
+                        {!props.liked?.some(name => name === props.glasslol.namn)
+                            ?
+                            <div>
+                                {currentUser ? <AiOutlineHeart onClick={() => likeGlass(props.glasslol, props.uid)
+                                } size={25}></AiOutlineHeart> : <label htmlFor="my-modal-3" className=" modal-button"><AiOutlineHeart onClick={() => {
+                                }} size={25}></AiOutlineHeart></label>}
+                            </div>
+                            : <AiFillHeart onClick={() => removeLikeGlass(props.glasslol, props.uid)} size={25} color="red">
+                            </AiFillHeart>}
                     </div>
                     <Link href={`/kategorier/${props.glasslol.sort}/${props.glasslol.namn.replace(/ /g, "%20")}`} passHref>
                         <div className=" cursor-pointer h-64 py-3 sm:py-0">
@@ -47,26 +55,28 @@ function GlassCard(props) {
                             </div>
                         </div>
                     </Link>
-                    {currentUser && props.cart?.filter(x => x.namn === props.glasslol.namn).length ?
-                        <div className=' w-full flex justify-between items-end bg-slate-100 rounded-full mb-3 p-1'>
-                            <div onClick={() => deleteFromCart(props.glasslol, props.uid, props.cart)} className='w-10 h-10 bg-slate-300 hover:bg-slate-400 transition duration-150 rounded-full cursor-pointer z-30'>
-                                <h1 className='font font-semibold text-3xl text-slate-900 items-center justify-center flex text-center font-serif select-none'>-</h1>
-                            </div>
-                            <p className=" font-semibold text-xl mb-1.5">{props.cart.filter(x => x.namn === props.glasslol.namn).length}</p>
-                            <div onClick={() => addToCart(props.glasslol, props.uid, props.cart)} className='w-10 h-10 bg-sky-700 hover:bg-sky-600 transition duration-150 rounded-full cursor-pointer z-30'>
-                                <h1 className='font font-semibold text-3xl text-white items-center justify-center flex text-center font-serif select-none'>+</h1>
-                            </div>
-                        </div> : <div className=' h-full w-full flex justify-end items-end rounded-full mb-3 p-1'>
-                            {!currentUser ? <label htmlFor="my-modal-3" className=" modal-button">
-                                <div className='w-10 h-10 bg-sky-700 hover:bg-sky-600 transition duration-150 rounded-full cursor-pointer z-30'>
-                                    <h1 className='font font-semibold text-3xl text-white items-center justify-center flex text-center font-serif select-none'>+</h1>
+                    {
+                        currentUser && props.cart?.filter(x => x.namn === props.glasslol.namn).length ?
+                            <div className=' w-full flex justify-between items-end bg-slate-100 rounded-full mb-3 p-1'>
+                                <div onClick={() => deleteFromCart(props.glasslol, props.uid, props.cart)} className='w-10 h-10 bg-slate-300 hover:bg-slate-400 transition duration-150 rounded-full cursor-pointer z-30'>
+                                    <h1 className='font font-semibold text-3xl text-slate-900 items-center justify-center flex text-center font-serif select-none'>-</h1>
                                 </div>
-                            </label> :
+                                <p className=" font-semibold text-xl mb-1.5">{props.cart.filter(x => x.namn === props.glasslol.namn).length}</p>
                                 <div onClick={() => addToCart(props.glasslol, props.uid, props.cart)} className='w-10 h-10 bg-sky-700 hover:bg-sky-600 transition duration-150 rounded-full cursor-pointer z-30'>
                                     <h1 className='font font-semibold text-3xl text-white items-center justify-center flex text-center font-serif select-none'>+</h1>
                                 </div>
-                            }
-                        </div>}
+                            </div> : <div className=' h-full w-full flex justify-end items-end rounded-full mb-3 p-1'>
+                                {!currentUser ? <label htmlFor="my-modal-3" className=" modal-button">
+                                    <div className='w-10 h-10 bg-sky-700 hover:bg-sky-600 transition duration-150 rounded-full cursor-pointer z-30'>
+                                        <h1 className='font font-semibold text-3xl text-white items-center justify-center flex text-center font-serif select-none'>+</h1>
+                                    </div>
+                                </label> :
+                                    <div onClick={() => addToCart(props.glasslol, props.uid, props.cart)} className='w-10 h-10 bg-sky-700 hover:bg-sky-600 transition duration-150 rounded-full cursor-pointer z-30'>
+                                        <h1 className='font font-semibold text-3xl text-white items-center justify-center flex text-center font-serif select-none'>+</h1>
+                                    </div>
+                                }
+                            </div>
+                    }
                 </div>
             </li>
         </>

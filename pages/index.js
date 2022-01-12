@@ -105,10 +105,22 @@ export default function Home() {
       <div className=" w-full flex flex-col items-center">
         <div className=" sm:h-96 h-44 flex w-full items-center justify-center text-slate-900 relative overflow-hidden bg-fixed">
           {/* <div className=" w-[32rem] h-[32rem] rounded-full bg-sky-400 absolute top-[-20rem] left-[-20rem] -z-10"></div> */}
+
+
+
+
+
           <div className=" w-[40rem] h-[40rem] rounded bg-sky-100 absolute bottom-[-10rem] left-[-32rem] -z-10 skew-x-[70deg]"></div>
+          <div className=" absolute top-0 left-10 h-[18rem] sm:h-[32rem] w-[18rem] sm:w-[32rem] xl:h-[48rem] xl:w-[48rem] bg-purple-300 animate-blob animation-delay-4000 rounded-full mix-blend-multiply filter blur-3xl opacity-50"></div>
+          <div className=" absolute top-0 right-10 h-[18rem] sm:h-[32rem] w-[18rem] sm:w-[32rem] xl:h-[48rem] xl:w-[48rem] bg-pink-300 animate-blob animation-delay-2000 rounded-full mix-blend-multiply filter blur-3xl opacity-50"></div>
+          <div className=" absolute h-[18rem] sm:h-[32rem] w-[18rem] sm:w-[32rem] xl:h-[48rem] xl:w-[48rem] bg-sky-300 rounded-full animate-blob mix-blend-multiply filter blur-3xl opacity-50"></div>
+
+
+
+
           <div className="flex flex-col items-center">
-            <h1 className="sm:text-7xl text-center text-3xl font-semibold">Välkommen till <span id="logoFont" className=" text-sky-700">ggHem</span></h1>
-            <p className="sm:text-xl font-semibold text-center">Beställ en massa god glass med fri hemleverans!</p>
+            <h1 className="sm:text-7xl text-center text-3xl font-semibold z-10 text-white">Välkommen till <span id="logoFont" className=" text-sky-600">ggHem</span></h1>
+            <p className="sm:text-xl font-semibold text-center z-10 text-white">Beställ en massa god glass med fri hemleverans!</p>
           </div>
         </div>
         {/* {!loading ? <GlassListSwipe glass={apilol} liked={currentUser && liked} text={"Nyheter"}></GlassListSwipe> : <GlassLoadingCard></GlassLoadingCard>} */}

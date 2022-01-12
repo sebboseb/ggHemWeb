@@ -44,11 +44,14 @@ export default function Glass({ glass }) {
                     setLiked(prevFollowed => prevFollowed.concat(doc.id));
                 });
             });
+        }
 
+        async function getGlassarApi() {
             const alla = await getApi(glass.sort);
             setAllaglassar(alla);
         }
 
+        getGlassarApi();
         currentUser && getFunction();
     }, [currentUser, id, glass.sort]);
 
@@ -66,7 +69,7 @@ export default function Glass({ glass }) {
                 <meta name="twitter:card" content="summary" />
                 <meta
                     name="og:description"
-                    content="Köp Sitting Bull online med fri hemleverans"
+                    content={`Köp ${glass.namn} online med fri hemleverans`}
                 />
                 <meta name="og:image" content={glass.url} />
             </Head>
@@ -77,7 +80,9 @@ export default function Glass({ glass }) {
                     </div>
                     <div className='flex justify-between border-b border-black pb-4'>
                         <h1 className=' text-3xl font-semibold'>{glass.namn}</h1>
-                        {!liked.some(name => name === glass.namn) ? <AiOutlineHeart onClick={() => likeGlass(glass, currentUser.uid)} size={35}></AiOutlineHeart> : currentUser && <AiFillHeart onClick={() => removeLikeGlass(glass, currentUser.uid)} size={35} color="red"></AiFillHeart>}
+                        {!liked.some(name => name === glass.namn) ?
+                            <AiOutlineHeart onClick={() => likeGlass(glass, currentUser.uid)} size={35}></AiOutlineHeart>
+                            : currentUser && <AiFillHeart onClick={() => removeLikeGlass(glass, currentUser.uid)} size={35} color="red"></AiFillHeart>}
                     </div>
                     <div className='flex justify-between text-xl pt-2 font-semibold text-slate-500'>
                         <p>{glass.antal} st</p>
@@ -96,10 +101,16 @@ export default function Glass({ glass }) {
                                         <h1 className='font font-semibold text-3xl text-white items-center justify-center flex text-center font-serif'>+</h1>
                                     </div>
                                 </div>
-                            </div> : <div className=''>
-                                <div onClick={() => addToCart(glass, currentUser.uid, cart)} className='w-32 h-12 bg-sky-600 hover:bg-sky-500 transition duration-150 rounded-full cursor-pointer z-30'>
-                                    <h1 className='font font-semibold sm:text-3xl text-xl text-white items-center h-full justify-center flex pb-1'>Köp</h1>
-                                </div>
+                            </div> : <div className=' h-full w-full flex justify-end items-end rounded-full mb-3 p-1'>
+                                {!currentUser ? <label htmlFor="my-modal-3" className=" modal-button">
+                                    <div className='w-10 h-10 bg-sky-700 hover:bg-sky-600 transition duration-150 rounded-full cursor-pointer z-30'>
+                                        <h1 className='font font-semibold text-3xl text-white items-center justify-center flex text-center font-serif select-none'>+</h1>
+                                    </div>
+                                </label> :
+                                    <div onClick={() => addToCart(glass, currentUser.uid, cart)} className='w-10 h-10 bg-sky-700 hover:bg-sky-600 transition duration-150 rounded-full cursor-pointer z-30'>
+                                        <h1 className='font font-semibold text-3xl text-white items-center justify-center flex text-center font-serif select-none'>+</h1>
+                                    </div>
+                                }
                             </div>}
                     </div>
                     <div className='flex flex-col sm:flex-row sm:flex-1 mt-8'>
@@ -128,7 +139,10 @@ export default function Glass({ glass }) {
                             <div className='w-full max-w-full mt-4 gap-y-3 sm:flex sm:flex-col grid grid-cols-2 gap-3'>
                                 {allaglassar?.map((glasslol, i) => (
                                     i <= 3 && glasslol.namn !== glass.namn &&
-                                    <GlassCard key={glass.url} glasslol={glasslol} liked={currentUser && liked} cart={cart} uid={currentUser?.uid}></GlassCard>
+                                    <div key={i}>
+                                        {/* <h1>{i}</h1> */}
+                                        <GlassCard key={glasslol.url} glasslol={glasslol} liked={currentUser && liked} cart={cart} uid={currentUser?.uid}></GlassCard>
+                                    </div>
                                 ))}
                             </div>
                         </div>

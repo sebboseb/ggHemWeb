@@ -104,7 +104,7 @@ function DrawerContainer(props) {
                             </div>
                         </li>
                     ))}
-                    {currentUser && cart.length !== 0 && <div onClick={() => {{setCart([]);}{deleteCart(currentUser.uid)}}} className='w-full flex justify-end items-center pt-4'><div className='cursor-pointer hover:bg-gray-100 duration-150 transition flex gap-x-3 p-2 rounded-full active:bg-gray-300'><h1 className='font-semibold'> Töm Kundvagn </h1> <RiDeleteBin5Line size={25} color='red'></RiDeleteBin5Line></div></div>}                </ul>
+                    {currentUser && cart.length !== 0 && <div onClick={() => { { setCart([]); } { deleteCart(currentUser.uid) } { window.location.reload(false) } }} className='w-full flex justify-end items-center pt-4'><div className='cursor-pointer hover:bg-gray-100 duration-150 transition flex gap-x-3 p-2 rounded-full active:bg-gray-300'><h1 className='font-semibold'> Töm Kundvagn </h1> <RiDeleteBin5Line size={25} color='red'></RiDeleteBin5Line></div></div>}                </ul>
                 <div className=" w-full h-full px-5 bg-sky-600 flex flex-col justify-end items-center mt-16">
                     <div className="h-full pt-4 w-full flex justify-between px-4 text-3xl font-semibold text-white">
                         <h1>Totalt</h1>

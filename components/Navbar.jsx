@@ -159,7 +159,7 @@ function Navbar(props) {
                                         <DropdownSupplier link={"Frill Frozen Smoothie"} title={"Frill Frozen Smoothie"}></DropdownSupplier>
                                         <DropdownSupplier link={"Grycan"} title={"Grycan"}></DropdownSupplier>
                                         <DropdownSupplier link={"Gute Glass"} title={"Gute Glass"}></DropdownSupplier>
-                                        <DropdownSupplier link={"Hugo o Celine"} title={"Hugo & Celine (Hundglass)"}></DropdownSupplier>
+                                        <DropdownSupplier link={"Hugo och Celine"} title={"Hugo & Celine (Hundglass)"}></DropdownSupplier>
                                         <DropdownSupplier link={"Lily o Hanna"} title={"Lily o Hanna"}></DropdownSupplier>
                                         <DropdownSupplier link={"Macacos"} title={"Macacos"}></DropdownSupplier>
                                         <DropdownSupplier link={"Movenpick"} title={"Mövenpick"}></DropdownSupplier>
@@ -196,7 +196,7 @@ function Navbar(props) {
                                             </div>
                                         </form>
                                     </ul>
-                                    <div >
+                                    <div>
                                         <div className='flex mt-4 justify-between w-full h-full items-end'>
                                             <div className='flex items-center font-semibold gap-x-1'>
                                                 <h1 className='text-2xs text-center mt-0.5'>Har du inget konto?</h1>
@@ -224,23 +224,39 @@ function Navbar(props) {
                                                 <label htmlFor="passwordawd">Lösenord</label>
                                                 <input id="passwordawd" type="password" placeholder="********" ref={passwordRefawd} className='border border-sky-600 rounded p-3' />
                                             </div>
-
                                         </form>
                                     </ul>
-                                    <div className="modal-action">
-                                        <label onClick={handleSubmitSignup} className="btn btn-primary bg-sky-600 border-0">Skapa Konto</label>
-                                        <label htmlFor="my-modal-2" className="btn">Avbryt</label>
+                                    <div className='flex mt-4 justify-between w-full h-full items-end'>
+                                        <div className='flex items-center font-semibold gap-x-1'>
+                                            <h1 className='text-2xs text-center mt-0.5'>Har du redan ett konto?</h1>
+                                            <div className=' text-sky-600 cursor-pointer'>Logga In</div>
+                                        </div>
+                                        <div className="modal-action">
+                                            <label onClick={handleSubmit} className="btn btn-primary bg-sky-600 border-0">Skapa Konto</label>
+                                            <label htmlFor="my-modal-2" className="btn">Avbryt</label>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </li>
-                    </ul> : <ul className="text-slate-600 font-semibold sm:text-xl flex items-center text-xs sm:gap-x-16 gap-x-4 px-4">
-                        <li className='text-center'>
-                            <h1 onClick={() => handleLogout()}>
-                                Mitt Konto
-                            </h1>
-                        </li>
-                    </ul>}
+                    </ul> :
+                        <ul className="text-slate-600 font-semibold sm:text-xl flex items-center text-xs sm:gap-x-16 gap-x-4 px-4">
+                            <li className='text-center'>
+                                <div className="dropdown dropdown-left dropdown-hover">
+                                    <div tabIndex="0" className="flex items-center gap-x-1">Mitt Konto</div>
+                                    <ul tabIndex="0" className="p-2 shadow menu dropdown-content bg-base-100 rounded-box flex flex-col gap-y-5  w-44">
+                                        <li>
+                                            <h1 className=' cursor-pointer hover:bg-gray-50'>
+                                                Favoriter
+                                            </h1>
+                                        </li>
+                                        <li><h1 className=' cursor-pointer hover:bg-gray-50' onClick={() => handleLogout()}>
+                                            Logga Ut
+                                        </h1></li>
+                                    </ul>
+                                </div>
+                            </li>
+                        </ul>}
                 </div>
             </nav>
         </>

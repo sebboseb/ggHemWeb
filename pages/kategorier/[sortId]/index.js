@@ -100,12 +100,27 @@ export default function Car({ glass }) {
                     <div className='h-screen w-full'>
                         <div className="flex justify-center">
                             <ul className="grid sm:grid-cols-3 grid-cols-2 sm:mx-0 mx-4 gap-y-3 gap-x-10 xl:grid-cols-5">
-                                {glass.map((glasslol) => (
-                                    (!veganCheck || !sugarCheck || !laktosCheck) ?
-                                        (glasslol.vegansk === veganCheck) &&
-                                        <GlassCard key={glass.url} glasslol={glasslol} liked={currentUser && liked} cart={cart} uid={currentUser?.uid}></GlassCard>
-                                        : null
-                                ))}
+                            {!veganCheck && !sugarCheck && !laktosCheck ?
+                                    <>
+                                        {glass.map((glasslol) => (
+                                            <GlassCard key={glass.url} glasslol={glasslol} liked={currentUser && liked} cart={cart} uid={currentUser?.uid}></GlassCard>
+                                        ))}
+                                    </>
+
+                                    :
+
+
+                                    <>
+                                        {veganCheck && glass.filter(vegan => vegan.vegansk === true).map((glasslol) => (
+                                            <GlassCard key={glass.url} glasslol={glasslol} liked={currentUser && liked} cart={cart} uid={currentUser?.uid}></GlassCard>
+                                        ))}
+                                        {sugarCheck && glass.filter(vegan => vegan.sockerfri === true).map((glasslol) => (
+                                            <GlassCard key={glass.url} glasslol={glasslol} liked={currentUser && liked} cart={cart} uid={currentUser?.uid}></GlassCard>
+                                        ))}
+                                        {laktosCheck && glass.filter(vegan => vegan.laktosfri === true).map((glasslol) => (
+                                            <GlassCard key={glass.url} glasslol={glasslol} liked={currentUser && liked} cart={cart} uid={currentUser?.uid}></GlassCard>
+                                        ))}
+                                    </>}
                             </ul>
                         </div>
                     </div>
