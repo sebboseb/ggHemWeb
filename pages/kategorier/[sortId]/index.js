@@ -15,11 +15,13 @@ export default function Car({ glass }) {
 
     const { currentUser } = useAuth();
 
-    const [cart, setCart] = useState([])
+    const [allaglassar, setAllaglassar] = useState([]);
+    const [cart, setCart] = useState([]);
     const [liked, setLiked] = useState([]);
     const [veganCheck, setVeganCheck] = useState(false);
     const [sugarCheck, setSugarCheck] = useState(false);
     const [laktosCheck, setLaktosCheck] = useState(false);
+    const [stringtest, setStringtest] = useState([""]);
 
     useEffect(() => {
         async function getFunction() {
@@ -45,13 +47,35 @@ export default function Car({ glass }) {
         currentUser && getFunction();
     }, [currentUser, id]);
 
+    function filterCart(array) {
+        var flags = [], output = [], l = array?.length, i;
+        for (i = 0; i < l; i++) {
+            if (flags[array[i].sort]) continue;
+            flags[array[i].sort] = true;
+            output.push(array[i]);
+        }
+
+        return output;
+    }
+
+    async function changeApiCall(sort, stringtest) {
+        // setAllaglassar(sortedApiCall);
+        console.log(`https://swedishicecream.herokuapp.com/glass?sort=${sort}&${stringtest}`);
+        const searchUrl = `https://swedishicecream.herokuapp.com/glass?sort=${sort}&${stringtest}`;
+        const response = await fetch(searchUrl);
+        const responseJson = await response.json();
+        const searchResults = responseJson;
+
+        setAllaglassar(searchResults);
+    }
+
     return (
         <>
             <Head>
                 <title>Köp {glass[0].sort} {glass.id} | Fri Hemleverans</title>
             </Head>
             {/* {veganCheck.toString()}{sugarCheck.toString()}{laktosCheck.toString()} */}
-            <main className='h-screen'>
+            <main className='h-auto min-h-screen'>
                 <div className='sm:h-44 h-36 relative overflow-hidden'>
                     <div className=" w-[40rem] h-[40rem] rounded bg-sky-100 absolute left-[-28rem] -top-44 -z-10 skew-x-[110deg]"></div>
                     <div className='ml-5 pt-5'>
@@ -68,12 +92,25 @@ export default function Car({ glass }) {
                 <div className='flex flex-col sm:flex-row'>
                     <div className='h-auto sm:w-44 sm:flex flex-col items-center sm:pl-4 mx-4 sm:mx-0 hidden'>
                         <ul className='sm:flex sm:flex-col sm:gap-y-3 gap-y-4 gap-x-7 justify-start grid grid-cols-3'>
+                            {filterCart(glass).map((sort) => (
+                                filterCart(glass).length > 1 &&
+                                <li className='w-44 border rounded shadow px-1 py-2 cursor-pointer hover:shadow-md transition duration-150'>
+                                    <Link href={`/leverantorer/${brandId}/${sort.sort}`} passHref>
+                                        <div className='flex justify-between'>
+                                            <h1 className='font-semibold pl-1 text-xl'>
+                                                {sort.sort}
+                                            </h1>
+                                            <span className='font-semibold'>&gt;</span>
+                                        </div>
+                                    </Link>
+                                </li>
+                            ))}
                             <li className='sm:w-44 border rounded shadow px-1 py-2 cursor-pointer hover:shadow-md transition duration-150'>
                                 <div className='flex justify-between'>
                                     <h1 className='font-semibold pl-1 sm:text-xl'>
                                         Veganskt
                                     </h1>
-                                    <input type="checkbox" onChange={() => setVeganCheck(!veganCheck)} className=" w-6 h-6 mt-0.5" />
+                                    <input type="checkbox" onChange={() => { { setVeganCheck(!veganCheck) } { stringtest.includes("vegansk=true&") ? setStringtest(stringtest.replace("vegansk=true&", "")) : setStringtest(stringtest + "vegansk=true&") } }} className=" w-6 h-6 mt-0.5" />
                                 </div>
                             </li>
                             <li className='sm:w-44 border rounded shadow px-1 py-2 cursor-pointer hover:shadow-md transition duration-150'>
@@ -81,7 +118,7 @@ export default function Car({ glass }) {
                                     <h1 className='font-semibold pl-1 sm:text-xl'>
                                         Sockerfritt
                                     </h1>
-                                    <input type="checkbox" onChange={() => setSugarCheck(!sugarCheck)} className=" w-6 h-6 mt-0.5" />
+                                    <input type="checkbox" onChange={() => { { setSugarCheck(!sugarCheck) } { stringtest.includes("sockerfri=true&") ? setStringtest(stringtest.replace("sockerfri=true&", "")) : setStringtest(stringtest + "sockerfri=true&") } }} className=" w-6 h-6 mt-0.5" />
                                 </div>
                             </li>
                             <li className='sm:w-44 border rounded shadow px-1 py-2 cursor-pointer hover:shadow-md transition duration-150'>
@@ -89,18 +126,20 @@ export default function Car({ glass }) {
                                     <h1 className='font-semibold pl-1 sm:text-xl'>
                                         Laktosfritt
                                     </h1>
-                                    <input type="checkbox" onChange={() => setLaktosCheck(!laktosCheck)} className=" w-6 h-6 mt-0.5" />
+                                    <input type="checkbox" onChange={() => { { setLaktosCheck(!laktosCheck) } { stringtest.includes("laktosfri=true&") ? setStringtest(stringtest.replace("laktosfri=true&", "")) : setStringtest(stringtest + "laktosfri=true&") } }} className=" w-6 h-6 mt-0.5" />
                                 </div>
                             </li>
+                            <button className=' bg-red-600 rounded-full py-2 text-white font-semibold text-xl' onClick={() => changeApiCall(sortId, stringtest)}>Sortera</button>
+                            <li></li>
                             <li>
-                                <h1>3 Resultat</h1>
+                                <h1>Resultat: {allaglassar.length}</h1>
                             </li>
                         </ul>
                     </div>
-                    <div className='h-screen w-full'>
+                    <div className='h-auto min-h-screen w-full'>
                         <div className="flex justify-center">
-                            <ul className="grid sm:grid-cols-3 grid-cols-2 sm:mx-0 mx-4 gap-y-3 gap-x-10 xl:grid-cols-5">
-                            {!veganCheck && !sugarCheck && !laktosCheck ?
+                            <ul className="grid sm:grid-cols-3 grid-cols-2 sm:mx-0 mx-4 gap-y-3 gap-x-10 xl:grid-cols-4">
+                                {!veganCheck && !sugarCheck && !laktosCheck ?
                                     <>
                                         {glass.map((glasslol) => (
                                             <GlassCard key={glass.url} glasslol={glasslol} liked={currentUser && liked} cart={cart} uid={currentUser?.uid}></GlassCard>
@@ -111,13 +150,7 @@ export default function Car({ glass }) {
 
 
                                     <>
-                                        {veganCheck && glass.filter(vegan => vegan.vegansk === true).map((glasslol) => (
-                                            <GlassCard key={glass.url} glasslol={glasslol} liked={currentUser && liked} cart={cart} uid={currentUser?.uid}></GlassCard>
-                                        ))}
-                                        {sugarCheck && glass.filter(vegan => vegan.sockerfri === true).map((glasslol) => (
-                                            <GlassCard key={glass.url} glasslol={glasslol} liked={currentUser && liked} cart={cart} uid={currentUser?.uid}></GlassCard>
-                                        ))}
-                                        {laktosCheck && glass.filter(vegan => vegan.laktosfri === true).map((glasslol) => (
+                                        {allaglassar.map((glasslol) => (
                                             <GlassCard key={glass.url} glasslol={glasslol} liked={currentUser && liked} cart={cart} uid={currentUser?.uid}></GlassCard>
                                         ))}
                                     </>}

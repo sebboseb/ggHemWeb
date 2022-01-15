@@ -20,14 +20,14 @@ export async function getAllApi(page) {
     return searchResults;
 }
 
-// export async function getApiType(sort, namn) {
-//     const searchUrl = `https://swedishicecream.herokuapp.com/${sort}?namn=${namn}`;
-//     const response = await fetch(searchUrl);
-//     const responseJson = await response.json();
-//     const searchResults = responseJson;
+export async function getApiType(namn) {
+    const searchUrl = `https://swedishicecream.herokuapp.com/glass?${namn}`;
+    const response = await fetch(searchUrl);
+    const responseJson = await response.json();
+    const searchResults = responseJson;
 
-//     return searchResults;
-// }
+    return searchResults;
+}
 
 // export async function getWeather() {
 //     const weatherUrl = `https://api.openweathermap.org/data/2.5/weather?q=stockholm&appid=7f3629c9cb887cc63ceccf2f0eb4ed48`;

@@ -134,7 +134,7 @@ function Navbar(props) {
                         </li> */}
                         <li className=''>
                             <div className="dropdown dropdown-hover">
-                                <div tabIndex="0" className="flex items-center gap-x-1">Kategorier <AiOutlineDown className='sm:mt-1.5 w-2 sm:w-5 h-2 sm:h-5' /></div>
+                                <Link href={"/kategorier"} passHref tabIndex="0"><div className="flex items-center gap-x-1">Kategorier <AiOutlineDown className='sm:mt-1.5 w-2 sm:w-5 h-2 sm:h-5' /></div></Link>
                                 <ul tabIndex="0" className="p-2 shadow menu dropdown-content bg-base-100 rounded-box w-max">
                                     <div className=' grid sm:grid-cols-2 grid-cols-1'>
                                         <DropdownCategory link={"Pinnglass"} title={"Pinnglass"}></DropdownCategory>
@@ -151,7 +151,7 @@ function Navbar(props) {
                         </li>
                         <li className=''>
                             <div className="dropdown dropdown-hover">
-                                <div tabIndex="0" className="flex items-center gap-x-1">Leverantörer <AiOutlineDown className='sm:mt-1.5 w-2 sm:w-5 h-2 sm:h-5' /></div>
+                                <Link href={"/leverantorer"} passHref tabIndex="0"><div className="flex items-center gap-x-1">Leverantörer <AiOutlineDown className='sm:mt-1.5 w-2 sm:w-5 h-2 sm:h-5' /></div></Link>
                                 <ul tabIndex="0" className="p-2 shadow menu dropdown-content bg-base-100 rounded-box w-max">
                                     <div className=' grid sm:grid-cols-2 grid-cols-1'>
                                         <DropdownSupplier link={"Add Ice Cream"} title={"Add Ice Cream"}></DropdownSupplier>
@@ -246,11 +246,11 @@ function Navbar(props) {
                                     <div tabIndex="0" className="flex items-center gap-x-1">Mitt Konto</div>
                                     <ul tabIndex="0" className="p-2 shadow menu dropdown-content bg-base-100 rounded-box flex flex-col gap-y-5  w-44">
                                         <li>
-                                            <h1 className=' cursor-pointer hover:bg-gray-50'>
+                                            <h1 className=' cursor-pointer hover:bg-gray-50 flex items-center justify-center rounded p-3'>
                                                 Favoriter
                                             </h1>
                                         </li>
-                                        <li><h1 className=' cursor-pointer hover:bg-gray-50' onClick={() => handleLogout()}>
+                                        <li><h1 className=' cursor-pointer hover:bg-gray-50 flex items-center justify-center rounded p-3' onClick={() => handleLogout()}>
                                             Logga Ut
                                         </h1></li>
                                     </ul>

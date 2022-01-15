@@ -73,7 +73,7 @@ function DrawerContainer(props) {
             <ul className="overflow-y-auto menu sm:w-1/2 w-full xl:w-1/3 bg-base-100">
                 <div className="w-full h-20  bg-sky-700 p-6 shadow flex items-center justify-center">
                     <h1 className=" font-semibold text-3xl text-center text-white">Varukorg</h1>
-                    <label htmlFor='my-drawer-3' className='flex w-full justify-end absolute mr-8 sm:hidden'>
+                    <label htmlFor='my-drawer-3' className='flex w-full justify-end absolute mr-24 sm:hidden'>
                         <h1 className=' font-semibold text-white text-3xl mb-1.5'>x</h1>
                     </label>
                 </div>
