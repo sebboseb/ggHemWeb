@@ -6,7 +6,8 @@ module.exports = {
   theme: {
     extend: {
       animation: {
-        blob: "blob 7s infinite"
+        blob: "blob 7s infinite",
+        slide: "slide 225ms "
       },
       keyframes: {
         blob: {
@@ -19,6 +20,14 @@ module.exports = {
           "66%": {
             transform: "translate(-30px, 30px) scale(0.8)"
           },"100%": {
+            transform: "translate(0px, 0px) scale(1)"
+          }
+        },
+        slide: {
+          "0%": {
+            transform: "translate(130px, 0px) scale(1)"
+          },
+          "100%": {
             transform: "translate(0px, 0px) scale(1)"
           }
         }

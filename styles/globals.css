@@ -22,3 +22,23 @@
       animation-delay: 4s;
     }
   }
+
+  .custom-shape-divider-top-1642622808 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
+}
+
+.custom-shape-divider-top-1642622808 svg {
+    position: relative;
+    display: block;
+    width: calc(100% + 1.3px);
+    height: 72px;
+}
+
+.custom-shape-divider-top-1642622808 .shape-fill {
+    fill: white;
+}

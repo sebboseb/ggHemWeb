@@ -58,7 +58,7 @@ function GlassCard(props) {
                     {
                         currentUser && props.cart?.filter(x => x.namn === props.glasslol.namn).length ?
                             <div className=' w-full flex justify-between items-end bg-slate-100 rounded-full mb-3 p-1'>
-                                <div onClick={() => deleteFromCart(props.glasslol, props.uid, props.cart)} className='w-10 h-10 bg-slate-300 hover:bg-slate-400 transition duration-150 rounded-full cursor-pointer z-30'>
+                                <div onClick={() => deleteFromCart(props.glasslol, props.uid, props.cart)} className='w-10 h-10 bg-slate-300 hover:bg-slate-400 transition duration-150 rounded-full cursor-pointer z-30 animate-slide'>
                                     <h1 className='font font-semibold text-3xl text-slate-900 items-center justify-center flex text-center font-serif select-none'>-</h1>
                                 </div>
                                 <p className=" font-semibold text-xl mb-1.5">{props.cart.filter(x => x.namn === props.glasslol.namn).length}</p>

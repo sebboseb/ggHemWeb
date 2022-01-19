@@ -136,7 +136,7 @@ export default function Glass({ glass }) {
                             <h1 className='text-xl font-semibold mt-16 sm:mt-0'>
                                 Liknande Produkter
                             </h1>
-                            <div className='w-full max-w-full mt-4 gap-y-3 sm:flex sm:flex-col grid grid-cols-2 gap-3'>
+                            <div className='w-full max-w-full mt-4 gap-y-3 sm:flex sm:flex-col grid grid-cols-2 gap-3 pb-8'>
                                 {allaglassar?.map((glasslol, i) => (
                                     i <= 3 && glasslol.namn !== glass.namn &&
                                     <div key={i}>

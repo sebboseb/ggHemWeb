@@ -146,10 +146,7 @@ export default function Leverantor({ glass }) {
                                             <GlassCard key={glass.url} glasslol={glasslol} liked={currentUser && liked} cart={cart} uid={currentUser?.uid}></GlassCard>
                                         ))}
                                     </>
-
                                     :
-
-
                                     <>
                                         {allaglassar.length !== 0 ? allaglassar.map((glasslol) => (
 
