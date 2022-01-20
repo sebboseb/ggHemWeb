@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { likeGlass, removeLikeGlass, addToCart, deleteFromCart, deleteCart } from './functions/Functions';
+import { likeGlass, removeLikeGlass, addToCart, deleteFromCart, deleteCart, addDatum } from './functions/Functions';
 import { db } from '../firebase';
 import { doc, onSnapshot, query, collection } from "firebase/firestore";
 import { useAuth } from './contexts/AuthContext';
@@ -12,6 +12,7 @@ function DrawerContainer(props) {
     const { currentUser } = useAuth();
     const [cart, setCart] = useState([]);
     const [stripeCart, setStripeCart] = useState([]);
+    const [chosenDatum, setChosenDatum] = useState("")
 
     useEffect(() => {
         async function getFunction() {
@@ -50,6 +51,8 @@ function DrawerContainer(props) {
 
     const handleClick = async (e) => {
         e.preventDefault();
+
+        await addDatum(currentUser.uid, chosenDatum)
 
         try {
             const res = await axios.post(
@@ -104,11 +107,46 @@ function DrawerContainer(props) {
                             </div>
                         </li>
                     ))}
-                    {currentUser && cart.length !== 0 && <div onClick={() => { { setCart([]); } { deleteCart(currentUser.uid) } { window.location.reload(false) } }} className='w-full flex justify-end items-center pt-4'><div className='cursor-pointer hover:bg-gray-100 duration-150 transition flex gap-x-3 p-2 rounded-full active:bg-gray-300'><h1 className='font-semibold'> Töm Kundvagn </h1> <RiDeleteBin5Line size={25} color='red'></RiDeleteBin5Line></div></div>}                </ul>
-                <div className=" w-full h-full px-5 bg-sky-600 flex flex-col justify-end items-center mt-16">
-                    <div className="h-full pt-4 w-full flex justify-between px-4 text-3xl font-semibold text-white">
-                        <h1>Totalt</h1>
-                        <h1>{currentUser && cart.reduce((previousValue, currentValue) => previousValue + parseInt(currentValue.displayPris), 0) + " kr"}</h1>
+                    {currentUser && cart.length !== 0 && <div onClick={() => { { setCart([]); } { deleteCart(currentUser.uid) } }} className='w-full flex justify-end items-center pt-4'><div className='cursor-pointer hover:bg-gray-100 duration-150 transition flex gap-x-3 p-2 rounded-full active:bg-gray-300'>
+                        <h1 className='font-semibold'> Töm Kundvagn </h1> <RiDeleteBin5Line size={25} color='red'></RiDeleteBin5Line></div></div>}                </ul>
+                <div className=" w-full h-full px-5 bg-sky-600 flex flex-col justify-end items-center mt-16 relative">
+                    <div class="custom-shape-divider-top-1642627204">
+                        <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                            <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" class="shape-fill"></path>
+                        </svg>
+                    </div>
+                    <div className="h-full pt-16 w-full flex flex-col px-4 text-3xl font-semibold text-white">
+                        {/*  */}
+                        <div className='flex justify-evenly text-center'>
+                            <label onClick={() => setChosenDatum("Förmiddag")} htmlFor='morningbox' className='w-44 h-44 border flex cursor-pointer items-end rounded shadow-white shadow relative'>
+                                <input type="radio" name='selectbox' id='morningbox' className='absolute top-0 right-0 checkbox' />
+                                <div className='flex flex-col justify-between h-full'>
+                                    <div className='border-b mx-4 pb-1'>
+                                        <h1 className='pt-4'>Imorgon</h1>
+                                        <p>{new Date().getMonth() + 1}-{new Date().getDate() + 1}</p>
+                                    </div>
+                                    <h1>
+                                        Förmiddag 08-12
+                                    </h1>
+                                </div>
+                            </label>
+                            <label onClick={() => setChosenDatum("Eftermiddag")} htmlFor='afternoonbox' className='w-44 h-44 border flex cursor-pointer items-end rounded shadow-white shadow relative'>
+                                <input type="radio" name='selectbox' id='afternoonbox' className='absolute top-0 right-0 checkbox' />
+                                <div className='flex flex-col justify-between h-full'>
+                                    <div className='border-b mx-4 pb-1'>
+                                        <h1 className='pt-4'>Imorgon</h1>
+                                        <p>{new Date().getMonth() + 1}-{new Date().getDate() + 1}</p>
+                                    </div>
+                                    <h1>
+                                        Eftermiddag 12-16
+                                    </h1>
+                                </div>
+                            </label>
+                        </div>
+                        <div className='h-full pt-16 w-full flex justify-between px-4 text-3xl font-semibold text-white'>
+                            <h1>Totalt</h1>
+                            <h1>{currentUser && cart.reduce((previousValue, currentValue) => previousValue + parseInt(currentValue.displayPris), 0) + " kr"}</h1>
+                        </div>
                     </div>
                     <button onClick={handleClick} className="text-center w-3/4 h-12 bg-white rounded-full flex justify-center items-center shadow-lg hover:shadow-white hover:shadow-md duration-150 transform shadow-white mb-8 cursor-pointer">
                         <h1 className=" text-slate-900 font-semibold text-xl capitalize">Gå till kassan</h1>
@@ -119,4 +157,4 @@ function DrawerContainer(props) {
     )
 }
 
-export default DrawerContainer
+export default DrawerContainer;

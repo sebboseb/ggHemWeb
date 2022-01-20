@@ -49,4 +49,12 @@ export async function deleteFromCart(glass, uid, cartlol) {
 export async function deleteCart(uid) {
     await deleteDoc(doc(db, "User", uid, "Cart", "glassar"));
     await deleteDoc(doc(db, "User", uid, "Cart", "stripeGlassar"));
+    window.location.reload(false);
+}
+
+export async function addDatum(uid, date) {
+    const userRef = doc(db, "User", uid)
+    await updateDoc(userRef, {
+        date
+    })
 }

@@ -21,6 +21,7 @@ export default function Succe() {
                     </div>
                     <h1 className='text-5xl mt-24 text-center font-semibold'>Tack för ditt köp!</h1>
                     <p className='text-xl mt-4 text-center font-semibold'>Din glass är påväg</p>
+                    <p className='text-xl mt-4 text-center font-semibold'>Din glass är framme (datum) på (förmiddagen)</p>
                 </div>
             </div>
         </>
