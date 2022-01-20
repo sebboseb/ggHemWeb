@@ -74,7 +74,7 @@ function DrawerContainer(props) {
         <div className="drawer-side h-full">
             <label htmlFor="my-drawer-3" className="drawer-overlay"></label>
             <ul className="overflow-y-auto menu sm:w-1/2 w-full xl:w-1/3 bg-base-100">
-                <div className="w-full h-20  bg-sky-700 p-6 shadow flex items-center justify-center">
+                <div className="w-full h-20  bg-sky-700 p-6 shadow flex items-center justify-center relative">
                     <h1 className=" font-semibold text-3xl text-center text-white">Varukorg</h1>
                     <label htmlFor='my-drawer-3' className='flex w-full justify-end absolute mr-24 sm:hidden'>
                         <h1 className=' font-semibold text-white text-3xl mb-1.5'>x</h1>
@@ -118,26 +118,26 @@ function DrawerContainer(props) {
                     <div className="h-full pt-16 w-full flex flex-col px-4 text-3xl font-semibold text-white">
                         {/*  */}
                         <div className='flex justify-evenly text-center'>
-                            <label onClick={() => setChosenDatum("Förmiddag")} htmlFor='morningbox' className='w-44 h-44 border flex cursor-pointer items-end rounded shadow-white shadow relative'>
+                            <label onClick={() => setChosenDatum("Förmiddag")} htmlFor='morningbox' className='sm:w-44 sm:h-44 w-32 h-32 text-sm sm:text-3xl border flex cursor-pointer justify-center sm:items-end rounded shadow-white shadow relative'>
                                 <input type="radio" name='selectbox' id='morningbox' className='absolute top-0 right-0 checkbox' />
                                 <div className='flex flex-col justify-between h-full'>
                                     <div className='border-b mx-4 pb-1'>
                                         <h1 className='pt-4'>Imorgon</h1>
                                         <p>{new Date().getMonth() + 1}-{new Date().getDate() + 1}</p>
                                     </div>
-                                    <h1>
+                                    <h1 className='pb-4 sm:pb-0'>
                                         Förmiddag 08-12
                                     </h1>
                                 </div>
                             </label>
-                            <label onClick={() => setChosenDatum("Eftermiddag")} htmlFor='afternoonbox' className='w-44 h-44 border flex cursor-pointer items-end rounded shadow-white shadow relative'>
+                            <label onClick={() => setChosenDatum("Eftermiddag")} htmlFor='afternoonbox' className='sm:w-44 sm:h-44 w-32 h-32 text-sm sm:text-3xl border flex cursor-pointer justify-center sm:items-end rounded shadow-white shadow relative'>
                                 <input type="radio" name='selectbox' id='afternoonbox' className='absolute top-0 right-0 checkbox' />
                                 <div className='flex flex-col justify-between h-full'>
                                     <div className='border-b mx-4 pb-1'>
                                         <h1 className='pt-4'>Imorgon</h1>
                                         <p>{new Date().getMonth() + 1}-{new Date().getDate() + 1}</p>
                                     </div>
-                                    <h1>
+                                    <h1 className='pb-4 sm:pb-0'>
                                         Eftermiddag 12-16
                                     </h1>
                                 </div>
