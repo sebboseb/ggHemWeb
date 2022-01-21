@@ -113,7 +113,7 @@ export default function Home() {
           <div className=" w-[40rem] h-[40rem] rounded bg-sky-100 absolute bottom-[-10rem] left-[-32rem] -z-10 skew-x-[70deg]"></div>
           <div className=" absolute top-0 left-10 h-[18rem] sm:h-[32rem] w-[18rem] sm:w-[32rem] xl:h-[48rem] xl:w-[48rem] sm:bg-purple-300 animate-blob animation-delay-4000 rounded-full mix-blend-multiply filter blur-3xl opacity-50 select-none"></div>
           <div className=" absolute top-0 right-10 h-[18rem] sm:h-[32rem] w-[18rem] sm:w-[32rem] xl:h-[48rem] xl:w-[48rem] sm:bg-pink-300 animate-blob animation-delay-2000 rounded-full mix-blend-multiply filter blur-3xl opacity-50 select-none"></div>
-          <div className=" absolute h-[18rem] sm:h-[32rem] w-[18rem] sm:w-[32rem] xl:h-[48rem] xl:w-[48rem] sm:bg-sky-300 bg-sky-300 rounded-full animate-blob sm:mix-blend-multiply sm:filter sm:blur-3xl blur-xl opacity-50 select-none"></div>
+          <div className=" absolute h-[18rem] sm:h-[32rem] w-[18rem] sm:w-[32rem] xl:h-[48rem] xl:w-[48rem] sm:bg-sky-300 bg-sky-300 rounded-full animate-blob sm:mix-blend-multiply sm:filter blur-3xl opacity-50 select-none"></div>
 
 
 
