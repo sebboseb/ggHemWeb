@@ -250,11 +250,11 @@ function Navbar(props) {
                                 <div className="dropdown dropdown-left dropdown-hover">
                                     <div tabIndex="0" className="flex items-center gap-x-1">Mitt Konto</div>
                                     <ul tabIndex="0" className="p-2 shadow menu dropdown-content bg-base-100 rounded-box flex flex-col gap-y-5  w-44">
-                                        <li>
+                                        <Link href={"/favoriter"} passHref>
                                             <h1 className=' cursor-pointer hover:bg-gray-50 flex items-center justify-center rounded p-3'>
                                                 Favoriter
                                             </h1>
-                                        </li>
+                                        </Link>
                                         <li><h1 className=' cursor-pointer hover:bg-gray-50 flex items-center justify-center rounded p-3' onClick={() => handleLogout()}>
                                             Logga Ut
                                         </h1></li>
