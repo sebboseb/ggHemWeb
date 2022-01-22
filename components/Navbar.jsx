@@ -52,6 +52,7 @@ function Navbar(props) {
     async function handleLogout() {
         setError("");
         try {
+            localStorage.clear();
             await logout();
             history.push("/");
         } catch (err) {
@@ -81,7 +82,7 @@ function Navbar(props) {
     async function handleSubmitSignup(e) {
         e.preventDefault();
 
-        await signup(emailRef.current.value, passwordRef.current.value);
+        await signup(emailRefawd.current.value, passwordRefawd.current.value);
         // history.push("/");
     }
 
@@ -116,7 +117,7 @@ function Navbar(props) {
                         <div className="flex w-full items-center justify-center">
                             <HiOutlineShoppingCart size={20} color="black" />
                             <p className=" font-semibold hidden sm:block">
-                                {currentUser ? cart.reduce((previousValue, currentValue) => previousValue + parseInt(currentValue.displayPris), 0) + ":-" : JSON.parse(localStorage.getItem("cart")).reduce((previousValue, currentValue) => previousValue + parseInt(currentValue.displayPris), 0) + ":-"}
+                                {currentUser ? cart.reduce((previousValue, currentValue) => previousValue + parseInt(currentValue.displayPris), 0) + ":-" : JSON.parse(localStorage.getItem("cart"))?.reduce((previousValue, currentValue) => previousValue + parseInt(currentValue.displayPris), 0) !== undefined && JSON.parse(localStorage.getItem("cart"))?.reduce((previousValue, currentValue) => previousValue + parseInt(currentValue.displayPris), 0) + ":-"}
                             </p>
                         </div>
                         <p>{price}</p>
@@ -124,7 +125,7 @@ function Navbar(props) {
                             <div className="bg-red-600 w-6 h-6 rounded-full absolute -top-4 -right-5 flex justify-center items-center">
                                 <p className=" text-white font-semibold transition duration-1000 mb-0.5">{cart.length}</p>
                             </div>
-                        </div> : JSON.parse(localStorage.getItem("cart")).length && <div className=" h-full flex justify-end items-start relative">
+                        </div> : !currentUser && JSON.parse(localStorage.getItem("cart"))?.length > 0 && <div className=" h-full flex justify-end items-start relative">
                             <div className="bg-red-600 w-6 h-6 rounded-full absolute -top-4 -right-5 flex justify-center items-center">
                                 <p className=" text-white font-semibold transition duration-1000 mb-0.5">{JSON.parse(localStorage.getItem("cart")).length}</p>
                             </div>
@@ -236,7 +237,7 @@ function Navbar(props) {
                                             <div className=' text-sky-600 cursor-pointer'>Logga In</div>
                                         </div>
                                         <div className="modal-action">
-                                            <label onClick={handleSubmit} className="btn btn-primary bg-sky-600 border-0">Skapa Konto</label>
+                                            <label onClick={handleSubmitSignup} className="btn btn-primary bg-sky-600 border-0">Skapa Konto</label>
                                             <label htmlFor="my-modal-2" className="btn">Avbryt</label>
                                         </div>
                                     </div>
