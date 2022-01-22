@@ -1,15 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { getApi, getAllApi } from "./api/glassApi";
-import Navbar from "../components/Navbar";
-import Signup from "../components/Signup";
 import { useAuth } from "../components/contexts/AuthContext";
 import { db } from '../firebase';
 import { doc, onSnapshot, query, collection } from "firebase/firestore";
 import 'swiper/css';
-import GlassListSwipe from "../components/GlassListSwipe";
-import { HiOutlineShoppingCart } from 'react-icons/hi'
-import DrawerContainer from "../components/DrawerContainer";
-import Login from "../components/Login";
 import GlassCard from "../components/GlassCard";
 import Head from "next/head";
 import GlassLoadingCard from "../components/GlassLoadingCard";
@@ -33,9 +27,6 @@ export default function Home() {
       const lolstrut = await getApi("Strut");
       setStrutar(lolstrut);
       // setApilol([...lol.strutar, ...lol.pinnar]);
-
-
-
 
       const docRef = doc(db, "User", currentUser.uid, "Cart", "glassar");
       onSnapshot(docRef, (snapshot) => {
