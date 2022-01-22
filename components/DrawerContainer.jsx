@@ -130,7 +130,7 @@ function DrawerContainer(props) {
                                             <p className=' text-lg text-slate-500'>{glass.antal}</p>
                                         </div>
                                         <div className=" flex flex-1 justify-end h-full mt-1">
-                                            <div className=' sm:w-36 w-24 flex justify-between items-center rounded-full mb-3 p-1'>
+                                            <div className=' sm:w-36 w-36 flex justify-between items-center rounded-full mb-3 p-1'>
                                                 <div onClick={() => { { deleteFromOfflineCart(glass) } { setCartOpen(!cartOpen) } { setOfflineCart([...offlineCart, glass]) } }} className='w-10 h-10 bg-slate-300 hover:bg-slate-400 transition duration-150 rounded-full cursor-pointer z-30 animate-slide'>
                                                     <h1 className='font font-semibold text-3xl text-slate-900 items-center justify-center flex text-center font-serif select-none'>-</h1>
                                                 </div>
