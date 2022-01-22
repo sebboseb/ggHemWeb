@@ -82,7 +82,7 @@ function Navbar(props) {
     async function handleSubmitSignup(e) {
         e.preventDefault();
 
-        await signup(emailRefawd.current.value, passwordRefawd.current.value);
+        await signup(emailRefawd.current.value, passwordRefawd.current.value, JSON.parse(localStorage.getItem("cart")));
         // history.push("/");
     }
 

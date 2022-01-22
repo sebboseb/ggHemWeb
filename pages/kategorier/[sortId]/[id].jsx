@@ -1,20 +1,18 @@
 import { useRouter } from 'next/router';
 import Head from 'next/head';
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { getApi } from '../../api/glassApi';
 import { useAuth } from '../../../components/contexts/AuthContext';
 import { db } from '../../../firebase';
 import { doc, onSnapshot, query, collection } from "firebase/firestore";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
-import { likeGlass, removeLikeGlass, addToCart, deleteFromCart } from '../../../components/functions/Functions';
-import { HiOutlineShoppingCart } from 'react-icons/hi';
-import Navbar from '../../../components/Navbar';
-import DrawerContainer from '../../../components/DrawerContainer';
+import { likeGlass, removeLikeGlass, addToCart, deleteFromCart, addToOfflineCart, deleteFromOfflineCart } from '../../../components/functions/Functions';
 import GlassCard from '../../../components/GlassCard';
 import Link from 'next/link';
-import Image from 'next/image';
+import { CartContext } from '../../../components/Layout';
 
 export default function Glass({ glass }) {
+    const { setCartOpen, cartOpen } = useContext(CartContext);
 
     const router = useRouter()
     let { id, sortId } = router.query;
@@ -25,6 +23,8 @@ export default function Glass({ glass }) {
     const [liked, setLiked] = useState([]);
     const price = [];
     const [allaglassar, setAllaglassar] = useState([]);
+    const [offlineCart, setOfflineCart] = useState([]);
+    const [loltest, setLoltest] = useState([]);
 
     useEffect(() => {
         async function getFunction() {
@@ -51,9 +51,13 @@ export default function Glass({ glass }) {
             setAllaglassar(alla);
         }
 
+        let test = JSON.parse(localStorage.getItem("cart"));
+        setLoltest(test)
+        console.log(test)
+
         getGlassarApi();
         currentUser && getFunction();
-    }, [currentUser, id, glass.sort]);
+    }, [currentUser, id, glass.sort, cartOpen]);
 
     return (
         <>
@@ -90,23 +94,25 @@ export default function Glass({ glass }) {
                     </div>
                     <div className='bg-sky-50 p-1 mt-8 w-full flex items-center justify-between rounded-full py-1 px-8 h-16'>
                         <h1 className='sm:text-3xl text-xl font-semibold mb-1'>{glass.displayPris}:-</h1>
-                        {currentUser && cart.filter(x => x.namn === glass.namn).length ?
-                            <div className=" flex flex-1 justify-end h-full mt-1">
-                                <div className=' sm:w-64 w-44 flex justify-between items-center rounded-full px-1 h-12 bg-slate-200'>
-                                    <div onClick={() => deleteFromCart(glass, currentUser.uid, cart)} className='w-10 h-10 bg-slate-300 hover:bg-slate-400 transition duration-150 rounded-full cursor-pointer z-30'>
-                                        <h1 className='font font-semibold text-3xl text-slate-900 items-center justify-center flex text-center font-serif'>-</h1>
-                                    </div>
-                                    <p className=" font-semibold sm:text-3xl text-xl sm:mb-1.5">{cart.filter(x => x.namn === glass.namn).length}</p>
-                                    <div onClick={() => addToCart(glass, currentUser.uid, cart)} className='w-10 h-10 bg-sky-700 hover:bg-sky-600 transition duration-150 rounded-full cursor-pointer z-30'>
-                                        <h1 className='font font-semibold text-3xl text-white items-center justify-center flex text-center font-serif'>+</h1>
-                                    </div>
-                                </div>
-                            </div> : <div className=' h-full w-full flex justify-end items-end rounded-full mb-3 p-1'>
-                                {!currentUser ? <label htmlFor="my-modal-3" className=" modal-button">
-                                    <div className='w-10 h-10 bg-sky-700 hover:bg-sky-600 transition duration-150 rounded-full cursor-pointer z-30'>
+                        {currentUser && cart?.filter(x => x.namn === glass.namn).length || !currentUser && loltest?.filter(x => x.namn === glass.namn).length ?
+                            <div className=' w-44 flex justify-between items-end bg-slate-100 rounded-full p-1'>
+                                {currentUser ? <div onClick={() => deleteFromCart(glass, currentUser.uid, cart)} className='w-10 h-10 bg-slate-300 hover:bg-slate-400 transition duration-150 rounded-full cursor-pointer z-30 animate-slide'>
+                                    <h1 className='font font-semibold text-3xl text-slate-900 items-center justify-center flex text-center font-serif select-none'>-</h1>
+                                </div> : <div onClick={() => { { deleteFromOfflineCart(glass) } { setCartOpen(!cartOpen) } { setOfflineCart([...offlineCart, glass]) } }} className='w-10 h-10 bg-slate-300 hover:bg-slate-400 transition duration-150 rounded-full cursor-pointer z-30 animate-slide'>
+                                    <h1 className='font font-semibold text-3xl text-slate-900 items-center justify-center flex text-center font-serif select-none'>-</h1>
+                                </div>}
+                                <p className=" font-semibold text-xl mb-1.5">{currentUser ? cart.filter(x => x.namn === glass.namn).length : loltest?.filter(x => x.namn === glass.namn).length}</p>
+                                {currentUser ? <div onClick={() => addToCart(glass, currentUser.uid, cart)} className='w-10 h-10 bg-sky-700 hover:bg-sky-600 transition duration-150 rounded-full cursor-pointer z-30'>
+                                    <h1 className='font font-semibold text-3xl text-white items-center justify-center flex text-center font-serif select-none'>+</h1>
+                                </div> : <div onClick={() => { { addToOfflineCart(glass) } { setCartOpen(!cartOpen) } { console.log(localStorage) } { setOfflineCart([...offlineCart, glass]) } }} className='w-10 h-10 bg-sky-700 hover:bg-sky-600 transition duration-150 rounded-full cursor-pointer z-30'>
+                                    <h1 className='font font-semibold text-3xl text-white items-center justify-center flex text-center font-serif select-none'>+</h1>
+                                </div>}
+                            </div> : <div className=' h-full w-full flex justify-end items-end rounded-full mb-2 p-1'>
+                                {!currentUser ?
+                                    <div onClick={() => { { addToOfflineCart(glass) } { setCartOpen(!cartOpen) } { console.log(localStorage) } { setOfflineCart([...offlineCart, glass]) } }} className='w-10 h-10 bg-sky-700 hover:bg-sky-600 transition duration-150 rounded-full cursor-pointer z-30'>
                                         <h1 className='font font-semibold text-3xl text-white items-center justify-center flex text-center font-serif select-none'>+</h1>
                                     </div>
-                                </label> :
+                                    :
                                     <div onClick={() => addToCart(glass, currentUser.uid, cart)} className='w-10 h-10 bg-sky-700 hover:bg-sky-600 transition duration-150 rounded-full cursor-pointer z-30'>
                                         <h1 className='font font-semibold text-3xl text-white items-center justify-center flex text-center font-serif select-none'>+</h1>
                                     </div>

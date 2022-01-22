@@ -85,6 +85,13 @@ export async function deleteCart(uid) {
     window.location.reload(false);
 }
 
+export async function addOfflineCartToCart(glass, uid) {
+    const cartRef = doc(db, "User", (uid), "Cart", "glassar");
+    await setDoc(cartRef, {
+        glass,
+    }, { merge: true });
+}
+
 export async function addDatum(uid, date) {
     const userRef = doc(db, "User", uid)
     await updateDoc(userRef, {
