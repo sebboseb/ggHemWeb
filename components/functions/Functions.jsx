@@ -1,6 +1,31 @@
 import { db } from "../../firebase";
 import { doc, setDoc, onSnapshot, deleteDoc, deleteField, updateDoc, collection, query } from "firebase/firestore";
 
+export function addToOfflineCart(glass) {
+    // let array = ["lol"]
+
+    let array = JSON.parse(localStorage.getItem("cart"));
+
+    if (array !== null) {
+        localStorage.setItem("cart", JSON.stringify(array.concat(glass)));
+    } else {
+        let array = [glass]
+        localStorage.setItem("cart", JSON.stringify((array)));
+    }
+}
+
+export function deleteFromOfflineCart(glass) {
+    let array = JSON.parse(localStorage.getItem("cart"));
+
+    let index = array.map((item) => item.namn).indexOf(glass.namn);
+    if (index > -1) {
+        array.splice(index, 1);
+        console.log("Result", array);
+    }
+
+    localStorage.setItem("cart", JSON.stringify((array)));
+}
+
 export async function likeGlass(glass, uid) {
     const likedRef = doc(db, "User", uid, "Liked", glass.namn)
     await setDoc(likedRef, {
@@ -13,6 +38,8 @@ export async function removeLikeGlass(glass, uid) {
 }
 
 export async function addToCart(glass, uid, cartlol) {
+    // const currentUser = false;
+    // if (currentUser) {
     const cartRef = doc(db, "User", (uid), "Cart", "glassar");
     const stripeRef = doc(db, "User", (uid), "Cart", "stripeGlassar");
     let stripeGlass = {};
@@ -31,6 +58,12 @@ export async function addToCart(glass, uid, cartlol) {
     await setDoc(stripeRef, {
         [stripeGlass.name + " " + amount]: stripeGlass,
     }, { merge: true });
+    // }
+    // else {
+    //     localStorage.setItem("cart", JSON.stringify([glass]))
+    //     // console.log(JSON.stringify(glass))
+    //     console.log(localStorage.getItem("cart"))
+    // }
 }
 
 export async function deleteFromCart(glass, uid, cartlol) {

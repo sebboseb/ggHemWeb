@@ -116,7 +116,7 @@ function Navbar(props) {
                         <div className="flex w-full items-center justify-center">
                             <HiOutlineShoppingCart size={20} color="black" />
                             <p className=" font-semibold hidden sm:block">
-                                {currentUser && cart.reduce((previousValue, currentValue) => previousValue + parseInt(currentValue.displayPris), 0) + ":-"}
+                                {currentUser ? cart.reduce((previousValue, currentValue) => previousValue + parseInt(currentValue.displayPris), 0) + ":-" : JSON.parse(localStorage.getItem("cart")).reduce((previousValue, currentValue) => previousValue + parseInt(currentValue.displayPris), 0) + ":-"}
                             </p>
                         </div>
                         <p>{price}</p>
