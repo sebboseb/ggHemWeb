@@ -7,6 +7,7 @@ import 'swiper/css';
 import DrawerContainer from "../components/DrawerContainer";
 import Head from 'next/head';
 import Footer from '../components/Footer';
+import Layout from '../components/Layout';
 
 
 
@@ -33,15 +34,11 @@ function MyApp({ Component, pageProps }) {
       </Head>
       <Elements stripe={stripePromise}>
         <AuthProvider>
-          <div className="drawer drawer-end">
-            <input id="my-drawer-3" type="checkbox" className="drawer-toggle" />
-            <div className="drawer-content min-h-screen">
-              <Navbar />
-              <Component {...pageProps} />
-              <Footer />
-            </div>
-            <DrawerContainer />
-          </div>
+          <Layout>
+            <Navbar />
+            <Component {...pageProps} />
+            <Footer />
+          </Layout>
         </AuthProvider>
       </Elements>
     </>

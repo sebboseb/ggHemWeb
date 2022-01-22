@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import Link from 'next/link';
 import { likeGlass, removeLikeGlass, addToCart, deleteFromCart, deleteCart, addDatum, addToOfflineCart, deleteFromOfflineCart } from './functions/Functions';
 import { db } from '../firebase';
@@ -6,8 +6,11 @@ import { doc, onSnapshot, query, collection } from "firebase/firestore";
 import { useAuth } from './contexts/AuthContext';
 import axios from 'axios';
 import { RiDeleteBin5Line } from 'react-icons/ri';
+import { CartContext } from './Layout';
 
 function DrawerContainer(props) {
+
+    const { setCartOpen, cartOpen } = useContext(CartContext);
 
     const { currentUser } = useAuth();
     const [cart, setCart] = useState([]);
@@ -41,7 +44,7 @@ function DrawerContainer(props) {
         setLoltest(test)
 
         currentUser && getFunction();
-    }, [currentUser, offlineCart]);
+    }, [currentUser, offlineCart, cartOpen]);
 
     function filterCart(array) {
         var flags = [], output = [], l = array?.length, i;
@@ -128,12 +131,12 @@ function DrawerContainer(props) {
                                         </div>
                                         <div className=" flex flex-1 justify-end h-full mt-1">
                                             <div className=' sm:w-36 w-24 flex justify-between items-center rounded-full mb-3 p-1'>
-                                                <div onClick={() => { { deleteFromOfflineCart(glass) } { setOfflineCart([...offlineCart, glass]) } }} className='w-10 h-10 bg-slate-300 hover:bg-slate-400 transition duration-150 rounded-full cursor-pointer z-30 animate-slide'>
+                                                <div onClick={() => { { deleteFromOfflineCart(glass) } {setCartOpen(!cartOpen)} { setOfflineCart([...offlineCart, glass]) } }} className='w-10 h-10 bg-slate-300 hover:bg-slate-400 transition duration-150 rounded-full cursor-pointer z-30 animate-slide'>
                                                     <h1 className='font font-semibold text-3xl text-slate-900 items-center justify-center flex text-center font-serif select-none'>-</h1>
                                                 </div>
                                                 <p className=" font-semibold text-xl mb-1.5">{loltest?.filter(x => x.namn === glass.namn).length}</p>
 
-                                                <div onClick={() => { { addToOfflineCart(glass) } { setOfflineCart([...offlineCart, glass]) } }} className='w-10 h-10 bg-sky-700 hover:bg-sky-600 transition duration-150 rounded-full cursor-pointer z-30'>
+                                                <div onClick={() => { { addToOfflineCart(glass) } {setCartOpen(!cartOpen)} { setOfflineCart([...offlineCart, glass]) } }} className='w-10 h-10 bg-sky-700 hover:bg-sky-600 transition duration-150 rounded-full cursor-pointer z-30'>
                                                     <h1 className='font font-semibold text-3xl text-white items-center justify-center flex text-center font-serif select-none'>+</h1>
                                                 </div>
                                             </div>

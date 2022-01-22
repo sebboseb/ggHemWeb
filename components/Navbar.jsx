@@ -1,15 +1,15 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useContext } from 'react';
 import Link from 'next/link';
 import { db } from '../firebase';
-import { doc, onSnapshot, query, collection } from "firebase/firestore";
+import { doc, onSnapshot } from "firebase/firestore";
 import { useAuth } from './contexts/AuthContext';
 import { HiOutlineShoppingCart } from "react-icons/hi";
 import Head from 'next/head';
 import { AiOutlineDown } from 'react-icons/ai';
-import { handleLogin } from './Login';
-import Signup from './Signup';
+import { CartContext } from './Layout';
 
 function Navbar(props) {
+    const { setCartOpen, cartOpen } = useContext(CartContext);
 
     const { currentUser, logout, login, signup } = useAuth();
 
@@ -33,7 +33,7 @@ function Navbar(props) {
         }
 
         currentUser && getFunction();
-    }, [currentUser]);
+    }, [currentUser, cartOpen]);
 
     const onChange = (e) => {
         e.preventDefault();
@@ -120,9 +120,13 @@ function Navbar(props) {
                             </p>
                         </div>
                         <p>{price}</p>
-                        {currentUser && cart.length > 0 && <div className=" h-full flex justify-end items-start relative">
+                        {currentUser && cart.length > 0 ? <div className=" h-full flex justify-end items-start relative">
                             <div className="bg-red-600 w-6 h-6 rounded-full absolute -top-4 -right-5 flex justify-center items-center">
                                 <p className=" text-white font-semibold transition duration-1000 mb-0.5">{cart.length}</p>
+                            </div>
+                        </div> : JSON.parse(localStorage.getItem("cart")).length && <div className=" h-full flex justify-end items-start relative">
+                            <div className="bg-red-600 w-6 h-6 rounded-full absolute -top-4 -right-5 flex justify-center items-center">
+                                <p className=" text-white font-semibold transition duration-1000 mb-0.5">{JSON.parse(localStorage.getItem("cart")).length}</p>
                             </div>
                         </div>}
                     </label>
@@ -182,7 +186,7 @@ function Navbar(props) {
                     </ul>
                     {!currentUser ? <ul className="text-slate-600 font-semibold sm:text-xl text-2xs flex items-center sm:gap-x-16 gap-x-4 px-4">
                         <li className=''>
-                            <label htmlFor="my-modal-3" className=" modal-button">Logga In</label>
+                            <label htmlFor="my-modal-3" className=" modal-button cursor-pointer">Logga In</label>
                             <input type="checkbox" id="my-modal-3" className="modal-toggle" />
                             <div className="modal">
                                 <div className="modal-box flex flex-col">
@@ -212,7 +216,7 @@ function Navbar(props) {
                             </div>
                         </li>
                         <li className=''>
-                            <label htmlFor="my-modal-2" className=" modal-button">Skapa Konto</label>
+                            <label htmlFor="my-modal-2" className=" modal-button cursor-pointer">Skapa Konto</label>
                             <input type="checkbox" id="my-modal-2" className="modal-toggle" />
                             <div className="modal">
                                 <div className="modal-box flex flex-col">

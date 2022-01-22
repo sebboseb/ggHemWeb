@@ -1,12 +1,14 @@
 import Link from 'next/link';
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import { deleteFromCart, addToCart, likeGlass, removeLikeGlass, addToOfflineCart, deleteFromOfflineCart } from './functions/Functions';
 import { useAuth } from './contexts/AuthContext';
 import { db } from '../firebase';
 import { doc, onSnapshot, query, collection } from "firebase/firestore";
+import { CartContext } from './Layout';
 
 function GlassCard(props) {
+    const { setCartOpen, cartOpen } = useContext(CartContext);
 
     const { currentUser } = useAuth();
     const [cart, setCart] = useState([]);
@@ -30,7 +32,7 @@ function GlassCard(props) {
         console.log(test)
 
         currentUser && getFunction();
-    }, [currentUser, offlineCart]);
+    }, [currentUser, offlineCart, cartOpen]);
 
     return (
         <>
@@ -67,18 +69,18 @@ function GlassCard(props) {
                             <div className=' w-full flex justify-between items-end bg-slate-100 rounded-full mb-3 p-1'>
                                 {currentUser ? <div onClick={() => deleteFromCart(props.glasslol, props.uid, props.cart)} className='w-10 h-10 bg-slate-300 hover:bg-slate-400 transition duration-150 rounded-full cursor-pointer z-30 animate-slide'>
                                     <h1 className='font font-semibold text-3xl text-slate-900 items-center justify-center flex text-center font-serif select-none'>-</h1>
-                                </div> : <div onClick={() => { { deleteFromOfflineCart(props.glasslol) } { setOfflineCart([...offlineCart, props.glasslol]) } }} className='w-10 h-10 bg-slate-300 hover:bg-slate-400 transition duration-150 rounded-full cursor-pointer z-30 animate-slide'>
+                                </div> : <div onClick={() => { { deleteFromOfflineCart(props.glasslol) } {setCartOpen(!cartOpen)} { setOfflineCart([...offlineCart, props.glasslol]) } }} className='w-10 h-10 bg-slate-300 hover:bg-slate-400 transition duration-150 rounded-full cursor-pointer z-30 animate-slide'>
                                     <h1 className='font font-semibold text-3xl text-slate-900 items-center justify-center flex text-center font-serif select-none'>-</h1>
                                 </div>}
                                 <p className=" font-semibold text-xl mb-1.5">{currentUser ? props.cart.filter(x => x.namn === props.glasslol.namn).length : loltest.filter(x => x.namn === props.glasslol.namn).length}</p>
                                 {currentUser ? <div onClick={() => addToCart(props.glasslol, props.uid, props.cart)} className='w-10 h-10 bg-sky-700 hover:bg-sky-600 transition duration-150 rounded-full cursor-pointer z-30'>
                                     <h1 className='font font-semibold text-3xl text-white items-center justify-center flex text-center font-serif select-none'>+</h1>
-                                </div> : <div onClick={() => { { addToOfflineCart(props.glasslol) } { console.log(localStorage) } { setOfflineCart([...offlineCart, props.glasslol]) } }} className='w-10 h-10 bg-sky-700 hover:bg-sky-600 transition duration-150 rounded-full cursor-pointer z-30'>
+                                </div> : <div onClick={() => { { addToOfflineCart(props.glasslol) } {setCartOpen(!cartOpen)} { console.log(localStorage) } { setOfflineCart([...offlineCart, props.glasslol]) } }} className='w-10 h-10 bg-sky-700 hover:bg-sky-600 transition duration-150 rounded-full cursor-pointer z-30'>
                                     <h1 className='font font-semibold text-3xl text-white items-center justify-center flex text-center font-serif select-none'>+</h1>
                                 </div>}
                             </div> : <div className=' h-full w-full flex justify-end items-end rounded-full mb-3 p-1'>
                                 {!currentUser ?
-                                    <div onClick={() => { { addToOfflineCart(props.glasslol) } { console.log(localStorage) } { setOfflineCart([...offlineCart, props.glasslol]) } }} className='w-10 h-10 bg-sky-700 hover:bg-sky-600 transition duration-150 rounded-full cursor-pointer z-30'>
+                                    <div onClick={() => { { addToOfflineCart(props.glasslol) } {setCartOpen(!cartOpen)} { console.log(localStorage) } { setOfflineCart([...offlineCart, props.glasslol]) } }} className='w-10 h-10 bg-sky-700 hover:bg-sky-600 transition duration-150 rounded-full cursor-pointer z-30'>
                                         <h1 className='font font-semibold text-3xl text-white items-center justify-center flex text-center font-serif select-none'>+</h1>
                                     </div>
                                     :
