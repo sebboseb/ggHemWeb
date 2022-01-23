@@ -58,7 +58,7 @@ export default function LeverantorExtra({ glass }) {
                 </div>
             </div>
             <div className="flex justify-center">
-                <ul className="grid sm:grid-cols-4 grid-cols-2 gap-y-3 gap-x-10 mx-4 xl:grid-cols-5">
+                <ul className="grid sm:grid-cols-4 grid-cols-2 gap-y-3 sm:gap-x-9 gap-x-3 mx-4 xl:grid-cols-5">
                     {glass.map((glasslol) => (
                         // glasslol.contains(sortArray //[veganskja, sockerfrija, laktosfrinej])
                         <GlassCard key={glass.url} glasslol={glasslol} liked={currentUser && liked} cart={cart} uid={currentUser?.uid}></GlassCard>

@@ -139,8 +139,8 @@ function Navbar(props) {
                         </li> */}
                         <li className=''>
                             <div className="dropdown dropdown-hover">
-                                <Link href={"/kategorier"} passHref tabIndex="0"><div className="flex items-center gap-x-1">Kategorier <AiOutlineDown className='sm:mt-1.5 w-2 sm:w-5 h-2 sm:h-5' /></div></Link>
-                                <ul tabIndex="0" className="p-2 shadow menu dropdown-content bg-base-100 rounded-box w-max">
+                                <Link href={"/kategorier"} passHref tabIndex="0"><div className="flex items-center gap-x-1">Kategorier <AiOutlineDown className='sm:mt-1.5 w-2 sm:w-5 h-2 sm:h-5 hidden sm:block' /></div></Link>
+                                <ul tabIndex="0" className="p-2 shadow menu dropdown-content bg-base-100 rounded-box w-max hidden sm:block">
                                     <div className=' grid sm:grid-cols-2 grid-cols-1'>
                                         <DropdownCategory link={"Pinnglass"} title={"Pinnglass"}></DropdownCategory>
                                         <DropdownCategory link={"Strutar"} title={"Strutar"}></DropdownCategory>
@@ -156,8 +156,8 @@ function Navbar(props) {
                         </li>
                         <li className=''>
                             <div className="dropdown dropdown-hover">
-                                <Link href={"/leverantorer"} passHref tabIndex="0"><div className="flex items-center gap-x-1">Leverantörer <AiOutlineDown className='sm:mt-1.5 w-2 sm:w-5 h-2 sm:h-5' /></div></Link>
-                                <ul tabIndex="0" className="p-2 shadow menu dropdown-content bg-base-100 rounded-box w-max">
+                                <Link href={"/leverantorer"} passHref tabIndex="0"><div className="flex items-center gap-x-1">Leverantörer <AiOutlineDown className='sm:mt-1.5 w-2 sm:w-5 h-2 sm:h-5 hidden sm:block' /></div></Link>
+                                <ul tabIndex="0" className="p-2 shadow menu dropdown-content bg-base-100 rounded-box w-max hidden sm:block">
                                     <div className=' grid sm:grid-cols-2 grid-cols-1'>
                                         <DropdownSupplier link={"Add Ice Cream"} title={"Add Ice Cream"}></DropdownSupplier>
                                         <DropdownSupplier link={"Cravingz"} title={"Cravingz"}></DropdownSupplier>
