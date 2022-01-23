@@ -87,7 +87,7 @@ export default function Car({ glass }) {
                     </div>
                 </div>
                 <div className='flex flex-col sm:flex-row'>
-                    <div className='sm:hidden -mt-14 flex items-center gap-x-1'>
+                    <div className='sm:hidden -mt-10 mx-4 flex items-center gap-x-1'>
                         <div className="collapse">
                             <input type="checkbox" />
                             <div className="collapse-title text-xl font-medium sm:hidden pt-3 flex items-center gap-x-1"><AiOutlineUnorderedList size={20} />Filter</div>

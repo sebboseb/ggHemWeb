@@ -86,13 +86,13 @@ export default function Leverantor({ glass }) {
                         </h1>
                     </div>
                 </div>
-                <div className='flex flex-col sm:flex-row bg-opacity-0'>
-                    <div className='sm:hidden -mt-14 flex items-center gap-x-1 bg-opacity-0'>
-                        <div className="collapse bg-opacity-0">
+                <div className='flex flex-col sm:flex-row'>
+                    <div className='sm:hidden -mt-10 flex items-center gap-x-1'>
+                        <div className="collapse mx-4">
                             <input type="checkbox" />
-                            <div className="collapse-title bg-opacity-0 text-xl font-medium sm:hidden pt-3 flex items-center gap-x-1"><AiOutlineUnorderedList size={20} />Filter</div>
-                            <div className="collapse-content bg-opacity-0">
-                                <ul className='flex flex-col gap-y-3 bg-opacity-0'>
+                            <div className="collapse-title text-xl font-medium sm:hidden pt-3 flex items-center gap-x-1"><AiOutlineUnorderedList size={20} />Filter</div>
+                            <div className="collapse-content">
+                                <ul className='flex flex-col gap-y-3'>
                                     <li className='sm:w-44 border rounded shadow px-1 py-2 cursor-pointer hover:shadow-md transition duration-150'>
                                         <div className='flex justify-between gap-x-1'>
                                             <h1 className='font-semibold pl-1 sm:text-xl'>
