@@ -4,7 +4,7 @@ import { db } from '../firebase';
 import { doc, onSnapshot, query, collection } from "firebase/firestore";
 import GlassCard from '../components/GlassCard';
 
-function favoriter() {
+function Favoriter() {
 
     const { currentUser } = useAuth();
     const [likedlol, setLikedlol] = useState([]);
@@ -47,4 +47,4 @@ function favoriter() {
     )
 }
 
-export default favoriter
+export default Favoriter
