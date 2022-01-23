@@ -88,10 +88,10 @@ export default function Leverantor({ glass }) {
                 </div>
                 <div className='flex flex-col sm:flex-row'>
                     <div className='sm:hidden -mt-14 flex items-center gap-x-1'>
-                        <div class="collapse">
+                        <div className="collapse">
                             <input type="checkbox" />
-                            <div class="collapse-title text-xl font-medium sm:hidden pt-3 flex items-center gap-x-1"><AiOutlineUnorderedList size={20} />Filter</div>
-                            <div class="collapse-content">
+                            <div className="collapse-title text-xl font-medium sm:hidden pt-3 flex items-center gap-x-1"><AiOutlineUnorderedList size={20} />Filter</div>
+                            <div className="collapse-content">
                                 <ul className='flex flex-col gap-y-3'>
                                     <li className='sm:w-44 border rounded shadow px-1 py-2 cursor-pointer hover:shadow-md transition duration-150'>
                                         <div className='flex justify-between gap-x-1'>
