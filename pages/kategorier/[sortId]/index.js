@@ -90,7 +90,7 @@ export default function Car({ glass }) {
                     <div className='sm:hidden -mt-10 mx-4 flex items-center gap-x-1'>
                         <div className="collapse">
                             <input type="checkbox" />
-                            <div className="collapse-title text-xl font-medium sm:hidden"><div className='pt-3 flex items-center gap-x-1'><AiOutlineUnorderedList size={20} />Filter</div></div>
+                            <div className="collapse-title text-3xl bg-red-600 font-medium sm:hidden"><div className='pt-3 flex items-center gap-x-1'><AiOutlineUnorderedList size={30} />Filter</div></div>
                             <div className="collapse-content">
                                 <ul className='flex flex-col gap-y-3 py-3'>
                                     <li className='sm:w-44 border rounded shadow px-1 py-2 cursor-pointer hover:shadow-md transition duration-150'>
@@ -98,7 +98,7 @@ export default function Car({ glass }) {
                                             <h1 className='font-semibold pl-1 sm:text-xl'>
                                                 Veganskt
                                             </h1>
-                                            <input type="checkbox" onChange={() => { { setSugarCheck(!sugarCheck) } { stringtest.includes("sockerfri=true&") ? setStringtest(stringtest.replace("sockerfri=true&", "")) : setStringtest(stringtest + "sockerfri=true&") } }} className=" w-5 h-5 mt-0.5" />
+                                            <input type="checkbox" onChange={() => { { setVeganCheck(!veganCheck) } { stringtest.includes("vegansk=true&") ? setStringtest(stringtest.replace("vegansk=true&", "")) : setStringtest(stringtest + "vegansk=true&") } }} className=" w-5 h-5 mt-0.5" />
                                         </div>
                                     </li>
                                     <li className='sm:w-44 border rounded shadow px-1 py-2 cursor-pointer hover:shadow-md transition duration-150'>
@@ -114,10 +114,10 @@ export default function Car({ glass }) {
                                             <h1 className='font-semibold pl-1 sm:text-xl'>
                                                 Laktosfritt
                                             </h1>
-                                            <input type="checkbox" onChange={() => { { setSugarCheck(!sugarCheck) } { stringtest.includes("sockerfri=true&") ? setStringtest(stringtest.replace("sockerfri=true&", "")) : setStringtest(stringtest + "sockerfri=true&") } }} className=" w-5 h-5 mt-0.5" />
+                                            <input type="checkbox" onChange={() => { { setLaktosCheck(!laktosCheck) } { stringtest.includes("laktosfri=true&") ? setStringtest(stringtest.replace("laktosfri=true&", "")) : setStringtest(stringtest + "laktosfri=true&") } }} className=" w-5 h-5 mt-0.5" />
                                         </div>
                                     </li>
-                                    <button className=' bg-red-600 rounded-full py-2 text-white font-semibold text-xl' onClick={() => changeApiCall(sortId, stringtest)}>Sortera</button>
+                                    <button className=' bg-red-600 rounded-full py-2 text-white font-semibold text-xl' onClick={() => changeApiCall(brandId, stringtest)}>Sortera</button>
                                 </ul>
                             </div>
                         </div>
