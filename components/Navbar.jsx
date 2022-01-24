@@ -104,7 +104,7 @@ function Navbar(props) {
                                 {glassar?.map((glass, index) => (
                                     index <= 3 &&
                                     <Link href={`/kategorier/${glass.sort}/${glass.namn}`} passHref>
-                                        <div key={glass.url} className="flex hover:bg-sky-100 transition duration-150 p-1 border-b border-black bg-transparent">
+                                        <div key={glass.url} className="flex cursor-pointer transition duration-150 p-1 border-black bg-transparent">
                                             <img className="w-auto min-w-min max-h-24 rounded" src={`${glass.url}`} alt={glass.namn} />
                                             <li className="text-black">{glass.namn}</li>
                                         </div>
