@@ -7,6 +7,9 @@ import { useAuth } from './contexts/AuthContext';
 import axios from 'axios';
 import { RiDeleteBin5Line } from 'react-icons/ri';
 import { CartContext } from './Layout';
+import OwlCarousel from 'react-owl-carousel';
+import 'owl.carousel/dist/assets/owl.carousel.css';
+import 'owl.carousel/dist/assets/owl.theme.default.css';
 
 function DrawerContainer(props) {
 
@@ -153,7 +156,7 @@ function DrawerContainer(props) {
                     </div>
                     <div className="h-full pt-16 w-full flex flex-col px-4 text-3xl font-semibold text-white">
                         {/*  */}
-                        <div className='flex justify-evenly text-center'>
+                        {/* <div className='flex justify-evenly text-center'>
                             <label onClick={() => setChosenDatum("Förmiddag")} htmlFor='morningbox' className='sm:w-44 sm:h-44 w-32 h-32 text-sm sm:text-3xl border flex cursor-pointer justify-center sm:items-end rounded shadow-white shadow relative'>
                                 <input type="radio" name='selectbox' id='morningbox' className='absolute top-0 right-0 checkbox' />
                                 <div className='flex flex-col justify-between h-full'>
@@ -178,7 +181,30 @@ function DrawerContainer(props) {
                                     </h1>
                                 </div>
                             </label>
-                        </div>
+                        </div> */}
+                        <OwlCarousel loop margin={10}>
+                            <div class='item'>
+                                <h4>1</h4>
+                            </div>
+                            <div class='item'>
+                                <h4>2</h4>
+                            </div>
+                            <div class='item'>
+                                <h4>3</h4>
+                            </div>
+                            <div class='item'>
+                                <h4>4</h4>
+                            </div>
+                            <div class='item'>
+                                <h4>5</h4>
+                            </div>
+                            <div class='item'>
+                                <h4>6</h4>
+                            </div>
+                            <div class='item'>
+                                <h4>7</h4>
+                            </div>
+                        </OwlCarousel>
                         <div className='h-full pt-16 w-full flex justify-between px-4 text-3xl font-semibold text-white'>
                             <h1>Totalt</h1>
                             <h1>{currentUser ? cart.reduce((previousValue, currentValue) => previousValue + parseInt(currentValue.displayPris), 0) + " kr" : loltest?.reduce((previousValue, currentValue) => previousValue + parseInt(currentValue.displayPris), 0) + " kr"}</h1>

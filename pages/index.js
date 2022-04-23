@@ -91,6 +91,14 @@ export default function Home() {
           content="Välj bland massa goda glassar med snabb och fri hemleverans!"
         />
         <meta name="og:image" content={"/ggHemIcon.png"} />
+
+        {/* <!-- Load jQuery(1.7+) --> */}
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+ 
+{/* <!-- Customized Style --> */}
+<link rel="stylesheet" href="owl-carousel/owl.theme.css">
+
+</link>
       </Head>
       {/* {loading && <div className="w-screen h-screen bg-red-600"></div>} */}
       <div className=" w-full flex flex-col items-center">

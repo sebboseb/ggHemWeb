@@ -1,36 +1,37 @@
 {
-  "name": "glassweb",
-  "private": true,
-  "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint",
-    "test": "jest"
-  },
-  "dependencies": {
-    "@stripe/react-stripe-js": "^1.7.0",
-    "@stripe/stripe-js": "^1.22.0",
-    "axios": "^0.24.0",
-    "daisyui": "^1.21.0",
-    "firebase": "^9.6.1",
-    "next": "12.0.7",
-    "rc-drawer": "^4.4.3",
-    "react": "17.0.2",
-    "react-confetti": "^6.0.1",
-    "react-dom": "17.0.2",
-    "react-firebase-hooks": "^4.0.1",
-    "react-firebaseui": "^6.0.0",
-    "react-icons": "^4.3.1",
-    "stripe": "^8.195.0",
-    "swiper": "^7.4.1"
-  },
-  "devDependencies": {
-    "autoprefixer": "^10.4.1",
-    "eslint": "8.5.0",
-    "eslint-config-next": "12.0.7",
-    "jest": "^27.4.7",
-    "postcss": "^8.4.5",
-    "tailwindcss": "^3.0.8"
-  }
+    "name": "glassweb",
+    "private": true,
+    "scripts": {
+        "dev": "next dev",
+        "build": "next build",
+        "start": "next start",
+        "lint": "next lint",
+        "test": "jest"
+    },
+    "dependencies": {
+        "@stripe/react-stripe-js": "^1.7.0",
+        "@stripe/stripe-js": "^1.22.0",
+        "axios": "^0.24.0",
+        "daisyui": "^1.21.0",
+        "firebase": "^9.6.1",
+        "next": "12.0.7",
+        "rc-drawer": "^4.4.3",
+        "react": "17.0.2",
+        "react-confetti": "^6.0.1",
+        "react-dom": "17.0.2",
+        "react-firebase-hooks": "^4.0.1",
+        "react-firebaseui": "^6.0.0",
+        "react-icons": "^4.3.1",
+        "react-owl-carousel": "^2.3.3",
+        "stripe": "^8.195.0",
+        "swiper": "^7.4.1"
+    },
+    "devDependencies": {
+        "autoprefixer": "^10.4.1",
+        "eslint": "8.5.0",
+        "eslint-config-next": "12.0.7",
+        "jest": "^27.4.7",
+        "postcss": "^8.4.5",
+        "tailwindcss": "^3.0.8"
+    }
 }
