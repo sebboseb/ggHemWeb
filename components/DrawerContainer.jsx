@@ -183,25 +183,25 @@ function DrawerContainer(props) {
                             </label>
                         </div> */}
                         <OwlCarousel loop margin={10}>
-                            <div class='item'>
+                            <div className='item'>
                                 <h4>1</h4>
                             </div>
-                            <div class='item'>
+                            <div className='item'>
                                 <h4>2</h4>
                             </div>
-                            <div class='item'>
+                            <div className='item'>
                                 <h4>3</h4>
                             </div>
-                            <div class='item'>
+                            <div className='item'>
                                 <h4>4</h4>
                             </div>
-                            <div class='item'>
+                            <div className='item'>
                                 <h4>5</h4>
                             </div>
-                            <div class='item'>
+                            <div className='item'>
                                 <h4>6</h4>
                             </div>
-                            <div class='item'>
+                            <div className='item'>
                                 <h4>7</h4>
                             </div>
                         </OwlCarousel>
