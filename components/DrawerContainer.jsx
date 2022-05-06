@@ -244,8 +244,8 @@ function DrawerContainer(props) {
 
 
                             <Slider {...settings}>
-                                {data.map((datum) => (
-                                    <div onClick={() => handleClickCalendar(datum.id)}><DateCard selected={selectElementCalendar === datum.id} day={datum.day} datum={datum.datum}></DateCard></div>
+                                {data.map((datum, i) => (
+                                    <div key={i} onClick={() => handleClickCalendar(datum.id)}><DateCard selected={selectElementCalendar === datum.id} day={datum.day} datum={datum.datum}></DateCard></div>
                                 ))}
                             </Slider>
 
