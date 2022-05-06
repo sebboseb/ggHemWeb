@@ -103,12 +103,14 @@ function Navbar(props) {
                             {query.length !== 0 && <ul className="flex flex-col gap-y-1 p-1">
                                 {glassar?.map((glass, index) => (
                                     index <= 3 &&
-                                    <Link href={`/kategorier/${glass.sort}/${glass.namn}`} passHref>
-                                        <div key={glass.url} className="flex cursor-pointer transition duration-150 p-1 border-black bg-transparent">
-                                            <img className="w-auto min-w-min max-h-24 rounded object-contain" src={`${glass.url}`} alt={glass.namn} />
-                                            <li className="text-black">{glass.namn}</li>
-                                        </div>
-                                    </Link>
+                                    <div>
+                                        <Link href={`/kategorier/${glass.sort}/${glass.namn}`} passHref>
+                                            <div key={glass.url} className="flex cursor-pointer transition duration-150 p-1 border-black bg-transparent">
+                                                <img className="sm:w-auto sm:min-w-min max-h-24 rounded object-contain left-0" src={`${glass.url}`} alt={glass.namn} />
+                                                <li className="text-black">{glass.namn}</li>
+                                            </div>
+                                        </Link>
+                                    </div>
                                 ))}
                             </ul>}
                         </div>
