@@ -11,6 +11,7 @@ import { CartContext } from './Layout';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
+import DateCard from './DateCard';
 
 function DrawerContainer(props) {
 
@@ -84,11 +85,59 @@ function DrawerContainer(props) {
 
     var settings = {
         infinite: true,
-        speed: 500,
+        speed: 300,
         slidesToShow: 3,
-        slidesToScroll: 1
-      };
+        slidesToScroll: 1,
+        swipe: true,
+        responsive: [
+            {
+                breakpoint: 480,
+                settings: {
+                    slidesToShow: 2,
+                    slidesToScroll: 1,
+                    infinite: true,
+                    dots: false
+                }
+            },
+            {
+                breakpoint: 480,
+                settings: {
+                    slidesToShow: 2,
+                    slidesToScroll: 2,
+                    initialSlide: 2
+                }
+            },
+            {
+                breakpoint: 480,
+                settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1
+                }
+            }
+        ]
+    };
 
+    const data = [
+        { day: "Idag", datum: "7 maj", id: 1 },
+        { day: "Imorgon", datum: "8 maj", id: 2 },
+        { day: "Om 2 dagar", datum: "9 maj", id: 3 },
+        { day: "Om 3 dagar", datum: "10 maj", id: 4 },
+        { day: "Om 4 dagar", datum: "11 maj", id: 5 },
+        { day: "Om 5 dagar", datum: "12 maj", id: 6 },
+        { day: "Om 6 dagar", datum: "13 maj", id: 7 }
+    ]
+    const tider = [{ tid: "08.00 - 09.00", id: 1 }, { tid: "09.00 - 10.00", id: 2 }, { tid: "10.00 - 11.00", id: 3 }, { tid: "11.00 - 12.00", id: 4 }, { tid: "12.00 - 13.00", id: 5 }, { tid: "13.00 - 14.00", id: 6 }, { tid: "14.00 - 15.00", id: 7 }, { tid: "15.00 - 16.00", id: 8 }];
+
+    const [selectElement, setSelectElement] = useState(0);
+    const [selectElementCalendar, setSelectElementCalendar] = useState(0);
+
+    const handleClicklol = (id) => {
+        setSelectElement(id)
+    }
+
+    const handleClickCalendar = (id) => {
+        setSelectElementCalendar(id)
+    }
 
     return (
         <>
@@ -156,7 +205,7 @@ function DrawerContainer(props) {
                                         </div>
                                     </div>
                                 </li>))}
-                        {currentUser && cart.length !== 0 && <div onClick={() => { { setCart([]); } { deleteCart(currentUser.uid) } }} className='w-full flex justify-end items-center pt-4'><div className='cursor-pointer hover:bg-gray-100 duration-150 transition flex gap-x-3 p-2 rounded-full active:bg-gray-300'>
+                        {currentUser && cart.length !== 0 && <div className='w-full flex justify-end items-center pt-4'><div onClick={() => { { setCart([]); } { deleteCart(currentUser.uid) } }} className='cursor-pointer hover:bg-gray-100 duration-150 transition flex gap-x-3 p-2 rounded-full active:bg-gray-300'>
                             <h1 className='font-semibold'> Töm Kundvagn </h1> <RiDeleteBin5Line size={25} color='red'></RiDeleteBin5Line></div></div>}                </ul>
                     <div className=" w-full h-full px-5 bg-sky-600 flex flex-col justify-end items-center mt-16 relative">
                         <div className="custom-shape-divider-top-1642627204">
@@ -194,34 +243,18 @@ function DrawerContainer(props) {
                         </div> */}
 
 
-<Slider {...settings}>
-      <div>
-        <h3>1</h3>
-      </div>
-      <div>
-        <h3>2</h3>
-      </div>
-      <div>
-        <h3>3</h3>
-      </div>
-      <div>
-        <h3>4</h3>
-      </div>
-      <div>
-        <h3>5</h3>
-      </div>
-      <div>
-        <h3>6</h3>
-      </div>
-    </Slider>
-
+                            <Slider {...settings}>
+                                {data.map((datum) => (
+                                    <div onClick={() => handleClickCalendar(datum.id)}><DateCard selected={selectElementCalendar === datum.id} day={datum.day} datum={datum.datum}></DateCard></div>
+                                ))}
+                            </Slider>
 
                             <div className='h-full pt-16 w-full flex justify-between px-4 text-3xl font-semibold text-white'>
                                 <h1>Totalt</h1>
                                 <h1>{currentUser ? cart.reduce((previousValue, currentValue) => previousValue + parseInt(currentValue.displayPris), 0) + " kr" : loltest?.reduce((previousValue, currentValue) => previousValue + parseInt(currentValue.displayPris), 0) + " kr"}</h1>
                             </div>
                         </div>
-                        {currentUser ? <button onClick={handleClick} className="text-center w-3/4 h-12 bg-white rounded-full flex justify-center items-center shadow-lg hover:shadow-white hover:shadow-md duration-150 transform shadow-white mb-8 cursor-pointer">
+                        {currentUser ? <button onClick={handleClick} id="shadowlol" className="text-center w-3/4 h-12 bg-white rounded-full flex justify-center items-center shadow-lg hover:shadow-white hover:shadow-md duration-150 transform shadow-white mb-8 cursor-pointer">
                             <h1 className=" text-slate-900 font-semibold text-xl capitalize">Gå till kassan</h1>
                         </button> : <label htmlFor='my-modal-2' className="text-center w-3/4 h-12 bg-white rounded-full flex justify-center items-center shadow-lg hover:shadow-white hover:shadow-md duration-150 transform shadow-white mb-8 cursor-pointer">
                             <h1 className=" text-slate-900 font-semibold text-xl capitalize">Gå till kassan</h1>
@@ -231,6 +264,6 @@ function DrawerContainer(props) {
             </div>
         </>
     )
-}
+} 
 
 export default DrawerContainer;

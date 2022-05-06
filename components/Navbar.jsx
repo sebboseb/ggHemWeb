@@ -105,7 +105,7 @@ function Navbar(props) {
                                     index <= 3 &&
                                     <Link href={`/kategorier/${glass.sort}/${glass.namn}`} passHref>
                                         <div key={glass.url} className="flex cursor-pointer transition duration-150 p-1 border-black bg-transparent">
-                                            <img className="w-auto min-w-min max-h-24 rounded" src={`${glass.url}`} alt={glass.namn} />
+                                            <img className="w-auto min-w-min max-h-24 rounded object-contain" src={`${glass.url}`} alt={glass.namn} />
                                             <li className="text-black">{glass.namn}</li>
                                         </div>
                                     </Link>
@@ -134,6 +134,9 @@ function Navbar(props) {
                 </div>
                 <div className="h-12 w-full shadow-slate-100 shadow-md flex justify-between text-sm">
                     <ul className="text-slate-600 font-semibold sm:text-xl text-xs gap-x-5 flex items-center sm:gap-x-16 px-4">
+                        <li>
+                            <Link href={"/"} passHref tabIndex="0"><div className="flex items-center gap-x-1">Hem</div></Link>
+                        </li>
                         {/* <li className=''>
                             <h1>Hem</h1>
                         </li> */}
