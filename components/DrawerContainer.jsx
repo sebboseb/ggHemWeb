@@ -241,29 +241,29 @@ function DrawerContainer(props) {
                                 </div>
                             </label>
                         </div> */}
-
-
-                            <Slider {...settings}>
+                            {currentUser && <Slider {...settings}>
                                 {data.map((datum, i) => (
-                                    <div key={i} onClick={() => handleClickCalendar(datum.id)}><DateCard selected={selectElementCalendar === datum.id} day={datum.day} datum={datum.datum}></DateCard></div>
+                                    <div>
+                                        <div className='bg-black overflow-hidden' style={{ backgroundColor: "green", width: "70%" }} key={i} onClick={() => handleClickCalendar(datum.id)}><DateCard selected={selectElementCalendar === datum.id} day={datum.day} datum={datum.datum}></DateCard></div>
+                                    </div>
                                 ))}
-                            </Slider>
+                            </Slider>}
 
-                            <div className='h-full pt-16 w-full flex justify-between px-4 text-3xl font-semibold text-white'>
+                            {currentUser && <div className='h-full pt-16 w-full flex justify-between px-4 text-3xl font-semibold text-white'>
                                 <h1>Totalt</h1>
                                 <h1>{currentUser ? cart.reduce((previousValue, currentValue) => previousValue + parseInt(currentValue.displayPris), 0) + " kr" : loltest?.reduce((previousValue, currentValue) => previousValue + parseInt(currentValue.displayPris), 0) + " kr"}</h1>
-                            </div>
+                            </div>}
                         </div>
                         {currentUser ? <button onClick={handleClick} id="shadowlol" className="text-center w-3/4 h-12 bg-white rounded-full flex justify-center items-center shadow-lg hover:shadow-white hover:shadow-md duration-150 transform shadow-white mb-8 cursor-pointer">
                             <h1 className=" text-slate-900 font-semibold text-xl capitalize">Gå till kassan</h1>
                         </button> : <label htmlFor='my-modal-2' className="text-center w-3/4 h-12 bg-white rounded-full flex justify-center items-center shadow-lg hover:shadow-white hover:shadow-md duration-150 transform shadow-white mb-8 cursor-pointer">
-                            <h1 className=" text-slate-900 font-semibold text-xl capitalize">Gå till kassan</h1>
+                            <h1 className=" text-slate-900 font-semibold text-xl capitalize">Logga in</h1>
                         </label>}
                     </div>
                 </ul>
             </div>
         </>
     )
-} 
+}
 
 export default DrawerContainer;

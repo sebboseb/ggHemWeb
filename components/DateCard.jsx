@@ -9,7 +9,7 @@ function DateCard(props) {
     const topSelected = 'border-b-4 border-green-500 bg-green-500 h-8 rounded-t'
 
     return (
-        <div className={!props.selected ? style : styleSelected + ("transition duration-75")}>
+        <div className={!props.selected ? style : styleSelected + ("transition duration-75 overflow-hidden")}>
             <div className={!props.selected ? top : topSelected}><h1 className='text-lg text-center'>{props.day}</h1></div>
             <h1 className='text-black text-center mt-4'>{props.datum}</h1>
         </div>

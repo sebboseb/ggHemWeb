@@ -62,11 +62,3 @@
 .custom-shape-divider-top-1642627204 .shape-fill {
     fill: #FFFFFF;
 }
-
-#shadowlol {
-  width: "100%"; display: "flex"; justifyContent: "center"; flexDirection: "row";
-                shadowColor: "black";
-                shadowOpacity: .7;
-                shadowRadius: 10.84;
-                elevation: 5;
-}
